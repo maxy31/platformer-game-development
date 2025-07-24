@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://d2wfovma14r6o"]
+[gd_scene load_steps=2 format=3 uid="uid://d2wfovma14r6o"]
+
+[ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Background.png" id="1_uidp5"]
 
 [node name="Area1" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(574.5, 324.5)
+scale = Vector2(1.99479, 1.99691)
+texture = ExtResource("1_uidp5")
