@@ -92,5 +92,9 @@ tile_set = SubResource("TileSet_ql8qi")
 use_parent_material = true
 tile_set = SubResource("TileSet_ql8qi")
 
+[node name="Layer0" type="TileMapLayer" parent="TileMap"]
+use_parent_material = true
+tile_set = SubResource("TileSet_ql8qi")
+
 [node name="Player" parent="." instance=ExtResource("3_8wi1m")]
 position = Vector2(45, 361)
