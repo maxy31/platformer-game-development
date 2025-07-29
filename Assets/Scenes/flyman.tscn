@@ -1,0 +1,212 @@
+[gd_scene load_steps=16 format=3 uid="uid://v3iimkhjwycp"]
+
+[ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
+[ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
+[ext_resource type="Texture2D" uid="uid://bfqsaldbqx2ol" path="res://Assets/Sprites/Flyman/Char_3.png" id="2_lgsfl"]
+
+[sub_resource type="Animation" id="Animation_guasd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(64, 0, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_f56ws"]
+resource_name = "attack1"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 128, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_q3qn3"]
+resource_name = "attack2"
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(128, 128, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_u7old"]
+resource_name = "attack3"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(192, 128, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_5eg1n"]
+resource_name = "attack4"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(256, 128, 64, 64), Rect2(320, 128, 64, 64), Rect2(320, 128, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_enrtd"]
+resource_name = "fall"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(128, 0, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_xt8c6"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(64, 0, 64, 64), Rect2(192, 0, 64, 64), Rect2(256, 0, 64, 64), Rect2(320, 0, 64, 64), Rect2(384, 0, 64, 64), Rect2(448, 0, 64, 64), Rect2(512, 0, 64, 64), Rect2(512, 0, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_i8rbu"]
+resource_name = "jump"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(960, 128, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_0mtd7"]
+resource_name = "move"
+length = 0.001
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(64, 64, 64, 64), Rect2(64, 64, 64, 64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_enrtd"]
+_data = {
+&"RESET": SubResource("Animation_guasd"),
+&"attack1": SubResource("Animation_f56ws"),
+&"attack2": SubResource("Animation_q3qn3"),
+&"attack3": SubResource("Animation_u7old"),
+&"attack4": SubResource("Animation_5eg1n"),
+&"fall": SubResource("Animation_enrtd"),
+&"idle": SubResource("Animation_xt8c6"),
+&"jump": SubResource("Animation_i8rbu"),
+&"move": SubResource("Animation_0mtd7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8rbu"]
+size = Vector2(7, 7)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8rbu"]
+radius = 3.0
+height = 12.0
+
+[node name="flymanController" type="CharacterBody2D"]
+script = ExtResource("1_i8rbu")
+speed = 5.0
+jump_power = 8.0
+metadata/_custom_type_script = "uid://c21ad1la0q0e2"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -15)
+zoom = Vector2(4, 4)
+
+[node name="FlymanAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite")]
+script = ExtResource("2_i8rbu")
+player_controller = NodePath("..")
+animation_player = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FlymanAnimator"]
+libraries = {
+&"": SubResource("AnimationLibrary_enrtd")
+}
+speed_scale = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="FlymanAnimator"]
+position = Vector2(0, -5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_lgsfl")
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="AttackArea" type="Area2D" parent="FlymanAnimator"]
+collision_layer = 3
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlymanAnimator/AttackArea"]
+position = Vector2(8, -6)
+shape = SubResource("RectangleShape2D_i8rbu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_i8rbu")
