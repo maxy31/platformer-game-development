@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mir1v"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Destroyer" type="CharacterBody2D"]
 script = ExtResource("1_mir1v")
 
 [node name="Node2D" type="Node2D" parent="." groups=["Enemy"]]
