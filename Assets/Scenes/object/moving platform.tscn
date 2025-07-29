@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://darcfylxpubff"]
+
+[ext_resource type="Script" uid="uid://bq26ydsqnbcf7" path="res://Assets/Script/moving_platform.gd" id="1_v8ogt"]
+[ext_resource type="Texture2D" uid="uid://djm3mt0khscnp" path="res://Assets/Sprites/Green Board/2.png" id="2_e47jg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0bqi"]
+size = Vector2(33.75, 37.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f24kw"]
+size = Vector2(7.875, 42.75)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+sync_to_physics = false
+script = ExtResource("1_v8ogt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(145.5, 98.25)
+scale = Vector2(0.90625, 1.10937)
+texture = ExtResource("2_e47jg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(147.125, 99.25)
+shape = SubResource("RectangleShape2D_g0bqi")
+
+[node name="LeftSensor" type="Area2D" parent="."]
+position = Vector2(18, 27)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSensor"]
+position = Vector2(109, 73)
+shape = SubResource("RectangleShape2D_f24kw")
+
+[node name="RightSensor" type="Area2D" parent="."]
+position = Vector2(18, 27)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSensor"]
+position = Vector2(150, 72)
+shape = SubResource("RectangleShape2D_f24kw")
+
+[connection signal="body_entered" from="LeftSensor" to="." method="_on_left_sensor_body_entered"]
+[connection signal="body_entered" from="RightSensor" to="." method="_on_right_sensor_body_entered"]

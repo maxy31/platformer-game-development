@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0e4xv5k4irqk"]
+
+[ext_resource type="Script" uid="uid://d2dbtjdjpe3g3" path="res://Assets/Script/platformfollowpath.gd" id="1_262gd"]
+[ext_resource type="Texture2D" uid="uid://c03givqn1fa5h" path="res://Assets/Sprites/Green Board/11.png" id="1_koybm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nipxd"]
+size = Vector2(44, 38)
+
+[node name="PlatformFollowPath" type="AnimatableBody2D"]
+script = ExtResource("1_262gd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(217, 137)
+texture = ExtResource("1_koybm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(217, 134)
+shape = SubResource("RectangleShape2D_nipxd")

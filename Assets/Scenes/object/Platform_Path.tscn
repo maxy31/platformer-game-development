@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpv1a3txqtka7"]
+
+[ext_resource type="PackedScene" uid="uid://b0e4xv5k4irqk" path="res://Assets/Scenes/object/platformfollowpath.tscn" id="1_1ecby"]
+
+[sub_resource type="Curve2D" id="Curve2D_v1qlq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -6, -175, 0, 0, 0, 0, -6, -265)
+}
+point_count = 2
+
+[node name="PlatformPath" type="Path2D"]
+curve = SubResource("Curve2D_v1qlq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(0, -1)
+rotation = -1.57673
+rotates = false
+loop = false
+
+[node name="PlatformFollowPath" parent="PathFollow2D" instance=ExtResource("1_1ecby")]
+position = Vector2(134.285, -216.207)
+rotation = 1.57593
+sync_to_physics = false
