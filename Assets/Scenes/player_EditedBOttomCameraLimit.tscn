@@ -107,6 +107,8 @@ jump_power = 8.0
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
 zoom = Vector2(4, 4)
+limit_bottom = 430
+limit_smoothed = true
 
 [node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite")]
 position = Vector2(-2, 6)
