@@ -6,6 +6,8 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mir1v"]
 
 [node name="Destroyer" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 73
 script = ExtResource("1_mir1v")
 
 [node name="Node2D" type="Node2D" parent="." groups=["Enemy"]]

@@ -171,6 +171,7 @@ radius = 3.0
 height = 12.0
 
 [node name="flymanController" type="CharacterBody2D"]
+collision_mask = 46
 script = ExtResource("1_i8rbu")
 speed = 5.0
 jump_power = 8.0
@@ -200,8 +201,8 @@ region_enabled = true
 region_rect = Rect2(64, 0, 64, 64)
 
 [node name="AttackArea" type="Area2D" parent="FlymanAnimator"]
-collision_layer = 3
-collision_mask = 5
+collision_layer = 64
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlymanAnimator/AttackArea"]
 position = Vector2(8, -6)

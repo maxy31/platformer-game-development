@@ -33,6 +33,12 @@ func _process(delta):
 		sprite.flip_h = false
 	elif player_controller.direction == -1:
 		sprite.flip_h = true
+	
+		# --- 攻击范围翻转位置 ---
+	var attack_area = $AttackArea
+	if attack_area:
+		var offset = 20
+		attack_area.position.x = offset * player_controller.direction
 
 	# --- 动画控制（非攻击状态下） ---
 	if not is_attacking:
