@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://v3iimkhjwycp"]
+[gd_scene load_steps=17 format=3 uid="uid://v3iimkhjwycp"]
 
 [ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
 [ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
 [ext_resource type="Texture2D" uid="uid://bfqsaldbqx2ol" path="res://Assets/Sprites/Flyman/Char_3.png" id="2_lgsfl"]
+[ext_resource type="Script" uid="uid://bbai7gu4fm30f" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
 
 [sub_resource type="Animation" id="Animation_guasd"]
 length = 0.001
@@ -21,6 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_f56ws"]
 resource_name = "attack1"
+length = 0.3
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -34,9 +36,24 @@ tracks/0/keys = {
 "update": 0,
 "values": [Rect2(0, 128, 64, 64)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_attack_cancel_point"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_q3qn3"]
 resource_name = "attack2"
+length = 0.3
 step = 0.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -50,9 +67,24 @@ tracks/0/keys = {
 "update": 0,
 "values": [Rect2(128, 128, 64, 64)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_attack_cancel_point"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_u7old"]
 resource_name = "attack3"
+length = 0.3
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -66,9 +98,24 @@ tracks/0/keys = {
 "update": 0,
 "values": [Rect2(192, 128, 64, 64)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_attack_cancel_point"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5eg1n"]
 resource_name = "attack4"
+length = 0.5
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -77,10 +124,24 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.75),
+"times": PackedFloat32Array(0, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Rect2(256, 128, 64, 64), Rect2(320, 128, 64, 64), Rect2(320, 128, 64, 64)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_attack_cancel_point"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_enrtd"]
@@ -170,22 +231,25 @@ size = Vector2(7, 7)
 radius = 3.0
 height = 12.0
 
-[node name="flymanController" type="CharacterBody2D"]
+[node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler")]
 collision_mask = 46
 script = ExtResource("1_i8rbu")
 speed = 5.0
 jump_power = 8.0
+animator = NodePath("FlymanAnimator")
+combat_handler = NodePath("FlymanAnimator/AttackArea/AttackAreaMap")
 metadata/_custom_type_script = "uid://c21ad1la0q0e2"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
 zoom = Vector2(4, 4)
 
-[node name="FlymanAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite")]
+[node name="FlymanAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "attack_area")]
 script = ExtResource("2_i8rbu")
 player_controller = NodePath("..")
 animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
+attack_area = NodePath("AttackArea")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FlymanAnimator"]
 libraries = {
@@ -204,10 +268,14 @@ region_rect = Rect2(64, 0, 64, 64)
 collision_layer = 64
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FlymanAnimator/AttackArea"]
+[node name="AttackAreaMap" type="CollisionShape2D" parent="FlymanAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
 position = Vector2(8, -6)
 shape = SubResource("RectangleShape2D_i8rbu")
+script = ExtResource("4_xt8c6")
+attack_area = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="FlymanMoveArea" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_i8rbu")
+
+[connection signal="animation_finished" from="FlymanAnimator/AnimationPlayer" to="FlymanAnimator" method="_on_animation_player_animation_finished"]
