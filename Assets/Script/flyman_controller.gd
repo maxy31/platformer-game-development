@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name FlymanController
 
-@export var speed := 10.0
-@export var jump_power := 10.0
+@export var speed := 5.0
+@export var jump_power := 8.0
 @export var max_health := 5
 @export var attack_damage := 1
 
@@ -32,9 +32,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		if not is_attacking:
 			start_attack()
-		elif can_queue_attack:
-			queued_attack = true
-			print("⏩ 连击输入记录（窗口内）")
+		else:
+			queued_attack = true  # 改成动画期间任何时刻都能缓冲
+			print("⏩ 攻击缓冲记录")
 
 	# 移动
 	direction = Input.get_axis("move_left", "move_right")
@@ -62,8 +62,6 @@ func on_attack_cancel_point():
 	print("🎯 Cancel Point 触发，可以提前输入下一击")
 
 func on_attack_animation_finished():
-	# 动画播放完毕时调用
-	can_queue_attack = false
 	if queued_attack:
 		queued_attack = false
 		current_attack_index += 1
@@ -73,6 +71,7 @@ func on_attack_animation_finished():
 	else:
 		is_attacking = false
 		current_attack_index = 1
+
 
 func take_damage(amount: int = 1):
 	current_health -= amount

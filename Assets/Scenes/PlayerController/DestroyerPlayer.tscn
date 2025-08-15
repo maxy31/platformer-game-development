@@ -96,7 +96,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("DestroyerAnimator/Sprite2D:region_rect")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
@@ -185,8 +185,12 @@ combat_handler = NodePath("DestroyerAnimator/AttackArea/AttackAreaMap")
 offset = Vector2(0, -15)
 zoom = Vector2(4, 4)
 
-[node name="DestroyerAnimator" type="Node2D" parent="."]
+[node name="DestroyerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "attack_area")]
 script = ExtResource("2_bcnlo")
+player_controller = NodePath("..")
+animation_player = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+attack_area = NodePath("AttackArea")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DestroyerAnimator"]
 root_node = NodePath("../..")
@@ -202,6 +206,8 @@ region_rect = Rect2(0, 132, 64, 64)
 
 [node name="AttackArea" type="Area2D" parent="DestroyerAnimator"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 64
+collision_mask = 2
 
 [node name="AttackAreaMap" type="CollisionShape2D" parent="DestroyerAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
 position = Vector2(19, 0)
@@ -210,4 +216,5 @@ script = ExtResource("4_bcnlo")
 attack_area = NodePath("..")
 
 [node name="DestroyerMoveArea" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_pptjt")

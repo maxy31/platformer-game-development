@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://v3iimkhjwycp"]
+[gd_scene load_steps=19 format=3 uid="uid://v3iimkhjwycp"]
 
 [ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
 [ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
@@ -211,6 +211,39 @@ tracks/0/keys = {
 "values": [Rect2(64, 64, 64, 64), Rect2(64, 64, 64, 64)]
 }
 
+[sub_resource type="Animation" id="Animation_86v2i"]
+resource_name = "hurt"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(192, 192, 64, 64), Rect2(256, 192, 64, 64), Rect2(320, 192, 64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_acrhl"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(576, 192, 64, 64), Rect2(640, 192, 64, 64), Rect2(640, 192, 64, 64)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_enrtd"]
 _data = {
 &"RESET": SubResource("Animation_guasd"),
@@ -218,7 +251,9 @@ _data = {
 &"attack2": SubResource("Animation_q3qn3"),
 &"attack3": SubResource("Animation_u7old"),
 &"attack4": SubResource("Animation_5eg1n"),
+&"die": SubResource("Animation_acrhl"),
 &"fall": SubResource("Animation_enrtd"),
+&"hurt": SubResource("Animation_86v2i"),
 &"idle": SubResource("Animation_xt8c6"),
 &"jump": SubResource("Animation_i8rbu"),
 &"move": SubResource("Animation_0mtd7")
@@ -234,8 +269,6 @@ height = 12.0
 [node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler")]
 collision_mask = 46
 script = ExtResource("1_i8rbu")
-speed = 5.0
-jump_power = 8.0
 animator = NodePath("FlymanAnimator")
 combat_handler = NodePath("FlymanAnimator/AttackArea/AttackAreaMap")
 metadata/_custom_type_script = "uid://c21ad1la0q0e2"
