@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name DestroyerController
 
-@export var speed := 10.0
+@export var speed := 5.0
 @export var jump_power := 8.0
 @export var max_health := 5
 @export var attack_damage := 3
@@ -15,6 +15,7 @@ var is_attacking := false
 var current_attack_index := 1
 var queued_attack := false
 var can_queue_attack := false   # cancel point 是否开启
+var is_hurt := false
 
 @export var animator: Node
 @export var combat_handler: Node
@@ -74,10 +75,28 @@ func on_attack_animation_finished():
 
 
 func take_damage(amount: int = 1):
+	if is_hurt:  # 如果已经在受击，就不重复播放
+		return
+
 	current_health -= amount
 	print("💔 Player took damage. Current HP:", current_health)
+
 	if current_health <= 0:
 		die()
+		return
+
+	# 进入受击状态
+	is_hurt = true
+	is_attacking = false
+	queued_attack = false
+	can_queue_attack = false
+
+	# 播放受击动画
+	if animator and animator.has_method("play_hurt_animation"):
+		animator.play_hurt_animation()
+
+func on_hurt_animation_finished():
+	is_hurt = false
 
 func die():
 	print("☠ Player Died")

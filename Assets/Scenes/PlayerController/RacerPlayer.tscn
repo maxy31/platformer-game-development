@@ -1,0 +1,262 @@
+[gd_scene load_steps=37 format=3 uid="uid://5mhrqxiqqhol"]
+
+[ext_resource type="Script" uid="uid://b8pm3unqjeuee" path="res://Assets/Script/racer_controller.gd" id="1_eau03"]
+[ext_resource type="Script" uid="uid://bqhj4411l64x5" path="res://Assets/Script/racer_animator.gd" id="2_jorce"]
+[ext_resource type="Texture2D" uid="uid://5dqarna1b5nb" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_1.png" id="3_gmh0g"]
+[ext_resource type="Texture2D" uid="uid://d2mso67iaapy5" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_2.png" id="4_8viik"]
+[ext_resource type="Texture2D" uid="uid://bd0oqls4gjb85" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_3.png" id="5_2plrr"]
+[ext_resource type="Texture2D" uid="uid://dxk5oav47cn15" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_4.png" id="6_d1d0g"]
+[ext_resource type="Texture2D" uid="uid://bvrj4plygqftw" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_5.png" id="7_a3ohs"]
+[ext_resource type="Texture2D" uid="uid://cvrdnc3q304eq" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_6.png" id="8_5wccm"]
+[ext_resource type="Texture2D" uid="uid://ds0apg7s2k64r" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_7.png" id="9_bc26m"]
+[ext_resource type="Texture2D" uid="uid://fhe7oglhovqn" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_8.png" id="10_dscsb"]
+[ext_resource type="Texture2D" uid="uid://b82xet77clbsu" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_9.png" id="11_cdo26"]
+[ext_resource type="Texture2D" uid="uid://bkwtjvs484vfd" path="res://Assets/Sprites/Racer/Attack/Knight_attack_new_10.png" id="12_k2ud3"]
+[ext_resource type="Texture2D" uid="uid://btcde8c3b5ekf" path="res://Assets/Sprites/Racer/Death/New_Knight_death_1.png" id="13_b0r6d"]
+[ext_resource type="Texture2D" uid="uid://dsnv2nisqqskn" path="res://Assets/Sprites/Racer/Death/New_Knight_death_2.png" id="14_meoo1"]
+[ext_resource type="Texture2D" uid="uid://c2kngdyudfbyo" path="res://Assets/Sprites/Racer/Death/New_Knight_death_3.png" id="15_7dwp4"]
+[ext_resource type="Texture2D" uid="uid://dst3yg68bkhlo" path="res://Assets/Sprites/Racer/Death/New_Knight_death_4.png" id="16_d5v8d"]
+[ext_resource type="Texture2D" uid="uid://bryv48ivr728w" path="res://Assets/Sprites/Racer/Death/New_Knight_death_5.png" id="17_1urhj"]
+[ext_resource type="Texture2D" uid="uid://csv1ekuvggryu" path="res://Assets/Sprites/Racer/Death/New_Knight_death_6.png" id="18_goeth"]
+[ext_resource type="Texture2D" uid="uid://bhrh731pg15ac" path="res://Assets/Sprites/Racer/Death/New_Knight_death_7.png" id="19_0qgua"]
+[ext_resource type="Texture2D" uid="uid://c1koi0xojb7yd" path="res://Assets/Sprites/Racer/Death/New_Knight_death_8.png" id="20_63f4g"]
+[ext_resource type="Texture2D" uid="uid://h6iyvc2h453x" path="res://Assets/Sprites/Racer/Death/New_Knight_death_9.png" id="21_7vlib"]
+[ext_resource type="Texture2D" uid="uid://jauol1ifnt5k" path="res://Assets/Sprites/Racer/Death/New_Knight_death_10.png" id="22_pfq5w"]
+[ext_resource type="Texture2D" uid="uid://d08w4we4aj2te" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop5.png" id="23_r3l87"]
+[ext_resource type="Texture2D" uid="uid://skinv31q5bl" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop2.png" id="24_81p1y"]
+[ext_resource type="Texture2D" uid="uid://b6ngkoj2lkwou" path="res://Assets/Sprites/Racer/Idle/Knight_idle1.png" id="25_udrwe"]
+[ext_resource type="Texture2D" uid="uid://my7hrxrwp0ir" path="res://Assets/Sprites/Racer/Idle/Knight_idle2.png" id="26_ybgec"]
+[ext_resource type="Texture2D" uid="uid://dinulhq2vr1bf" path="res://Assets/Sprites/Racer/Idle/Knight_idle3.png" id="27_sg8m6"]
+[ext_resource type="Texture2D" uid="uid://ca86mp87dxcg4" path="res://Assets/Sprites/Racer/Idle/Knight_idle4.png" id="28_uew8r"]
+[ext_resource type="Texture2D" uid="uid://ddety7trp3lm1" path="res://Assets/Sprites/Racer/Idle/Knight_idle5.png" id="29_ruual"]
+[ext_resource type="Texture2D" uid="uid://6nagj8qom8ic" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop1.png" id="30_k2kyw"]
+[ext_resource type="Texture2D" uid="uid://cawkggwqnki0b" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop3.png" id="31_kws6u"]
+[ext_resource type="Texture2D" uid="uid://b7n0h30m1wcqs" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop4.png" id="32_nhehg"]
+[ext_resource type="Script" uid="uid://bumxktdwcaji1" path="res://Assets/Script/racer_combatHandler.gd" id="33_qto2m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_de0mg"]
+animations = [{
+"frames": [{
+"duration": 0.3,
+"texture": ExtResource("3_gmh0g")
+}, {
+"duration": 0.3,
+"texture": ExtResource("4_8viik")
+}, {
+"duration": 0.3,
+"texture": ExtResource("5_2plrr")
+}, {
+"duration": 0.3,
+"texture": ExtResource("6_d1d0g")
+}, {
+"duration": 0.3,
+"texture": ExtResource("7_a3ohs")
+}, {
+"duration": 0.3,
+"texture": ExtResource("8_5wccm")
+}, {
+"duration": 0.3,
+"texture": ExtResource("9_bc26m")
+}, {
+"duration": 0.3,
+"texture": ExtResource("10_dscsb")
+}, {
+"duration": 0.3,
+"texture": ExtResource("11_cdo26")
+}, {
+"duration": 0.3,
+"texture": ExtResource("12_k2ud3")
+}],
+"loop": false,
+"name": &"attack1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_b0r6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_meoo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7dwp4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_d5v8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_1urhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_goeth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_0qgua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_63f4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_7vlib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_pfq5w")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_r3l87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_81p1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cdo26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_udrwe")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_b0r6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_meoo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7dwp4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_d5v8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7dwp4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_meoo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_b0r6d")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_udrwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ybgec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_sg8m6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_uew8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ruual")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gmh0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8viik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2plrr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d1d0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a3ohs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5wccm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gmh0g")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_k2kyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_81p1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_kws6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_nhehg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_r3l87")
+}],
+"loop": false,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thn1c"]
+size = Vector2(6.625, 12.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auws5"]
+radius = 6.0
+height = 16.0
+
+[node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler")]
+collision_mask = 46
+script = ExtResource("1_eau03")
+animator = NodePath("RacerAnimator")
+combat_handler = NodePath("RacerAnimator/AttackArea/AttackAreaMap")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -15)
+zoom = Vector2(4, 4)
+
+[node name="RacerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animated_sprite", "attack_area")]
+script = ExtResource("2_jorce")
+player_controller = NodePath("..")
+animated_sprite = NodePath("AnimatedSprite2D")
+attack_area = NodePath("AttackArea")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RacerAnimator"]
+position = Vector2(0, -12)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_de0mg")
+animation = &"attack1"
+frame = 9
+frame_progress = 1.0
+
+[node name="AttackArea" type="Area2D" parent="RacerAnimator"]
+collision_layer = 64
+collision_mask = 2
+
+[node name="AttackAreaMap" type="CollisionShape2D" parent="RacerAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
+position = Vector2(8.6875, -6.75)
+shape = SubResource("RectangleShape2D_thn1c")
+script = ExtResource("33_qto2m")
+attack_area = NodePath("..")
+
+[node name="RacerMoveArea" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_auws5")

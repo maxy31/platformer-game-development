@@ -45,9 +45,17 @@ func play_attack_animation(index: int):
 	else:
 		print("❌ 找不到动画", anim_name)
 
+func play_hurt_animation():
+	if animation_player and animation_player.has_animation("hurt"):
+		print("🤕 播放受击动画")
+		animation_player.play("hurt")
+
 func _on_animation_finished(anim_name: String):
 	print("✅ 动画播放结束:", anim_name)
-	if anim_name.begins_with("attack"):
+	if anim_name == "hurt":
+		if player_controller:
+			player_controller.on_hurt_animation_finished()
+	elif anim_name.begins_with("attack"):
 		if player_controller:
 			player_controller.on_attack_animation_finished()
 

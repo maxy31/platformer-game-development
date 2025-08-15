@@ -1,5 +1,5 @@
 extends Node
-class_name AttackAreaMap
+class_name FlymanAttackAreaMap
 
 @export var attack_area: Area2D
 
