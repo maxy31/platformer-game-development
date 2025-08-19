@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://5mhrqxiqqhol"]
+[gd_scene load_steps=38 format=3 uid="uid://5mhrqxiqqhol"]
 
 [ext_resource type="Script" uid="uid://b8pm3unqjeuee" path="res://Assets/Script/racer_controller.gd" id="1_eau03"]
 [ext_resource type="Script" uid="uid://bqhj4411l64x5" path="res://Assets/Script/racer_animator.gd" id="2_jorce"]
@@ -219,13 +219,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thn1c"]
 size = Vector2(6.625, 12.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eau03"]
+size = Vector2(20, 9)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auws5"]
 radius = 6.0
 height = 16.0
 
-[node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler")]
+[node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("body_attack_area", "animator", "combat_handler") groups=["Player"]]
 collision_mask = 46
 script = ExtResource("1_eau03")
+body_attack_area = NodePath("RacerAnimator/BodyAttackArea")
 animator = NodePath("RacerAnimator")
 combat_handler = NodePath("RacerAnimator/AttackArea/AttackAreaMap")
 
@@ -257,6 +261,14 @@ shape = SubResource("RectangleShape2D_thn1c")
 script = ExtResource("33_qto2m")
 attack_area = NodePath("..")
 
+[node name="BodyAttackArea" type="Area2D" parent="RacerAnimator"]
+collision_layer = 64
+collision_mask = 2
+
+[node name="BodyAttackAreaMap" type="CollisionShape2D" parent="RacerAnimator/BodyAttackArea"]
+position = Vector2(3, -5)
+shape = SubResource("RectangleShape2D_eau03")
+
 [node name="RacerMoveArea" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(1, -8)
 shape = SubResource("CapsuleShape2D_auws5")

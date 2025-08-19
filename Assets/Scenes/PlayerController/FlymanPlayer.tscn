@@ -179,7 +179,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_86v2i"]
 resource_name = "hurt"
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -263,10 +262,10 @@ _data = {
 size = Vector2(7, 7)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8rbu"]
-radius = 3.0
+radius = 4.0
 height = 12.0
 
-[node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler")]
+[node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler") groups=["Player"]]
 collision_mask = 46
 script = ExtResource("1_i8rbu")
 animator = NodePath("FlymanAnimator")
@@ -307,7 +306,7 @@ shape = SubResource("RectangleShape2D_i8rbu")
 script = ExtResource("4_xt8c6")
 attack_area = NodePath("..")
 
-[node name="FlymanMoveArea" type="CollisionShape2D" parent="."]
+[node name="FlymanMoveArea" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_i8rbu")
 

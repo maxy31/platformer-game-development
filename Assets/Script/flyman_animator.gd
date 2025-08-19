@@ -16,10 +16,23 @@ func _process(delta):
 
 	var vel = player_controller.velocity
 
+	# ===========================
+	#   优先播放受击动画
+	# ===========================
+	if player_controller.invincible_timer > (player_controller.invincible_time - 0.2):
+		if animation_player and animation_player.has_animation("hurt"):
+			if not animation_player.is_playing() or animation_player.current_animation != "hurt":
+				print("🤕 播放受击动画（覆盖检测）")
+				animation_player.play("hurt")
+		return
+
 	# 如果正在攻击，就不要随便覆盖动画
 	if player_controller.is_attacking:
 		return
 
+	# ===========================
+	#   正常的移动/跳跃动画
+	# ===========================
 	if player_controller.direction == 1:
 		sprite.flip_h = false
 		attack_area.scale.x = 1
