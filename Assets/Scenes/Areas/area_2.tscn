@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx8ssfa5myhdv"]
+[gd_scene load_steps=8 format=3 uid="uid://cx8ssfa5myhdv"]
 
 [ext_resource type="Texture2D" uid="uid://c7cb60dsr36c4" path="res://Assets/Sprites/Background/color2.jpg" id="1_si01f"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_y4hc0"]
 [ext_resource type="PackedScene" uid="uid://darcfylxpubff" path="res://Assets/Scenes/object/moving platform.tscn" id="3_fsu62"]
 [ext_resource type="PackedScene" uid="uid://dpv1a3txqtka7" path="res://Assets/Scenes/object/Platform_Path.tscn" id="4_oqdf5"]
 [ext_resource type="PackedScene" uid="uid://c0hsymos3eqpp" path="res://Assets/Scenes/object/platform_down.tscn" id="5_1tu6k"]
-
-[sub_resource type="GDScript" id="GDScript_y4hc0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fsu62"]
 texture = ExtResource("2_y4hc0")
@@ -79,7 +77,6 @@ texture = ExtResource("2_y4hc0")
 sources/0 = SubResource("TileSetAtlasSource_fsu62")
 
 [node name="Area2" type="Node2D"]
-script = SubResource("GDScript_y4hc0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(319, 180)

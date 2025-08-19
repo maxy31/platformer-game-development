@@ -12,7 +12,7 @@ point_count = 2
 curve = SubResource("Curve2D_v1qlq")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(-6, -175)
 rotation = -1.57673
 rotates = false
 loop = false

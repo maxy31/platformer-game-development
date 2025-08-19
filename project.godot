@@ -63,6 +63,7 @@ attack={
 2d_physics/layer_6="Goal"
 2d_physics/layer_7="PlayerAttack"
 2d_physics/layer_8="EnemyAttack"
+2d_physics/layer_9="Wall"
 
 [rendering]
 
