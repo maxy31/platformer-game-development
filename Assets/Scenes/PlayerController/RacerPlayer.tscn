@@ -229,6 +229,12 @@ height = 16.0
 [node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("body_attack_area", "animator", "combat_handler") groups=["Player"]]
 collision_mask = 46
 script = ExtResource("1_eau03")
+speed = null
+jump_power = null
+max_health = null
+attack_damage = null
+charge_attack_time = null
+charge_attack_damage = null
 body_attack_area = NodePath("RacerAnimator/BodyAttackArea")
 animator = NodePath("RacerAnimator")
 combat_handler = NodePath("RacerAnimator/AttackArea/AttackAreaMap")

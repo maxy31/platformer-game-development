@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c8qf1fmrhd7h2" path="res://Assets/Scenes/object/platform_a.tscn" id="4_mex2m"]
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="5_o3j8m"]
 [ext_resource type="PackedScene" uid="uid://5mhrqxiqqhol" path="res://Assets/Scenes/PlayerController/RacerPlayer.tscn" id="6_8fqg5"]
-[ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="6_r5d1o"]
+[ext_resource type="PackedScene" path="res://Assets/Scenes/Food/cheese.tscn" id="6_r5d1o"]
 [ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="7_8fqg5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7im2"]
@@ -144,6 +144,21 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_r7im2")
 
+[sub_resource type="Animation" id="Animation_o3j8m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(516, 288)]
+}
+
 [sub_resource type="Animation" id="Animation_mex2m"]
 resource_name = "move"
 loop_mode = 2
@@ -160,7 +175,13 @@ tracks/0/keys = {
 "values": [Vector2(516, 288), Vector2(463, 289)]
 }
 
-[sub_resource type="Animation" id="Animation_o3j8m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5d1o"]
+_data = {
+&"RESET": SubResource("Animation_o3j8m"),
+&"move": SubResource("Animation_mex2m")
+}
+
+[sub_resource type="Animation" id="Animation_8fqg5"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -172,13 +193,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(516, 288)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5d1o"]
-_data = {
-&"RESET": SubResource("Animation_o3j8m"),
-&"move": SubResource("Animation_mex2m")
+"values": [Vector2(113, 289)]
 }
 
 [sub_resource type="Animation" id="Animation_r5d1o"]
@@ -198,7 +213,13 @@ tracks/0/keys = {
 "values": [Vector2(113, 289), Vector2(113, 193)]
 }
 
-[sub_resource type="Animation" id="Animation_8fqg5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j254v"]
+_data = {
+&"RESET": SubResource("Animation_8fqg5"),
+&"up": SubResource("Animation_r5d1o")
+}
+
+[sub_resource type="Animation" id="Animation_3v8ev"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -210,13 +231,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(113, 289)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j254v"]
-_data = {
-&"RESET": SubResource("Animation_8fqg5"),
-&"up": SubResource("Animation_r5d1o")
+"values": [Vector2(240, 192)]
 }
 
 [sub_resource type="Animation" id="Animation_j254v"]
@@ -234,21 +249,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(240, 192), Vector2(240, 287)]
-}
-
-[sub_resource type="Animation" id="Animation_3v8ev"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(240, 192)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3rbst"]
@@ -343,6 +343,12 @@ collision_layer = 512
 [node name="RacerController" parent="." instance=ExtResource("6_8fqg5")]
 position = Vector2(18, 273)
 collision_mask = 814
+speed = null
+jump_power = null
+max_health = null
+attack_damage = null
+charge_attack_time = null
+charge_attack_damage = null
 
 [node name="Destroyer" parent="." groups=["Enemy"] instance=ExtResource("7_8fqg5")]
 position = Vector2(588, 62)

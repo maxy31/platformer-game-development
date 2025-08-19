@@ -190,7 +190,7 @@ func _on_body_attack_area_entered(body):
 
 		# 攻击触发后重置（防止无限撞）
 		move_timer = 0.0
-		charge_attack_ready = false
+		charge_attack_ready = falsed
 
 #Boost Jump Cheese
 func eat_food():

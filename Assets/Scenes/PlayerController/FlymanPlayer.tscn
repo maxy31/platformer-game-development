@@ -288,6 +288,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_enrtd")
 }
 speed_scale = 0.8
+movie_quit_on_finish = true
 
 [node name="Sprite2D" type="Sprite2D" parent="FlymanAnimator"]
 position = Vector2(0, -5)

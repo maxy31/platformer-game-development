@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://52ye45ph8nlu" path="res://Assets/Script/enemy.gd" id="1_mir1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qafb8"]
-size = Vector2(19, 26)
+size = Vector2(19, 29)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mir1v"]
 radius = 6.0
@@ -26,7 +26,7 @@ region_rect = Rect2(0, 0, 64, 64)
 collision_layer = 128
 
 [node name="HitBoxArea" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-0.5, -9)
+position = Vector2(-0.5, -10.5)
 shape = SubResource("RectangleShape2D_qafb8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
