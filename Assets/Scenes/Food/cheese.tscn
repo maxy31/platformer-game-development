@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbevqyrp2h7ii"]
+
+[ext_resource type="Script" uid="uid://cpiomxgdhkbql" path="res://Assets/Script/cheese.gd" id="1_cp6wg"]
+[ext_resource type="Texture2D" uid="uid://b33ohbunyqd4g" path="res://Assets/Scenes/Food/tile_0011.png" id="1_vhs5l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhs5l"]
+atlas = ExtResource("1_vhs5l")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cp6wg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhs5l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcstv"]
+size = Vector2(19, 15)
+
+[node name="Cheese" type="Area2D"]
+script = ExtResource("1_cp6wg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cp6wg")
+frame_progress = 0.392526
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_qcstv")
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

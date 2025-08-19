@@ -64,6 +64,7 @@ attack={
 2d_physics/layer_7="PlayerAttack"
 2d_physics/layer_8="EnemyAttack"
 2d_physics/layer_9="Wall"
+2d_physics/layer_10="Food"
 
 [rendering]
 

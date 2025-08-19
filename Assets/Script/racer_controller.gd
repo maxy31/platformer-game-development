@@ -25,6 +25,12 @@ var is_hurt := false
 var move_timer: float = 0.0
 var charge_attack_ready: bool = false
 
+#boost jump
+var jump_velocity = -400
+var boosted_jump_velocity = -600  # stronger jump after cheese
+var boost_time = 3.0              # seconds boost lasts
+var is_boosted = false
+
 # 自动回血相关
 var regen_interval: float = 10.0   # 每10秒回血
 var regen_timer: float = 0.0
@@ -62,7 +68,10 @@ func _physics_process(delta: float) -> void:
 
 	# 跳跃
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_power * jump_multiplier
+		if is_boosted:
+			velocity.y = boosted_jump_velocity          #boost jump
+		else:
+			velocity.y = jump_power * jump_multiplier   #normal jump
 
 	# 攻击输入（缓冲）
 	if Input.is_action_just_pressed("attack"):
@@ -182,3 +191,11 @@ func _on_body_attack_area_entered(body):
 		# 攻击触发后重置（防止无限撞）
 		move_timer = 0.0
 		charge_attack_ready = false
+
+#Boost Jump Cheese
+func eat_food():
+	is_boosted = true
+	$BoostTimer.start(3.0)
+	
+func _on_boost_timer_timeout() -> void:
+	is_boosted = false
