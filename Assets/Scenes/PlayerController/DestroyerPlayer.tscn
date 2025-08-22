@@ -36,6 +36,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Rect2(0, 132, 64, 64), Rect2(64, 132, 64, 64), Rect2(128, 132, 64, 64), Rect2(192, 132, 64, 64)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_attack_cancel_point"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_o5bhd"]
 resource_name = "attack2"
@@ -52,6 +66,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Rect2(0, 192, 64, 64), Rect2(64, 192, 64, 64), Rect2(128, 192, 64, 64)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_attack_cancel_point"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ugmww"]
@@ -175,7 +203,7 @@ size = Vector2(26, 20)
 radius = 4.0
 height = 12.0
 
-[node name="DestroyerController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler")]
+[node name="DestroyerController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler") groups=["Player"]]
 collision_mask = 46
 script = ExtResource("1_lsrbb")
 animator = NodePath("DestroyerAnimator")
@@ -197,6 +225,7 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_av6gl")
 }
+speed_scale = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="DestroyerAnimator"]
 scale = Vector2(0.5, 0.5)

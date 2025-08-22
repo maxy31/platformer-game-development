@@ -16,10 +16,23 @@ func _process(delta):
 
 	var vel = player_controller.velocity
 
-	# 如果正在攻击，就不要随便覆盖动画
+	# ===========================
+	#   优先播放受击动画
+	# ===========================
+	if player_controller.is_hurt:
+		if animation_player and animation_player.has_animation("hurt"):
+			if not animation_player.is_playing() or animation_player.current_animation != "hurt":
+				print("🤕 播放受击动画（只触发一次）")
+				animation_player.play("hurt")
+		return  # 正在受击 → 不切换其他动画
+
+	# 如果正在攻击，就不要覆盖动画
 	if player_controller.is_attacking:
 		return
 
+	# ===========================
+	#   正常的移动/跳跃动画
+	# ===========================
 	if player_controller.direction == 1:
 		sprite.flip_h = false
 		attack_area.scale.x = 1
@@ -37,6 +50,9 @@ func _process(delta):
 	else:
 		animation_player.play("idle")
 
+# ===========================
+#   战斗 & 动画事件
+# ===========================
 func play_attack_animation(index: int):
 	var anim_name = "attack%d" % index
 	if animation_player and animation_player.has_animation(anim_name):
@@ -47,7 +63,7 @@ func play_attack_animation(index: int):
 
 func play_hurt_animation():
 	if animation_player and animation_player.has_animation("hurt"):
-		print("🤕 播放受击动画")
+		print("🤕 播放受击动画（由 Player 调用）")
 		animation_player.play("hurt")
 
 func _on_animation_finished(anim_name: String):
@@ -59,7 +75,7 @@ func _on_animation_finished(anim_name: String):
 		if player_controller:
 			player_controller.on_attack_animation_finished()
 
-# 这个方法会在动画事件中调用
+# 这个方法会在动画事件中调用（cancel point）
 func animation_cancel_point():
 	if player_controller:
 		player_controller.on_attack_cancel_point()

@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Flyteam - Lost in the void"
 
+[global_group]
+
+Player=""
+
 [input]
 
 jump={
