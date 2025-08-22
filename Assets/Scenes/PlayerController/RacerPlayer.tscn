@@ -227,7 +227,7 @@ radius = 6.0
 height = 16.0
 
 [node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("body_attack_area", "animator", "combat_handler") groups=["Player"]]
-collision_mask = 46
+collision_mask = 62
 script = ExtResource("1_eau03")
 body_attack_area = NodePath("RacerAnimator/BodyAttackArea")
 animator = NodePath("RacerAnimator")

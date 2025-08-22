@@ -28,6 +28,7 @@ project/assembly_name="Flyteam - Lost in the void"
 [global_group]
 
 Player=""
+Enemy=""
 
 [input]
 

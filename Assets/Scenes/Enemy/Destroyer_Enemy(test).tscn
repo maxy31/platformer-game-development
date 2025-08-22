@@ -9,12 +9,12 @@ size = Vector2(19, 29)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mir1v"]
 radius = 6.0
 
-[node name="Destroyer" type="CharacterBody2D"]
+[node name="Destroyer" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_mir1v")
 
-[node name="Node2D" type="Node2D" parent="." groups=["Enemy"]]
+[node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(0, -11)
