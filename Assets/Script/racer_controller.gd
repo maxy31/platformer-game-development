@@ -13,6 +13,11 @@ class_name RacerController
 @export var animator: Node
 @export var combat_handler: Node
 
+# ⚡ 新增：受伤相关
+@export var knockback_force := 50.0
+@export var knockback_up := -30.0
+@export var invincible_duration := 0.1
+
 var current_health : int
 var speed_multiplier := 30.0
 var jump_multiplier := -30.0
@@ -21,6 +26,9 @@ var direction := 0.0
 var is_attacking := false
 var queued_attack := false
 var is_hurt := false
+var invincible_timer := 0.0        # ⚡ 无敌计时器
+var _allow_jump_while_hurt_this_time := false  # ⚡ 地面受击立刻跳
+
 # 冲锋模式变量
 var move_timer: float = 0.0
 var charge_attack_ready: bool = false
@@ -38,19 +46,28 @@ signal health_changed(current: int, max: int)
 
 func _ready():
 	current_health = max_health
-	# 同步“最大血量”和“当前血量”到 HeartBar
 	if heart_bar:
 		heart_bar.set_max_hearts(max_health)
 		heart_bar.set_value(current_health)
-	# 绑定 BodyAttackArea 的碰撞检测
+
 	if body_attack_area:
 		body_attack_area.body_entered.connect(_on_body_attack_area_entered)
 
 
 func _physics_process(delta: float) -> void:
 	# ======================
-	#   自动回血逻辑
+	#   无敌计时 & 闪烁
 	# ======================
+	if invincible_timer > 0.0:
+		invincible_timer -= delta
+		if animator and animator.has_method("set_modulate_alpha"):
+			# 交给 animator 控制闪烁，或直接修改 modulate
+			animator.set_modulate_alpha(0.5 + 0.5 * sin(Time.get_ticks_msec() / 50.0))
+	else:
+		if animator and animator.has_method("set_modulate_alpha"):
+			animator.set_modulate_alpha(1.0)
+
+	# 自动回血逻辑
 	if current_health < max_health:
 		regen_timer += delta
 		if regen_timer >= regen_interval:
@@ -67,11 +84,14 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# 跳跃
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		if is_boosted:
-			velocity.y = boosted_jump_velocity          #boost jump
-		else:
-			velocity.y = jump_power * jump_multiplier   #normal jump
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor() or _allow_jump_while_hurt_this_time:
+			if is_boosted:
+				velocity.y = boosted_jump_velocity
+			else:
+				velocity.y = jump_power * jump_multiplier
+		# ⚡ 一次机会用完后重置
+		_allow_jump_while_hurt_this_time = false
 
 	# 攻击输入（缓冲）
 	if Input.is_action_just_pressed("attack"):
@@ -86,7 +106,6 @@ func _physics_process(delta: float) -> void:
 	if direction != 0:
 		velocity.x = direction * speed * speed_multiplier
 
-		# 计时：持续移动
 		move_timer += delta
 		if move_timer >= charge_attack_time:
 			if not charge_attack_ready:
@@ -94,8 +113,6 @@ func _physics_process(delta: float) -> void:
 				charge_attack_ready = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
-
-		# 停止移动则重置
 		move_timer = 0.0
 		charge_attack_ready = false
 
@@ -103,31 +120,24 @@ func _physics_process(delta: float) -> void:
 
 
 func start_attack():
-	# 开始攻击
 	is_attacking = true
-
-	# 播放动画（由 animator 控制）
 	if animator and animator.has_method("play_attack_animation"):
 		animator.play_attack_animation()
 
-	# 立刻做一次攻击判定
 	if combat_handler and combat_handler.has_method("do_attack_hit"):
 		combat_handler.do_attack_hit(attack_damage)
 
-	# 保险：如果 animation_finished 没触发，0.5s 后强制结束攻击状态
 	var t = get_tree().create_timer(0.5)
 	t.timeout.connect(Callable(self, "_force_end_attack"))
 
 
 func _force_end_attack():
-	# 保险回调 — 若仍在攻击则强制结束
 	if is_attacking:
 		print("⚠ 动画信号未触发，强制结束攻击状态")
 		on_attack_animation_finished()
 
 
 func on_attack_animation_finished():
-	# 动画结束时由 animator 调用
 	if queued_attack:
 		queued_attack = false
 		start_attack()
@@ -135,16 +145,14 @@ func on_attack_animation_finished():
 		is_attacking = false
 
 
-func take_damage(amount: int = 1):
-	# 受击
-	if is_hurt:
+# ⚡ 修改：take_damage 增加 from_pos & 无敌 & 击退
+func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
+	if invincible_timer > 0.0:
 		return
 
 	current_health = max(0, current_health - amount)
-
 	if heart_bar:
 		heart_bar.set_value(current_health)
-		
 	emit_signal("health_changed", current_health, max_health)
 	print("💔 Player took damage. Current HP:", current_health)
 
@@ -152,9 +160,21 @@ func take_damage(amount: int = 1):
 		die()
 		return
 
+	# 地面受击可以立即跳
+	_allow_jump_while_hurt_this_time = is_on_floor()
+
 	is_hurt = true
 	is_attacking = false
 	queued_attack = false
+
+	# ⚡ 击退
+	if from_pos != Vector2.ZERO:
+		var dir = sign(global_position.x - from_pos.x)
+		velocity.x = dir * knockback_force
+		velocity.y = knockback_up
+
+	# ⚡ 开启无敌
+	invincible_timer = invincible_duration
 
 	if animator and animator.has_method("play_hurt_animation"):
 		animator.play_hurt_animation()
@@ -188,9 +208,9 @@ func _on_body_attack_area_entered(body):
 		else:
 			print("⚠ 敌人没有 take_damage 方法")
 
-		# 攻击触发后重置（防止无限撞）
 		move_timer = 0.0
-		charge_attack_ready = falsed
+		charge_attack_ready = false
+
 
 #Boost Jump Cheese
 func eat_food():

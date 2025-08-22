@@ -259,7 +259,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8rbu"]
-size = Vector2(7, 7)
+size = Vector2(9.5, 7)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8rbu"]
 radius = 4.0
@@ -302,7 +302,7 @@ collision_layer = 64
 collision_mask = 2
 
 [node name="AttackAreaMap" type="CollisionShape2D" parent="FlymanAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
-position = Vector2(8, -6)
+position = Vector2(9.25, -6)
 shape = SubResource("RectangleShape2D_i8rbu")
 script = ExtResource("4_xt8c6")
 attack_area = NodePath("..")
