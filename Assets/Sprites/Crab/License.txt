@@ -1,0 +1,19 @@
+Pixel Art Sprites License
+1. License Grant
+You are granted a license to use, modify, and incorporate these pixel art sprites 
+ in your own projects, both personal and commercial.
+
+2. Restrictions
+No Resale or Redistribution: You may not sell, resell, or distribute these pixel art sprites 
+ as standalone assets or as part of any asset pack, even if modified.
+No Claim of Ownership: You may not claim ownership or authorship of the original pixel art sprites.
+
+3. Credits
+Credit is not required, but it is appreciated.
+
+4. Termination
+This license is automatically terminated if any of the above conditions are violated.
+
+5. Disclaimer
+These pixel art sprites are provided "as is" without any warranties, express or implied. 
+The creator is not liable for any damages arising from the use of these sprites.
