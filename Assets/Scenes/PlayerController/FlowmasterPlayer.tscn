@@ -1,7 +1,7 @@
-[gd_scene load_steps=61 format=3 uid="uid://dxjuvswdpv43p"]
+[gd_scene load_steps=72 format=3 uid="uid://dxjuvswdpv43p"]
 
 [ext_resource type="Script" uid="uid://0rdsy0dyatlj" path="res://Assets/Script/flowmaster_controller.gd" id="1_1rhmj"]
-[ext_resource type="Texture2D" uid="uid://b084itospc68g" path="res://Assets/Sprites/Flowmaster/B_witch_attack.png" id="2_08y4y"]
+[ext_resource type="Texture2D" uid="uid://5drqe6d3jwu7" path="res://Assets/Sprites/Flowmaster/B_witch_attack.png" id="2_08y4y"]
 [ext_resource type="Script" uid="uid://cn8v1w8n6pigm" path="res://Assets/Script/flowmaster_animator.gd" id="2_ti2co"]
 [ext_resource type="Texture2D" uid="uid://cnie835npcfhn" path="res://Assets/Sprites/Flowmaster/B_witch_death.png" id="3_ti2co"]
 [ext_resource type="Texture2D" uid="uid://b5j2sw2lypuaf" path="res://Assets/Sprites/Flowmaster/B_witch_charge.png" id="4_jtyff"]
@@ -10,40 +10,43 @@
 [ext_resource type="Texture2D" uid="uid://oxooiswm3cgm" path="res://Assets/Sprites/Flowmaster/B_witch_run.png" id="7_byfcp"]
 [ext_resource type="Script" uid="uid://b4pen3sfmifn4" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ti2co"]
+load_path = "res://.godot/imported/B_witch_attack.png-e7a79e1a610971ad734e007ef1dc6817.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_srm8r"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 0, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ftr8r"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 92, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1cjqi"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 46, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs5y2"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 138, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_81okr"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 184, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhbbf"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 230, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sxy87"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 276, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oirqx"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 322, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jmc78"]
-atlas = ExtResource("2_08y4y")
+atlas = SubResource("CompressedTexture2D_ti2co")
 region = Rect2(0, 368, 104, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8oq2s"]
@@ -202,7 +205,7 @@ region = Rect2(0, 288, 32, 48)
 atlas = ExtResource("7_byfcp")
 region = Rect2(0, 336, 32, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dvd17"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ti2co"]
 animations = [{
 "frames": [{
 "duration": 0.3,
@@ -384,6 +387,77 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtyff"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 0, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17omi"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 46, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1a7y"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 92, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byfcp"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 138, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvd17"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 184, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5msgx"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 230, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tooa8"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 276, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyxt7"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 322, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jd3b"]
+atlas = ExtResource("2_08y4y")
+region = Rect2(0, 368, 104, 46)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7qkh"]
+animations = [{
+"frames": [{
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_jtyff")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_17omi")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_s1a7y")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_byfcp")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_dvd17")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_5msgx")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_tooa8")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_nyxt7")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_3jd3b")
+}],
+"loop": true,
+"name": &"attack1",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5msgx"]
 size = Vector2(27, 18)
 
@@ -401,16 +475,23 @@ combat_handler = NodePath("FlowmasterAnimator/AttackArea/AttackAreaMap")
 offset = Vector2(0, -15)
 zoom = Vector2(4, 4)
 
-[node name="FlowmasterAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animated_sprite", "attack_area")]
+[node name="FlowmasterAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animated_sprite", "attack_animated_sprite", "attack_area")]
 script = ExtResource("2_ti2co")
 player_controller = NodePath("..")
 animated_sprite = NodePath("AnimatedSprite2D")
+attack_animated_sprite = NodePath("AttackAnimatedSprite2D")
 attack_area = NodePath("AttackArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FlowmasterAnimator"]
 scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_dvd17")
+sprite_frames = SubResource("SpriteFrames_ti2co")
 animation = &"attack1"
+
+[node name="AttackAnimatedSprite2D" type="AnimatedSprite2D" parent="FlowmasterAnimator"]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_q7qkh")
+animation = &"attack1"
+offset = Vector2(32, 0)
 
 [node name="AttackArea" type="Area2D" parent="FlowmasterAnimator"]
 collision_layer = 64

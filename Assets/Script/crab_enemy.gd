@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var speed : int = 1500
 @export var wait_time : int = 3
 @export var damage_to_player : int = 1  # 新增：对玩家造成的伤害
-
+@export var max_health := 1
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var timer = $Timer
 @onready var damage_area = $DamageArea  # 假设Area2D节点名为DamageArea
@@ -12,6 +12,7 @@ extends CharacterBody2D
 const GRAVITY = 1000
 
 enum State {Idle, Walk}
+var current_health := max_health
 var current_state :State
 var direction : Vector2 = Vector2.LEFT
 var number_of_points: int
@@ -52,6 +53,16 @@ func _physics_process(delta : float):
 	# 新增：检测与玩家的碰撞
 	check_player_collision()
 
+func take_damage(amount: int):
+	current_health -= amount
+	print("💥 Enemy took", amount, "damage. HP:", current_health)
+
+	if current_health <= 0:
+		die()
+
+func die():
+	print("☠ Enemy died")
+	queue_free()
 
 func enemy_gravity(delta : float):
 	velocity.y += GRAVITY * delta
