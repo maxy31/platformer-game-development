@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpysr4w1tyt1r"]
+
+[ext_resource type="Texture2D" uid="uid://7a4aop7fpe0q" path="res://Assets/Sprites/Flying Demon/projectile.png" id="1_g0k2o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ysrvr"]
+
+[node name="fireball" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g0k2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 1)
+shape = SubResource("CircleShape2D_ysrvr")

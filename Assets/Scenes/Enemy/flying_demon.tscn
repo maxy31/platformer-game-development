@@ -1,0 +1,217 @@
+[gd_scene load_steps=19 format=3 uid="uid://d3mm0obwvwwtg"]
+
+[ext_resource type="Script" uid="uid://co1fyqw7oa54n" path="res://Assets/Script/flying_demon.gd" id="1_obwwn"]
+[ext_resource type="Texture2D" uid="uid://cfe8bv0f67iou" path="res://Assets/Sprites/Flying Demon/with_outline/IDLE.png" id="1_wm3aj"]
+[ext_resource type="Script" uid="uid://cx4n4xaj3125k" path="res://Assets/Script/State/FiniteStateMachine.gd" id="2_g3doo"]
+[ext_resource type="Script" uid="uid://cqrismiqrx2sy" path="res://Assets/Script/State/flying_demon/flying_demon_Idle_State.gd" id="4_onjrk"]
+[ext_resource type="Script" uid="uid://k5qrvurc2cqa" path="res://Assets/Script/State/flying_demon/flying_demon_Patrol_State.gd" id="5_abx1p"]
+[ext_resource type="Script" uid="uid://daphqexnc0bi3" path="res://Assets/Script/State/flying_demon/flying_demon_Chase_State.gd" id="6_f2pxu"]
+[ext_resource type="Script" uid="uid://bb4mn57uovlq5" path="res://Assets/Script/State/flying_demon/flying_demon_Attack_State.gd" id="7_dqedu"]
+[ext_resource type="PackedScene" uid="uid://dpysr4w1tyt1r" path="res://Assets/Scenes/Enemy/fireball.tscn" id="8_0k70j"]
+[ext_resource type="Script" uid="uid://dbm3dhd3oerk3" path="res://Assets/Script/State/flying_demon/flying_demon_Hurt_State.gd" id="9_0k70j"]
+[ext_resource type="Script" uid="uid://b2xoa3dq6nybg" path="res://Assets/Script/State/flying_demon/flying_demon_Dead_State.gd" id="10_0k70j"]
+
+[sub_resource type="Animation" id="Animation_wm3aj"]
+resource_name = "Idle"
+length = 0.40001
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_kfmji"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_g3doo"]
+resource_name = "Attack"
+length = 0.80001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FiniteStateMachine/Attack State")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_obwwn"]
+resource_name = "Patrol-Chase"
+length = 0.40001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_onjrk"]
+resource_name = "Hurt"
+length = 0.40001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_abx1p"]
+resource_name = "Dead"
+length = 0.70001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfmji"]
+_data = {
+&"Attack": SubResource("Animation_g3doo"),
+&"Dead": SubResource("Animation_abx1p"),
+&"Hurt": SubResource("Animation_onjrk"),
+&"Idle": SubResource("Animation_wm3aj"),
+&"Patrol-Chase": SubResource("Animation_obwwn"),
+&"RESET": SubResource("Animation_kfmji")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2pxu"]
+radius = 20.025
+
+[node name="flying_demon" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 73
+script = ExtResource("1_obwwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Enemy"]]
+position = Vector2(-1.90735e-06, 0)
+scale = Vector2(0.403597, 0.452886)
+texture = ExtResource("1_wm3aj")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["Enemy"]]
+libraries = {
+&"": SubResource("AnimationLibrary_kfmji")
+}
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+shape = SubResource("CircleShape2D_f2pxu")
+
+[node name="debug" type="Label" parent="." groups=["Enemy"]]
+offset_left = -19.0
+offset_top = -82.0
+offset_right = 21.0
+offset_bottom = -59.0
+
+[node name="PlayerDetection" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 73
+
+[node name="FiniteStateMachine" type="Node2D" parent="." groups=["Enemy"]]
+script = ExtResource("2_g3doo")
+
+[node name="Idle State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+script = ExtResource("4_onjrk")
+can_move = false
+
+[node name="Patrol State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+script = ExtResource("5_abx1p")
+
+[node name="Chase State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+script = ExtResource("6_f2pxu")
+
+[node name="Attack State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+script = ExtResource("7_dqedu")
+ranged_attack_scene = ExtResource("8_0k70j")
+can_move = false
+
+[node name="Hurt State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+script = ExtResource("9_0k70j")
+can_move = false
+
+[node name="Dead State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+script = ExtResource("10_0k70j")
+can_move = false
+
+[node name="RandomPatrolTimer" type="Timer" parent="." groups=["Enemy"]]
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detected"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_lost"]
+[connection signal="timeout" from="RandomPatrolTimer" to="." method="_on_random_patrol_timer_timeout"]

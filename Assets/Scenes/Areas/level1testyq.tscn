@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://drd16d84s4l2r"]
+[gd_scene load_steps=30 format=3 uid="uid://drd16d84s4l2r"]
 
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_3apip"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_md17y"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="9_cwqmp"]
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="10_yaukd"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="11_md17y"]
+[ext_resource type="PackedScene" uid="uid://b6d3sy0xa8uoh" path="res://Assets/Scenes/Enemy/Skeleton_Enemy.tscn" id="12_ykdkx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7im2"]
 texture = ExtResource("2_md17y")
@@ -443,3 +444,6 @@ position = Vector2(-39, 0)
 
 [node name="Point2" type="Marker2D" parent="EnemyCrab2/PatrolPoints"]
 position = Vector2(35, 0)
+
+[node name="Skeleton" parent="." instance=ExtResource("12_ykdkx")]
+position = Vector2(346, 49)
