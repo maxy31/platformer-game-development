@@ -385,7 +385,7 @@ collision_layer = 512
 
 [node name="RacerController" parent="." node_paths=PackedStringArray("heart_bar") instance=ExtResource("6_t78u1")]
 position = Vector2(18, 273)
-collision_mask = 814
+collision_mask = 878
 heart_bar = NodePath("../HeartUi/HeartBar")
 
 [node name="Destroyer" parent="." instance=ExtResource("7_2pvgx")]
@@ -445,5 +445,5 @@ position = Vector2(-39, 0)
 [node name="Point2" type="Marker2D" parent="EnemyCrab2/PatrolPoints"]
 position = Vector2(35, 0)
 
-[node name="Skeleton" parent="." instance=ExtResource("12_ykdkx")]
+[node name="Skeleton" parent="." groups=["Enemy"] instance=ExtResource("12_ykdkx")]
 position = Vector2(346, 49)

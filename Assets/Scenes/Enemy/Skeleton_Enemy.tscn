@@ -232,11 +232,12 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uv2cl"]
-height = 32.0
+radius = 15.0
+height = 34.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8ji7"]
 radius = 40.0
-height = 400.0
+height = 300.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5j0l"]
 radius = 15.0
@@ -260,7 +261,6 @@ libraries = {
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_uv2cl")
 
 [node name="debug" type="Label" parent="."]
@@ -270,7 +270,6 @@ offset_right = 21.0
 offset_bottom = -26.0
 
 [node name="PlayerDetection" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
@@ -279,17 +278,14 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r8ji7")
 
 [node name="RayCast" type="Node2D" parent="."]
-visible = false
 
 [node name="RayCastRight" type="RayCast2D" parent="RayCast"]
 position = Vector2(0, 10)
 rotation = 4.71239
-target_position = Vector2(0, 25)
 
 [node name="RayCastLeft" type="RayCast2D" parent="RayCast"]
 position = Vector2(0, 10)
 rotation = 1.5708
-target_position = Vector2(0, 25)
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
 script = ExtResource("3_rumkp")
