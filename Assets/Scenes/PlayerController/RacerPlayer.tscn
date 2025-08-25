@@ -72,34 +72,34 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("13_b0r6d")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("14_meoo1")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("15_7dwp4")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("16_d5v8d")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("17_1urhj")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("18_goeth")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("19_0qgua")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("20_63f4g")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("21_7vlib")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": ExtResource("22_pfq5w")
 }],
 "loop": false,
@@ -247,7 +247,7 @@ attack_area = NodePath("AttackArea")
 position = Vector2(0, -12)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_de0mg")
-animation = &"hurt"
+animation = &"move"
 
 [node name="AttackArea" type="Area2D" parent="RacerAnimator"]
 collision_layer = 64

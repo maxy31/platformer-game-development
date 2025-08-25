@@ -1,14 +1,113 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpysr4w1tyt1r"]
+[gd_scene load_steps=9 format=3 uid="uid://dpysr4w1tyt1r"]
 
-[ext_resource type="Texture2D" uid="uid://7a4aop7fpe0q" path="res://Assets/Sprites/Flying Demon/projectile.png" id="1_g0k2o"]
+[ext_resource type="Texture2D" uid="uid://bme5dto68yqxa" path="res://Assets/Sprites/Fireball/1.png" id="1_g0k2o"]
+[ext_resource type="Script" uid="uid://8sprtut0ty1s" path="res://Assets/Script/fireball.gd" id="1_ysrvr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ysrvr"]
+[sub_resource type="Animation" id="Animation_ysrvr"]
+resource_name = "create"
+length = 0.30001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
-[node name="fireball" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_mmc00"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mxvvr"]
+resource_name = "fly"
+length = 0.40001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_voe1h"]
+resource_name = "explode"
+length = 0.70001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i5ns"]
+_data = {
+&"RESET": SubResource("Animation_mmc00"),
+&"create": SubResource("Animation_ysrvr"),
+&"explode": SubResource("Animation_voe1h"),
+&"fly": SubResource("Animation_mxvvr")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvaao"]
+
+[node name="fireball" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ysrvr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_g0k2o")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7i5ns")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, 1)
-shape = SubResource("CircleShape2D_ysrvr")
+shape = SubResource("CircleShape2D_wvaao")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

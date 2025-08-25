@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3mm0obwvwwtg"]
+[gd_scene load_steps=20 format=3 uid="uid://d3mm0obwvwwtg"]
 
 [ext_resource type="Script" uid="uid://co1fyqw7oa54n" path="res://Assets/Script/flying_demon.gd" id="1_obwwn"]
 [ext_resource type="Texture2D" uid="uid://cfe8bv0f67iou" path="res://Assets/Sprites/Flying Demon/with_outline/IDLE.png" id="1_wm3aj"]
@@ -152,61 +152,68 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2pxu"]
-radius = 20.025
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0k70j"]
+radius = 150.0
+height = 300.0
 
 [node name="flying_demon" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_obwwn")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Enemy"]]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, 0)
 scale = Vector2(0.403597, 0.452886)
 texture = ExtResource("1_wm3aj")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["Enemy"]]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_kfmji")
 }
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f2pxu")
 
-[node name="debug" type="Label" parent="." groups=["Enemy"]]
-offset_left = -19.0
-offset_top = -82.0
-offset_right = 21.0
-offset_bottom = -59.0
+[node name="debug" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -41.0
+offset_right = 20.0
+offset_bottom = -18.0
 
 [node name="PlayerDetection" type="Area2D" parent="." groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 73
 
-[node name="FiniteStateMachine" type="Node2D" parent="." groups=["Enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CapsuleShape2D_0k70j")
+
+[node name="FiniteStateMachine" type="Node2D" parent="."]
 script = ExtResource("2_g3doo")
 
-[node name="Idle State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+[node name="Idle State" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("4_onjrk")
 can_move = false
 
-[node name="Patrol State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+[node name="Patrol State" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("5_abx1p")
+patrol_timer = 6.0
 
-[node name="Chase State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+[node name="Chase State" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("6_f2pxu")
 
-[node name="Attack State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+[node name="Attack State" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("7_dqedu")
 ranged_attack_scene = ExtResource("8_0k70j")
 can_move = false
 
-[node name="Hurt State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+[node name="Hurt State" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("9_0k70j")
 can_move = false
 
-[node name="Dead State" type="Node2D" parent="FiniteStateMachine" groups=["Enemy"]]
+[node name="Dead State" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("10_0k70j")
 can_move = false
 

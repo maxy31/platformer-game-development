@@ -387,6 +387,8 @@ position = Vector2(18, 273)
 collision_mask = 814
 heart_bar = NodePath("../HeartUi/HeartBar")
 
+[node name="Camera2D2" type="Camera2D" parent="RacerController"]
+
 [node name="Destroyer" parent="." instance=ExtResource("7_8fqg5")]
 position = Vector2(588, 62)
 
@@ -410,7 +412,7 @@ position = Vector2(1062, 132)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("10_3rbst")]
+[node name="PauseMenu" parent="CanvasLayer" groups=["Player"] instance=ExtResource("10_3rbst")]
 offset_right = 88.0
 offset_bottom = 5.0
 

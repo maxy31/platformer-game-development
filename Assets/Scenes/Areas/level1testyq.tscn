@@ -445,5 +445,5 @@ position = Vector2(-39, 0)
 [node name="Point2" type="Marker2D" parent="EnemyCrab2/PatrolPoints"]
 position = Vector2(35, 0)
 
-[node name="Skeleton" parent="." groups=["Enemy"] instance=ExtResource("12_ykdkx")]
-position = Vector2(346, 49)
+[node name="Skeleton" parent="." instance=ExtResource("12_ykdkx")]
+position = Vector2(340, 50)

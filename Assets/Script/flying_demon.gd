@@ -15,7 +15,7 @@ var is_dead = false
 @export var attack_range : float = 150.0
 @export var move_speed = 15
 @export var chase_speed = 20
-@export var health = 10
+@export var health = 4
 @export var knockback_force = Vector2(100, -100)
 
 func _ready():
@@ -68,7 +68,7 @@ func start_attack_animation():
 func _on_random_patrol_timer_timeout():
 	$RandomPatrolTimer.wait_time = choose([0.6,0.8,1.0])
 	if is_player_in_range == false and finite_state_machine.check_if_can_move():
-		direction = choose([Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,])
+		direction = choose([Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN])
 
 func choose(array):
 	array.shuffle()

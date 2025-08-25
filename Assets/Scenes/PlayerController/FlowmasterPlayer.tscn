@@ -488,6 +488,7 @@ sprite_frames = SubResource("SpriteFrames_ti2co")
 animation = &"attack1"
 
 [node name="AttackAnimatedSprite2D" type="AnimatedSprite2D" parent="FlowmasterAnimator"]
+visible = false
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_q7qkh")
 animation = &"attack1"
