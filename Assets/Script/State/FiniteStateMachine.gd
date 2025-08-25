@@ -21,3 +21,4 @@ func change_state(state):
 		
 func check_if_can_move():
 	return current_state.can_move
+	

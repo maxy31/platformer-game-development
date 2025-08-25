@@ -7,8 +7,10 @@ extends CharacterBody2D
 @onready var ray_cast_right = $RayCast/RayCastRight
 @onready var ray_cast_left = $RayCast/RayCastLeft
 @onready var attack_area = $AttackArea2D
-var player = null  # Don't initialize here, will be set in _ready()
+@export var attack_cooldown : float = 1.5 # 攻击冷却时间（秒）
 
+var player = null  # Don't initialize here, will be set in _ready()
+var can_attack: bool = true  # 是否能攻击
 var mandatory_idle_active = false
 var is_player_in_range = false #for chase
 var is_close_to_player = false #for attack
@@ -110,8 +112,20 @@ func check_wall_collision():
 		sprite_2d.flip_h = false
 	
 func start_attack_animation():
-	is_close_to_player = true
+	if not can_attack:
+		return  # 冷却中，不能攻击
 	
+	is_close_to_player = true
+	can_attack = false  # 进入冷却
+	# 播放攻击动画（假设在 FSM 或 AnimationPlayer 里处理）
+	
+	# 启动计时器冷却
+	var cooldown_timer = get_tree().create_timer(attack_cooldown)
+	cooldown_timer.timeout.connect(_reset_attack_cooldown)
+	
+func _reset_attack_cooldown():
+	can_attack = true
+
 func _on_player_detected(body):
 	if body.is_in_group("Player"):
 		is_player_in_range = true
