@@ -247,3 +247,5 @@ attack_area = NodePath("..")
 [node name="DestroyerMoveArea" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_pptjt")
+
+[node name="BoostTimer" type="Timer" parent="."]

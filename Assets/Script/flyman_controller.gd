@@ -7,7 +7,7 @@ class_name FlymanController
 @export var attack_damage := 1
 
 @export var heart_bar: HeartBar
-@export var animator: Node          # hurt 动画结束请从 Animator 调用 on_hurt_animation_finished()
+@export var animator: Node
 @export var combat_handler: Node
 
 # —— 接触持续伤害相关 —— 
@@ -55,6 +55,12 @@ var regen_timer: float = 0.0
 # 接触持续伤害
 var _contact_list: Array[Node] = []
 var _contact_cd: float = 0.0
+
+#boost jump
+var jump_velocity = -400
+var boosted_jump_velocity = -600  # stronger jump after cheese
+var boost_time = 3.0              # seconds boost lasts
+var is_boosted = false
 
 signal health_changed(current: int, max: int)
 
@@ -269,3 +275,11 @@ func _stop_invincible_flicker() -> void:
 	_flicker_time_left = 0.0
 	_flicker_accum = 0.0
 	_flicker_state = false
+
+#Boost Jump Cheese
+func eat_food():
+	is_boosted = true
+	$BoostTimer.start(3.0)
+	
+func _on_boost_timer_timeout() -> void:
+	is_boosted = false
