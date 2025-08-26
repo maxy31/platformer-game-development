@@ -19,7 +19,7 @@ var is_dead = false
 @export var knockback_force = Vector2(100, -100)
 
 # ✅ 新增：攻击冷却
-@export var attack_cooldown : float = 1.5
+@export var attack_cooldown : float = 2
 var can_attack: bool = true
 
 func _ready():
