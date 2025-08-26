@@ -1,14 +1,14 @@
 [gd_scene load_steps=9 format=4 uid="uid://ducjyas6bgu2y"]
 
-[ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_fjgyd"]
-[ext_resource type="Texture2D" uid="uid://dtdc0fxr4nrj5" path="res://Assets/Sprites/Tutorial/tiles_1.png" id="2_dtyab"]
-[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="3_6lttb"]
-[ext_resource type="PackedScene" uid="uid://dxjuvswdpv43p" path="res://Assets/Scenes/PlayerController/FlowmasterPlayer.tscn" id="4_84eg4"]
-[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_x8n0n"]
-[ext_resource type="PackedScene" uid="uid://d3mm0obwvwwtg" path="res://Assets/Scenes/Enemy/flying_demon.tscn" id="6_dtyab"]
+[ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_r1sv1"]
+[ext_resource type="Texture2D" uid="uid://dtdc0fxr4nrj5" path="res://Assets/Sprites/Tutorial/tiles_1.png" id="2_7k1b7"]
+[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="3_jt6vs"]
+[ext_resource type="PackedScene" uid="uid://dxjuvswdpv43p" path="res://Assets/Scenes/PlayerController/FlowmasterPlayer.tscn" id="4_opsn0"]
+[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_bl6vc"]
+[ext_resource type="PackedScene" uid="uid://d3mm0obwvwwtg" path="res://Assets/Scenes/Enemy/flying_demon.tscn" id="6_i631l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8wi1m"]
-texture = ExtResource("2_dtyab")
+texture = ExtResource("2_7k1b7")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -81,7 +81,7 @@ sources/0 = SubResource("TileSetAtlasSource_8wi1m")
 z_index = -1
 position = Vector2(574, 324)
 scale = Vector2(1.99479, 1.99691)
-texture = ExtResource("1_fjgyd")
+texture = ExtResource("1_r1sv1")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ql8qi")
@@ -92,18 +92,18 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAAAABcAAAAAAAAAAAAAABgAAAAAAAEAAAAAABkAAAAAAAIAAAABABgAAAABAAEAAAABABkAAAABAAIAAAABABcAAAABAAAAAAACABcAAAABAAAAAAACABgAAAABAAEAAAACABkAAAABAAIAAAADABcAAAABAAAAAAADABgAAAABAAEAAAADABkAAAABAAIAAAAEABcAAAABAAAAAAAEABgAAAABAAEAAAAEABkAAAABAAIAAAAFABcAAAABAAAAAAAFABgAAAABAAEAAAAFABkAAAABAAIAAAAGABcAAAABAAAAAAAGABgAAAABAAEAAAAGABkAAAABAAIAAAAHABcAAAABAAAAAAAHABgAAAABAAEAAAAHABkAAAABAAIAAAAIABcAAAABAAAAAAAIABgAAAABAAEAAAAIABkAAAABAAIAAAAJABcAAAABAAEAAAAJABgAAAABAAIAAAAKABYAAAABAAAAAAAKABcAAAABAAEAAAAKABgAAAABAAIAAAALABYAAAABAAAAAAALABcAAAABAAEAAAALABgAAAABAAIAAAAMABYAAAABAAAAAAAMABcAAAABAAEAAAAMABgAAAABAAIAAAANABYAAAABAAAAAAANABcAAAABAAEAAAANABgAAAABAAIAAAAOABUAAAAAAAEAAAAOABYAAAABAAIAAAAPABQAAAABAAAAAAAPABUAAAABAAEAAAAPABYAAAABAAIAAAAQABQAAAABAAAAAAAQABUAAAABAAEAAAAQABYAAAABAAIAAAARABQAAAABAAAAAAARABUAAAABAAEAAAARABYAAAABAAIAAAASABQAAAABAAAAAAASABUAAAABAAEAAAASABYAAAABAAIAAAAUABQAAAABAAAAAAAUABUAAAABAAEAAAAUABYAAAABAAIAAAATABQAAAABAAAAAAATABUAAAABAAEAAAATABYAAAABAAIAAAAVABQAAAABAAAAAAAVABUAAAABAAEAAAAVABYAAAABAAIAAAAWABQAAAABAAAAAAAWABUAAAABAAEAAAAWABYAAAABAAIAAAAXABQAAAABAAAAAAAXABUAAAABAAEAAAAXABYAAAABAAIAAAAZABUAAAABAAEAAAAZABYAAAABAAIAAAAYABQAAAABAAAAAAAYABUAAAABAAEAAAAYABYAAAABAAIAAAAaABUAAAABAAAAAAAaABYAAAABAAEAAAAaABcAAAABAAIAAAAbABUAAAABAAAAAAAbABYAAAABAAEAAAAbABcAAAABAAIAAAAcABYAAAABAAEAAAAcABcAAAABAAIAAAAdABYAAAABAAAAAAAdABcAAAABAAEAAAAdABgAAAABAAIAAAAeABYAAAABAAAAAAAeABcAAAABAAEAAAAeABgAAAABAAIAAAAfABYAAAABAAAAAAAfABcAAAABAAEAAAAfABgAAAABAAIAAAAJABYAAAAAAAAAAAAOABQAAAAAAAAAAAAZABQAAAACAAAAAAAcABUAAAACAAAAAAAaABQAAAAAAAAAAAAbABQAAAAAAAAAAAAcABQAAAAAAAAAAAAdABQAAAAAAAAAAAAeABQAAAAAAAAAAAAfABQAAAAAAAAAAAAgABQAAAAAAAAAAAAhABQAAAAAAAAAAAAiABQAAAAAAAAAAAAjABQAAAAAAAAAAAAkABQAAAAAAAAAAAAlABQAAAAAAAAAAAAmABQAAAAAAAAAAAAnABQAAAAAAAAAAAAoABQAAAAAAAAAAAApABQAAAAAAAAAAAAqABQAAAAAAAAAAAArABQAAAAAAAAAAAAsABQAAAAAAAAAAAAtABQAAAAAAAAAAAAuABQAAAAAAAAAAAAvABQAAAABAAAAAAAwABQAAAABAAAAAAAxABQAAAABAAAAAAAyABQAAAABAAAAAAAzABQAAAABAAAAAAA0ABQAAAABAAAAAAA1ABQAAAABAAAAAAA2ABQAAAABAAAAAAA3ABQAAAABAAAAAAA4ABQAAAABAAAAAAA5ABQAAAABAAAAAAA6ABQAAAABAAAAAAA7ABQAAAABAAAAAAA8ABQAAAABAAAAAAA9ABQAAAABAAAAAAA+ABQAAAABAAAAAAA/ABQAAAABAAAAAABAABQAAAABAAAAAABBABQAAAABAAAAAABCABQAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_ql8qi")
 
-[node name="Destroyer" parent="." instance=ExtResource("3_6lttb")]
+[node name="Destroyer" parent="." instance=ExtResource("3_jt6vs")]
 position = Vector2(1061, 316)
 
-[node name="FlowmasterController" parent="." node_paths=PackedStringArray("heart_bar") instance=ExtResource("4_84eg4")]
+[node name="FlowmasterController" parent="." node_paths=PackedStringArray("heart_bar") instance=ExtResource("4_opsn0")]
 position = Vector2(1001, 314)
 collision_mask = 62
 heart_bar = NodePath("../UI/HeartBar")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HeartBar" parent="UI" instance=ExtResource("5_x8n0n")]
+[node name="HeartBar" parent="UI" instance=ExtResource("5_bl6vc")]
 
-[node name="flying_demon" parent="." instance=ExtResource("6_dtyab")]
+[node name="flying_demon" parent="." instance=ExtResource("6_i631l")]
 position = Vector2(908, 277)
 move_speed = 20

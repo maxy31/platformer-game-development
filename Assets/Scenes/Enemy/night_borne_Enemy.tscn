@@ -1,0 +1,332 @@
+[gd_scene load_steps=21 format=3 uid="uid://bqowr5tox3fvy"]
+
+[ext_resource type="Texture2D" uid="uid://bd0facdqvkqvs" path="res://Assets/Sprites/NightBorne/NightBorne.png" id="1_17qip"]
+[ext_resource type="Script" uid="uid://bus83t3ps8ko2" path="res://Assets/Script/night_borne_enemy.gd" id="1_17xjp"]
+[ext_resource type="Script" uid="uid://cx4n4xaj3125k" path="res://Assets/Script/State/FiniteStateMachine.gd" id="3_8e2l3"]
+[ext_resource type="Script" uid="uid://bsmbueljesevy" path="res://Assets/Script/State/NightBorne/NightBorne_Idle_State.gd" id="3_atm6q"]
+[ext_resource type="Script" uid="uid://im4kfyidrksa" path="res://Assets/Script/State/NightBorne/NightBorne_Patrol_State.gd" id="4_17xjp"]
+[ext_resource type="Script" uid="uid://c8vtp3audhu1x" path="res://Assets/Script/State/NightBorne/NightBorne_Chase_State.gd" id="5_1x6c5"]
+[ext_resource type="Script" uid="uid://bxk05cp5ft0v0" path="res://Assets/Script/State/NightBorne/NightBorne_Attack_State.gd" id="6_7f7a1"]
+[ext_resource type="Script" uid="uid://b3otoyiubysgn" path="res://Assets/Script/State/NightBorne/NightBorne_Hurt_State.gd" id="7_dryw1"]
+[ext_resource type="Script" uid="uid://du724aaet5c5k" path="res://Assets/Script/State/NightBorne/NightBorne_Dead_State.gd" id="8_lkj46"]
+[ext_resource type="Script" uid="uid://bbpjrhusveg3h" path="res://Assets/Script/State/NightBorne/NightBorne_Mandatory_Idle_State.gd" id="9_ajq72"]
+
+[sub_resource type="Animation" id="Animation_07e4q"]
+resource_name = "Attack"
+length = 1.20001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.901033, 1, 1.0984),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackArea2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9, 1, 1.00523),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(8, -2), Vector2(8, -3), Vector2(6, 16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackArea2D/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9, 1, 1.00523),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [35.0, 36.4359, 12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackArea2D/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9, 1, 1.00523),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [78.0, 72.8717, 52.0]
+}
+
+[sub_resource type="Animation" id="Animation_grgnv"]
+resource_name = "Dead"
+length = 2.30001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8e2l3"]
+resource_name = "Hurt"
+length = 0.50001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [69, 70, 71, 72, 73]
+}
+
+[sub_resource type="Animation" id="Animation_17qip"]
+resource_name = "Idle"
+length = 0.90001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ujr0t"]
+resource_name = "Patrol-Chase"
+length = 0.60001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [23, 24, 25, 26, 27, 28]
+}
+
+[sub_resource type="Animation" id="Animation_buehn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackArea2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, -2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackArea2D/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [35.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackArea2D/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [78.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqmy7"]
+_data = {
+&"Attack": SubResource("Animation_07e4q"),
+&"Dead": SubResource("Animation_grgnv"),
+&"Hurt": SubResource("Animation_8e2l3"),
+&"Idle": SubResource("Animation_17qip"),
+&"Patrol-Chase": SubResource("Animation_ujr0t"),
+&"RESET": SubResource("Animation_buehn")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atm6q"]
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17xjp"]
+radius = 40.0
+height = 400.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xh2lk"]
+radius = 35.0
+height = 78.0
+
+[node name="NightBorne" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 73
+script = ExtResource("1_17xjp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_17qip")
+hframes = 23
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bqmy7")
+}
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 8)
+shape = SubResource("CapsuleShape2D_atm6q")
+
+[node name="debug" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -38.0
+offset_right = 22.0
+offset_bottom = -15.0
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+position = Vector2(0, -16)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_17xjp")
+
+[node name="RayCast" type="Node2D" parent="."]
+
+[node name="RayCastRight" type="RayCast2D" parent="RayCast"]
+position = Vector2(0, 15)
+rotation = 4.71239
+target_position = Vector2(0, 25)
+
+[node name="RayCastLeft" type="RayCast2D" parent="RayCast"]
+position = Vector2(0, 15)
+rotation = 1.5708
+target_position = Vector2(0, 25)
+
+[node name="FiniteStateMachine" type="Node2D" parent="."]
+script = ExtResource("3_8e2l3")
+
+[node name="Idle State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("3_atm6q")
+can_move = false
+
+[node name="Patrol State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("4_17xjp")
+
+[node name="Chase State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("5_1x6c5")
+
+[node name="Attack State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("6_7f7a1")
+can_move = false
+
+[node name="Hurt State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("7_dryw1")
+can_move = false
+
+[node name="Dead State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("8_lkj46")
+can_move = false
+
+[node name="Mandatory Idle State" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("9_ajq72")
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 73
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2(8, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xh2lk")
+disabled = true
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detected"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_lost"]
+[connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_entered"]

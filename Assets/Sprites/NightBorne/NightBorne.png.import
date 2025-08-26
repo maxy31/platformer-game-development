@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2wx74267ime2"
-path="res://.godot/imported/ATTACK.png-74650bdf265994683fe99b447d0d0221.ctex"
+uid="uid://bd0facdqvkqvs"
+path="res://.godot/imported/NightBorne.png-34187c22c36780d701f68f71c405a610.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Flying Demon/without_outline/ATTACK.png"
-dest_files=["res://.godot/imported/ATTACK.png-74650bdf265994683fe99b447d0d0221.ctex"]
+source_file="res://Assets/Sprites/NightBorne/NightBorne.png"
+dest_files=["res://.godot/imported/NightBorne.png-34187c22c36780d701f68f71c405a610.ctex"]
 
 [params]
 

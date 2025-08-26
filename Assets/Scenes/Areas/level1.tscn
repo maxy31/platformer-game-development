@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bswcofslo0wpl"]
+[gd_scene load_steps=32 format=3 uid="uid://bswcofslo0wpl"]
 
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="1_37bgh"]
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_ph71w"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="11_rqom5"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="12_gs0c5"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="13_q1clr"]
+[ext_resource type="PackedScene" uid="uid://bqowr5tox3fvy" path="res://Assets/Scenes/Enemy/night_borne_Enemy.tscn" id="14_eiqap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7im2"]
 texture = ExtResource("1_37bgh")
@@ -449,7 +450,12 @@ position = Vector2(-39, 0)
 position = Vector2(35, 0)
 
 [node name="GameOverUI" parent="." instance=ExtResource("12_gs0c5")]
+visible = false
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("13_q1clr")]
+
+[node name="NightBorne" parent="." groups=["Enemy"] instance=ExtResource("14_eiqap")]
+position = Vector2(377, 43)

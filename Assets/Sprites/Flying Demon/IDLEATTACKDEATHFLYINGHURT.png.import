@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://belewygku3ejn"
-path="res://.godot/imported/DEATH.png-8edea8245546b52c2164f33c1bf1fce0.ctex"
+uid="uid://cjbfthxgiw104"
+path="res://.godot/imported/IDLEATTACKDEATHFLYINGHURT.png-a22629f433d392b7bacc92be0d2676e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Flying Demon/without_outline/DEATH.png"
-dest_files=["res://.godot/imported/DEATH.png-8edea8245546b52c2164f33c1bf1fce0.ctex"]
+source_file="res://Assets/Sprites/Flying Demon/IDLEATTACKDEATHFLYINGHURT.png"
+dest_files=["res://.godot/imported/IDLEATTACKDEATHFLYINGHURT.png-a22629f433d392b7bacc92be0d2676e9.ctex"]
 
 [params]
 
