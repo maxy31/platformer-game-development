@@ -194,7 +194,9 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
-	queue_free()
+	var ui = get_tree().current_scene.get_node("GameOverUI")
+	if ui:
+		ui.show_game_over()
 
 
 # ======================

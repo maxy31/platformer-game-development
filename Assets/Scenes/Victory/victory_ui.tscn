@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgygn05ht1qvo"]
+
+[ext_resource type="Script" uid="uid://drvbdfxhlmhjy" path="res://Assets/Scenes/Victory/victory_ui.gd" id="1_5eu4l"]
+
+[node name="VictoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5eu4l")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 75.0
+offset_right = 442.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 50
+text = "Victory ! ! !"
+
+[node name="NextLevel" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 181.0
+offset_right = 244.0
+offset_bottom = 232.0
+text = "Next Level"
+
+[node name="Restart" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 257.0
+offset_top = 181.0
+offset_right = 394.0
+offset_bottom = 232.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 179.0
+offset_right = 553.0
+offset_bottom = 232.0
+text = "Quit"

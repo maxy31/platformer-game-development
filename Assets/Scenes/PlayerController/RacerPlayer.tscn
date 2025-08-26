@@ -235,7 +235,6 @@ combat_handler = NodePath("RacerAnimator/AttackArea/AttackAreaMap")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
-zoom = Vector2(4, 4)
 
 [node name="RacerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animated_sprite", "attack_area")]
 script = ExtResource("2_jorce")

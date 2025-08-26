@@ -1,11 +1,8 @@
 extends Area2D
 
-@onready var timer: Timer = $Timer
+@export var respawn_position: Vector2 = Vector2.ZERO
 
 func _on_body_entered(body: Node2D) -> void:
-	print("You died!")
-	timer.start()
-
-func _on_timer_timeout() -> void:
-	get_tree().reload_current_scene()
-	
+	if body.has_method("take_damage"):
+		body.take_damage(1, global_position)
+		body.global_position = respawn_position  # move back instead of reload

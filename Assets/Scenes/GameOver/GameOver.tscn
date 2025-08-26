@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmihho5qlp3qf"]
+
+[ext_resource type="Script" uid="uid://etjfd4yio2cj" path="res://Assets/Scenes/GameOver/game_over.gd" id="1_hrj4f"]
+
+[node name="GameOverUI" type="CanvasLayer"]
+script = ExtResource("1_hrj4f")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 84.0
+offset_right = 447.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(0.647059, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Game Over"
+
+[node name="Restart" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 199.0
+offset_right = 301.0
+offset_bottom = 240.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 196.0
+offset_right = 470.0
+offset_bottom = 242.0
+text = "Quit
+"
+
+[connection signal="pressed" from="Panel/Restart" to="." method="_on_restart_pressed"]
