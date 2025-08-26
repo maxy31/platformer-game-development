@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpyjuodoiureh"]
+
+[ext_resource type="Texture2D" uid="uid://5tanfrymggmm" path="res://Assets/Sprites/Bat/Bat.png" id="1_d7u50"]
+[ext_resource type="Script" uid="uid://bjigmpd0fjao1" path="res://Assets/Script/bat.gd" id="1_ng07e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ng07e"]
+radius = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4l54"]
+atlas = ExtResource("1_d7u50")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcw0n"]
+atlas = ExtResource("1_d7u50")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j50ly"]
+atlas = ExtResource("1_d7u50")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0am8e"]
+atlas = ExtResource("1_d7u50")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y0ayv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4l54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcw0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j50ly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0am8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcw0n")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4l54"]
+radius = 68.0294
+
+[node name="Bat" type="Area2D" groups=["Enemy"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ng07e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ng07e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.5, 0)
+scale = Vector2(0.984375, 1)
+sprite_frames = SubResource("SpriteFrames_y0ayv")
+animation = &"fly"
+frame_progress = 0.54701
+
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CircleShape2D_d4l54")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

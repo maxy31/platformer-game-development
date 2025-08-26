@@ -217,10 +217,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thn1c"]
-size = Vector2(6.625, 12.5)
+size = Vector2(12, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eau03"]
-size = Vector2(20, 9)
+size = Vector2(20, 16.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auws5"]
 radius = 6.0
@@ -253,7 +253,7 @@ collision_layer = 64
 collision_mask = 2
 
 [node name="AttackAreaMap" type="CollisionShape2D" parent="RacerAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
-position = Vector2(8.6875, -6.75)
+position = Vector2(6, -9.25)
 shape = SubResource("RectangleShape2D_thn1c")
 script = ExtResource("33_qto2m")
 attack_area = NodePath("..")
@@ -263,7 +263,7 @@ collision_layer = 64
 collision_mask = 2
 
 [node name="BodyAttackAreaMap" type="CollisionShape2D" parent="RacerAnimator/BodyAttackArea"]
-position = Vector2(3, -5)
+position = Vector2(3, -8.75)
 shape = SubResource("RectangleShape2D_eau03")
 
 [node name="RacerMoveArea" type="CollisionShape2D" parent="."]
