@@ -14,8 +14,8 @@ class_name FlowmasterController
 
 # ⚡ 新增：受伤相关
 @export var knockback_force := 30.0
-@export var knockback_up := -20.0
-@export var invincible_duration := 0
+@export var knockback_up := -10.0
+@export var invincible_duration := 0.5
 
 var current_health : int
 var speed_multiplier := 30.0
