@@ -45,6 +45,7 @@ var regen_timer: float = 0.0
 signal health_changed(current: int, max: int)
 
 func _ready():
+	add_to_group("PlayerController"); #新加的group
 	current_health = max_health
 	if heart_bar:
 		heart_bar.set_max_hearts(max_health)
