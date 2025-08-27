@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 			if player and player.has_method("take_damage"):
 				player.take_damage(1)  # 玩家扣血 1 点
 				print("Player took damage from Bat!")
-			stay_timer = 0.0  # 重置计时器
+			stay_timer = 2.0  # 重置计时器
 	else:
 		stay_timer = 0.0
 
