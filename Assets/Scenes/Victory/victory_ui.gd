@@ -15,6 +15,8 @@ func _ready():
 func show_victory():
 	print("🎉 Victory screen shown")
 	visible = true
+	print("👁️ VictoryUI visible now?", visible)
+	print("🖼️ Global rect:", get_global_rect())
 	get_tree().paused = true
 
 func _on_restart_pressed():

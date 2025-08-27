@@ -270,7 +270,7 @@ _data = {
 size = Vector2(23, 356)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5d1o"]
-size = Vector2(739, 20)
+size = Vector2(1183, 20)
 
 [sub_resource type="Animation" id="Animation_rqom5"]
 length = 0.001
@@ -378,7 +378,7 @@ shape = SubResource("RectangleShape2D_o3j8m")
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpBoundaries"]
-position = Vector2(350.5, -10)
+position = Vector2(572.5, -10)
 shape = SubResource("RectangleShape2D_r5d1o")
 
 [node name="Cheese" parent="." instance=ExtResource("6_r5d1o")]
@@ -452,14 +452,13 @@ position = Vector2(35, 0)
 [node name="GameOverUI" parent="." instance=ExtResource("12_gs0c5")]
 visible = false
 
-[node name="VictoryUI" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="VictoryUI" parent="VictoryUI" instance=ExtResource("13_q1clr")]
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Bat" parent="Enemies" instance=ExtResource("14_eiqap")]
 position = Vector2(429, 33)
 collision_layer = 2
 collision_mask = 73
+
+[node name="VictoryUI" type="CanvasLayer" parent="."]
+
+[node name="VictoryUI" parent="VictoryUI" instance=ExtResource("13_q1clr")]
