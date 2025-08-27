@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://clikeh86gs6si"]
+[gd_scene load_steps=33 format=3 uid="uid://clikeh86gs6si"]
 
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_m00ke"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_5iect"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="12_nkrhc"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="13_vx4v7"]
 [ext_resource type="PackedScene" uid="uid://bur1j3skw4rmc" path="res://Assets/Scenes/Trap/Spike-trap.tscn" id="14_5iect"]
+[ext_resource type="PackedScene" uid="uid://d12ws5yjabkmb" path="res://Assets/Scenes/Trap/FallingSpikes.tscn" id="15_x1ife"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7im2"]
 texture = ExtResource("2_5iect")
@@ -459,3 +460,7 @@ visible = false
 
 [node name="Spike" parent="." instance=ExtResource("14_5iect")]
 position = Vector2(60, 264)
+
+[node name="FallingSpikes" parent="." instance=ExtResource("15_x1ife")]
+position = Vector2(312, 134)
+speed = 200.0

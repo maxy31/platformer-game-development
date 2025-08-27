@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bur1j3skw4rmc"]
 
-[ext_resource type="Script" uid="uid://ci8k0xike73tt" path="res://Assets/Scenes/Trap/spike-trap.gd" id="1_ag7he"]
+[ext_resource type="Script" uid="uid://ci8k0xike73tt" path="res://Assets/Script/spike-trap.gd" id="1_ag7he"]
 [ext_resource type="Texture2D" uid="uid://ddfbswosbs56" path="res://Assets/Sprites/Trap/art_atlas.png" id="1_i7ren"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ag7he"]
