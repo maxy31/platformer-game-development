@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpw1pgudqn5ii"]
+
+[ext_resource type="Script" uid="uid://wjw5omqj1iaw" path="res://Assets/Scenes/Global/level_select_screen.gd" id="1_gmv5r"]
+[ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="1_qnx68"]
+[ext_resource type="FontFile" uid="uid://bi4dnmwfja8if" path="res://Assets/Fonts/antiquity-print.ttf" id="2_gmv5r"]
+
+[node name="LevelSelectScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gmv5r")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qnx68")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 52.0
+offset_right = 538.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("2_gmv5r")
+theme_override_font_sizes/font_size = 50
+text = "Level Choose"
+
+[node name="Level1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 176.0
+offset_right = 264.0
+offset_bottom = 219.0
+theme_override_fonts/font = ExtResource("2_gmv5r")
+text = "Level1"
+
+[node name="Level2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 172.0
+offset_right = 531.0
+offset_bottom = 220.0
+theme_override_fonts/font = ExtResource("2_gmv5r")
+text = "Level2"
+
+[node name="Level3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 249.0
+offset_right = 408.0
+offset_bottom = 288.0
+theme_override_fonts/font = ExtResource("2_gmv5r")
+text = "Level3"
+
+[connection signal="pressed" from="Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="Level3" to="." method="_on_level_3_pressed"]

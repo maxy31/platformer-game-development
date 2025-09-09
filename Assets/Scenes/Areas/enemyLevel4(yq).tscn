@@ -72,7 +72,7 @@ texture = ExtResource("2_7k1b7")
 
 [sub_resource type="TileSet" id="TileSet_ql8qi"]
 physics_layer_0/collision_layer = 8
-physics_layer_0/collision_mask = 0
+physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_8wi1m")
 
 [node name="Area1" type="Node2D"]
@@ -86,6 +86,7 @@ texture = ExtResource("1_r1sv1")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ql8qi")
 format = 2
+layer_0/tile_data = PackedInt32Array(1114160, 0, 0, 1179696, 0, 1, 1245232, 0, 2, 1114161, 65536, 0, 1179697, 65536, 1, 1245233, 65536, 2, 1245234, 131072, 0, 1245235, 196608, 0, 1245236, 131072, 0, 1245237, 196608, 0, 1179698, 131072, 0, 1179699, 196608, 0)
 
 [node name="TileMapLayer0" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true

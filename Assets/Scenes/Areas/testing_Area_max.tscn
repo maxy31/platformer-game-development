@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_uidp5"]
 [ext_resource type="Texture2D" uid="uid://dtdc0fxr4nrj5" path="res://Assets/Sprites/Tutorial/tiles_1.png" id="2_3uyhe"]
-[ext_resource type="PackedScene" uid="uid://v3iimkhjwycp" path="res://Assets/Scenes/PlayerController/FlymanPlayer.tscn" id="4_6swj7"]
 [ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="4_luk32"]
+[ext_resource type="PackedScene" uid="uid://5mhrqxiqqhol" path="res://Assets/Scenes/PlayerController/RacerPlayer.tscn" id="5_6swj7"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_luk32"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8wi1m"]
@@ -94,10 +94,9 @@ tile_set = SubResource("TileSet_ql8qi")
 [node name="Destroyer" parent="." instance=ExtResource("4_luk32")]
 position = Vector2(1061, 316)
 
-[node name="FlymanController" parent="." node_paths=PackedStringArray("heart_bar") instance=ExtResource("4_6swj7")]
-position = Vector2(977, 320)
-heart_bar = NodePath("../UI/HeartBar")
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HeartBar" parent="UI" instance=ExtResource("5_luk32")]
+
+[node name="RacerController" parent="." node_paths=PackedStringArray("heart_bar") instance=ExtResource("5_6swj7")]
+heart_bar = NodePath("../UI/HeartBar")

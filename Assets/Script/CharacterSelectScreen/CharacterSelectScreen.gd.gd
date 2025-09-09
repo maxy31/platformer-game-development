@@ -123,3 +123,7 @@ func _on_select_button_pressed() -> void:
 	# 3. 打印确认信息并切换到游戏主场景
 	print("选择了角色: ", selected_character_data["name"])
 	get_tree().change_scene_to_file("res://scenes/main_game.tscn") # 替换成你的游戏场景路径
+	
+
+func _on_back_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")

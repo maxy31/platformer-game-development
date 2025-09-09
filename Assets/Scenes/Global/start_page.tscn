@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://g1beklg07jvw"]
+
+[ext_resource type="Script" uid="uid://d2j0d1bh3jpuq" path="res://Assets/Scenes/Global/start_page.gd" id="1_uq3g0"]
+[ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="2_jm0dv"]
+[ext_resource type="FontFile" uid="uid://bi4dnmwfja8if" path="res://Assets/Fonts/antiquity-print.ttf" id="3_kh51p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jshle"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qsl3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6y84w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63vo4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e45bq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yng3t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ot5g1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vux2u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rxwq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6myu"]
+
+[node name="StartPage" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 643.0
+offset_bottom = 361.0
+script = ExtResource("1_uq3g0")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jm0dv")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 78.0
+offset_right = 597.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("3_kh51p")
+theme_override_font_sizes/font_size = 35
+text = "Flyteam: Lost in the Void"
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 241.0
+offset_right = 380.0
+offset_bottom = 280.0
+theme_override_fonts/font = ExtResource("3_kh51p")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jshle")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_8qsl3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6y84w")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_63vo4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_e45bq")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_yng3t")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ot5g1")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_vux2u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2rxwq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_p6myu")
+text = "Start
+"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 293.0
+offset_right = 379.0
+offset_bottom = 336.0
+theme_override_fonts/font = ExtResource("3_kh51p")
+text = "Quit
+"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

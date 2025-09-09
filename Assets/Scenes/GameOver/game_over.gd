@@ -30,4 +30,4 @@ func _on_restart_pressed():
 
 func _on_quit_pressed():
 	print("❌ Quit button pressed")
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
