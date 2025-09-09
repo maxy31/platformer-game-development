@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dha4gukhe1h42"]
+[gd_scene load_steps=3 format=3 uid="uid://dha4gukhe1h42"]
 
 [ext_resource type="Script" uid="uid://bab8jq71wnk3w" path="res://Assets/Script/CharacterSelectScreen/CharacterSelectScreen.gd.gd" id="1_4dvk2"]
+[ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="2_boi53"]
 
 [node name="CharacterSelectScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4dvk2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 639.0
+offset_bottom = 359.0
+texture = ExtResource("2_boi53")
+expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
