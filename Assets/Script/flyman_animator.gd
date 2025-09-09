@@ -14,6 +14,13 @@ func _process(delta):
 	if not player_controller:
 		return
 
+	# ===========================
+	#      新增：UI 模式的最高优先级
+	# ===========================
+	if player_controller.is_in_ui_mode:
+		animation_player.play("idle")
+		return # 如果在UI模式，直接播放idle并跳过后续所有逻辑
+
 	var vel = player_controller.velocity
 
 	# ===========================

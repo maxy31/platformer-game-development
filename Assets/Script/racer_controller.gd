@@ -18,6 +18,8 @@ class_name RacerController
 @export var knockback_up := -30.0
 @export var invincible_duration := 0.1
 
+var is_in_ui_mode: bool = false
+
 var current_health : int
 var speed_multiplier := 30.0
 var jump_multiplier := -30.0
@@ -222,3 +224,9 @@ func eat_food():
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
+
+func enter_ui_mode():
+	is_in_ui_mode = true
+	velocity = Vector2.ZERO
+	is_hurt = false
+	is_attacking = false

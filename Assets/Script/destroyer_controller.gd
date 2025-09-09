@@ -5,63 +5,53 @@ class_name DestroyerController
 @export var jump_power := 8.0
 @export var max_health := 5
 @export var attack_damage := 3
-
 @export var heart_bar: HeartBar
 @export var animator: Node          # hurt 动画结束请从 Animator 调用 on_hurt_animation_finished()
 @export var combat_handler: Node
-
-# —— 接触持续伤害相关 —— 
+# Contact with ongoing harm related
 @export var contact_area: Area2D
 @export var contact_damage: int = 1
 @export var contact_damage_interval: float = 0.4
-
-# —— 闪烁无敌 —— 
+# Unbeatable Flashing
 @export var flicker_target: CanvasItem
 @export var invincible_time: float = 0.5
 @export var flicker_interval: float = 0.1
-
-# —— 击退 —— 
+# Repulse
 @export var knockback_force: float = 250.0
 @export var knockback_up: float = -150.0
-
-# —— 攻击缓冲模式 —— 
+# Attack buffer Mode
 @export var attack_buffer_on_hurt: bool = true
+
+var is_in_ui_mode: bool = false
 
 var current_health : int
 var speed_multiplier := 30.0
 var jump_multiplier := -30.0
 var direction := 0.0
-
-# 攻击
+# Attack
 var is_attacking := false
 var current_attack_index := 1
 var queued_attack := false
 var can_queue_attack := false
-
-# 受击/无敌/闪烁
+# Hit/Invincible/Flash
 var is_hurt: bool = false
 var invincible_timer: float = 0.0
 var _flicker_time_left: float = 0.0
 var _flicker_accum: float = 0.0
 var _flicker_state: bool = false
-
-# “地面受击可立刻跳 / 空中受击锁跳”
+# When hit on the ground, you can jump immediately / When hit in the air, you can lock jump
 var _allow_jump_while_hurt_this_time: bool = false
-
-# 自动回血
+# Automatic Blood Replenishment
 var regen_interval: float = 10.0
 var regen_timer: float = 0.0
-
-# 接触持续伤害
+# Continuous Contact Injury
 var _contact_list: Array[Node] = []
 var _contact_cd: float = 0.0
-
-#boost jump
+# Boost Jump
 var jump_velocity = -400
 var boosted_jump_velocity = -600  # stronger jump after cheese
 var boost_time = 3.0              # seconds boost lasts
 var is_boosted = false
-
 signal health_changed(current: int, max: int)
 
 func _ready():
@@ -114,7 +104,7 @@ func _physics_process(delta: float) -> void:
 			queued_attack = true
 			print("⏩ 攻击缓冲记录")
 
-	# 移动
+	# move
 	direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		velocity.x = direction * speed * speed_multiplier
@@ -123,9 +113,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# =========================
-#       战斗逻辑
-# =========================
+# Attack Logic
 func start_attack():
 	is_attacking = true
 	can_queue_attack = false
@@ -151,9 +139,7 @@ func on_attack_animation_finished():
 		is_attacking = false
 		current_attack_index = 1
 
-# =========================
-#       受击与恢复
-# =========================
+# Take damage and heal
 func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 	if invincible_timer > 0.0:
 		return
@@ -214,9 +200,7 @@ func die():
 	else:
 		queue_free()
 
-# =========================
-#   接触持续伤害
-# =========================
+# Continuous take damage
 func _on_contact_area_body_entered(body: Node) -> void:
 	if body and body.is_in_group("Enemy"):
 		if not _contact_list.has(body):
@@ -243,9 +227,7 @@ func _process_contact_damage(delta: float) -> void:
 	take_damage(contact_damage, src_pos)
 	_contact_cd = contact_damage_interval
 
-# =========================
-#     无敌闪烁
-# =========================
+# Invicibility
 func _start_invincibility_fx():
 	invincible_timer = invincible_time
 	_flicker_time_left = invincible_time
@@ -276,10 +258,17 @@ func _stop_invincible_flicker() -> void:
 	_flicker_accum = 0.0
 	_flicker_state = false
 
-#Boost Jump Cheese
+# Boost Jump Cheese
 func eat_food():
 	is_boosted = true
 	$BoostTimer.start(3.0)
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
+
+func enter_ui_mode():
+	is_in_ui_mode = true
+	# 这里的速度和状态重置是可选的，但有助于确保角色完全静止
+	velocity = Vector2.ZERO 
+	is_hurt = false
+	is_attacking = false

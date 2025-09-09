@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btved8nlgmfid" path="res://Assets/Sprites/Flowmaster/B_witch_take_damage.png" id="5_17omi"]
 [ext_resource type="Texture2D" uid="uid://dkx8b8c8npd5t" path="res://Assets/Sprites/Flowmaster/B_witch_idle.png" id="6_s1a7y"]
 [ext_resource type="Texture2D" uid="uid://oxooiswm3cgm" path="res://Assets/Sprites/Flowmaster/B_witch_run.png" id="7_byfcp"]
-[ext_resource type="Script" uid="uid://b4pen3sfmifn4" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
+[ext_resource type="Script" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ti2co"]
 atlas = ExtResource("2_08y4y")
@@ -552,6 +552,7 @@ attackE = NodePath("AnimatedSprite2DAttackE")
 attack_area = NodePath("AttackArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FlowmasterAnimator"]
+position = Vector2(-1, -7)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_ti2co")
 animation = &"attack1"
@@ -559,15 +560,21 @@ frame = 8
 frame_progress = 1.0
 
 [node name="AnimatedSprite2DAttackM" type="AnimatedSprite2D" parent="FlowmasterAnimator"]
+position = Vector2(-2.6, -7.88)
 scale = Vector2(0.44, 0.44)
 sprite_frames = SubResource("SpriteFrames_3jd3b")
 animation = &"attack1"
+frame = 8
+frame_progress = 1.0
 offset = Vector2(32, 0)
 
 [node name="AnimatedSprite2DAttackE" type="AnimatedSprite2D" parent="FlowmasterAnimator"]
+position = Vector2(-2.6, -7.88)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_7vub7")
 animation = &"attack1"
+frame = 8
+frame_progress = 1.0
 offset = Vector2(64, 0)
 
 [node name="AttackArea" type="Area2D" parent="FlowmasterAnimator"]
@@ -575,12 +582,13 @@ collision_layer = 64
 collision_mask = 2
 
 [node name="AttackAreaMap" type="CollisionShape2D" parent="FlowmasterAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
-position = Vector2(20.25, 0)
+position = Vector2(17.65, -7.88)
 shape = SubResource("RectangleShape2D_5msgx")
 script = ExtResource("9_jtyff")
 attack_area = NodePath("..")
 
 [node name="FlowmasterMoveMap" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_tooa8")
 
 [node name="BoostTimer" type="Timer" parent="."]

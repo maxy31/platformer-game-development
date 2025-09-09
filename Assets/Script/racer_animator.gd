@@ -15,6 +15,14 @@ func _ready():
 func _process(_delta):
 	if not player_controller:
 		return
+		
+	# ===========================
+	#      新增：UI 模式的最高优先级
+	# ===========================
+	if player_controller.is_in_ui_mode:
+		animated_sprite.play("idle")
+		return # 如果在UI模式，直接播放idle并跳过后续所有逻辑
+
 
 	# 优先级：受伤 > 攻击 > 其他动作
 	if player_controller.is_hurt:

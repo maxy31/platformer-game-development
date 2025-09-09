@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2eectg6ejnlt" path="res://Assets/Script/destroyer_controller.gd" id="1_lsrbb"]
 [ext_resource type="Texture2D" uid="uid://dp1ghuf3t8nt2" path="res://Assets/Sprites/Destroyer/DarkSamurai (64x64).png" id="2_601w7"]
 [ext_resource type="Script" uid="uid://blwj64fyycpaj" path="res://Assets/Script/destroyer_animator.gd" id="2_bcnlo"]
-[ext_resource type="Script" uid="uid://dfbq4anuyi33e" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
+[ext_resource type="Script" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
 
 [sub_resource type="Animation" id="Animation_hfby3"]
 length = 0.001
@@ -228,6 +228,7 @@ libraries = {
 speed_scale = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="DestroyerAnimator"]
+position = Vector2(0, -7)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_601w7")
 region_enabled = true
@@ -239,13 +240,13 @@ collision_layer = 64
 collision_mask = 2
 
 [node name="AttackAreaMap" type="CollisionShape2D" parent="DestroyerAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
-position = Vector2(19, 0)
+position = Vector2(20, -12)
 shape = SubResource("RectangleShape2D_a8ve8")
 script = ExtResource("4_bcnlo")
 attack_area = NodePath("..")
 
 [node name="DestroyerMoveArea" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_pptjt")
 
 [node name="BoostTimer" type="Timer" parent="."]

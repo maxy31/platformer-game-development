@@ -32,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://6nagj8qom8ic" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop1.png" id="30_k2kyw"]
 [ext_resource type="Texture2D" uid="uid://cawkggwqnki0b" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop3.png" id="31_kws6u"]
 [ext_resource type="Texture2D" uid="uid://b7n0h30m1wcqs" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop4.png" id="32_nhehg"]
-[ext_resource type="Script" uid="uid://bumxktdwcaji1" path="res://Assets/Script/racer_combatHandler.gd" id="33_qto2m"]
+[ext_resource type="Script" path="res://Assets/Script/racer_combatHandler.gd" id="33_qto2m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_de0mg"]
 animations = [{
@@ -235,6 +235,7 @@ combat_handler = NodePath("RacerAnimator/AttackArea/AttackAreaMap")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
+zoom = Vector2(4, 4)
 
 [node name="RacerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animated_sprite", "attack_area")]
 script = ExtResource("2_jorce")

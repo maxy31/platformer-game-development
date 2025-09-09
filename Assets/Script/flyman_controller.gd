@@ -27,6 +27,8 @@ class_name FlymanController
 # —— 攻击缓冲模式 —— 
 @export var attack_buffer_on_hurt: bool = true
 
+var is_in_ui_mode: bool = false
+
 var current_health : int
 var speed_multiplier := 30.0
 var jump_multiplier := -30.0
@@ -283,3 +285,10 @@ func eat_food():
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
+
+func enter_ui_mode():
+	is_in_ui_mode = true
+	# 这里的速度和状态重置是可选的，但有助于确保角色完全静止
+	velocity = Vector2.ZERO 
+	is_hurt = false
+	is_attacking = false
