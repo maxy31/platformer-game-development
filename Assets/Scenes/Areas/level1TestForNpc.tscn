@@ -323,8 +323,6 @@ visible = false
 
 [node name="Bat" parent="Enemies" instance=ExtResource("13_naafl")]
 position = Vector2(429, 33)
-collision_layer = 2
-collision_mask = 73
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 
@@ -334,4 +332,3 @@ collision_mask = 73
 position = Vector2(1043, 139)
 
 [node name="DestroyerDialogueUI" parent="." instance=ExtResource("16_mgw7y")]
-process_mode = 2

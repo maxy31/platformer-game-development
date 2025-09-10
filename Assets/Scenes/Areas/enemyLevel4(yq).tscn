@@ -107,4 +107,4 @@ heart_bar = NodePath("../UI/HeartBar")
 
 [node name="flying_demon" parent="." instance=ExtResource("6_i631l")]
 position = Vector2(908, 277)
-move_speed = 20
+scale = Vector2(0.989547, 1.00683)

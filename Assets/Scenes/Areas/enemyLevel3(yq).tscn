@@ -435,7 +435,6 @@ collision_layer = 2
 collision_mask = 73
 patrol_points = NodePath("PatrolPoints")
 speed = 3000
-wait_time = 1
 
 [node name="PatrolPoints" type="Node2D" parent="EnemyCrab2"]
 

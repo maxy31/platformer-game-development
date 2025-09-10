@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
 [ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
 [ext_resource type="Texture2D" uid="uid://bfqsaldbqx2ol" path="res://Assets/Sprites/Flyman/Char_3.png" id="2_lgsfl"]
-[ext_resource type="Script" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
+[ext_resource type="Script" uid="uid://bbai7gu4fm30f" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_acrhl"]
 
 [sub_resource type="Animation" id="Animation_guasd"]
@@ -267,7 +267,7 @@ radius = 4.0
 height = 12.0
 
 [node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar", "animator", "combat_handler") groups=["Player"]]
-collision_mask = 46
+collision_mask = 62
 script = ExtResource("1_i8rbu")
 heart_bar = NodePath("HeartUi/HeartBar")
 animator = NodePath("FlymanAnimator")
@@ -299,7 +299,7 @@ region_enabled = true
 region_rect = Rect2(64, 0, 64, 64)
 
 [node name="AttackArea" type="Area2D" parent="FlymanAnimator"]
-collision_layer = 64
+collision_layer = 73
 collision_mask = 2
 
 [node name="AttackAreaMap" type="CollisionShape2D" parent="FlymanAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]

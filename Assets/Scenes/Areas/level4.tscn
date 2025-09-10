@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dur3jlnx3ouk"]
+[gd_scene load_steps=15 format=3 uid="uid://dur3jlnx3ouk"]
 
 [ext_resource type="Texture2D" uid="uid://sevmli5c722c" path="res://Assets/Sprites/Background/color5.jpg" id="1_qkauv"]
 [ext_resource type="Script" uid="uid://bg5f0kdn5gxq4" path="res://Assets/Scenes/Areas/level_4.gd" id="1_scr3p"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="8_pggec"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_igkw5"]
 [ext_resource type="PackedScene" uid="uid://c12euual2tjn2" path="res://Assets/Scenes/DialogueUI/VictoryDialogueUI.tscn" id="9_qkauv"]
+[ext_resource type="PackedScene" uid="uid://d3mm0obwvwwtg" path="res://Assets/Scenes/Enemy/flying_demon.tscn" id="10_scr3p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhhfi"]
 texture = ExtResource("2_scr3p")
@@ -154,7 +155,9 @@ size = Vector2(37, 387.5)
 [node name="level4" type="Node2D"]
 script = ExtResource("1_scr3p")
 
-[node name="SpawnPoint" type="CharacterBody2D" parent="."]
+[node name="SpawnPoint" type="CharacterBody2D" parent="." groups=["Player"]]
+scale = Vector2(0.952089, 1)
+collision_mask = 62
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -195,10 +198,16 @@ shape = SubResource("WorldBoundaryShape2D_opfb8")
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_v03m4")]
 
 [node name="GameOverUI" parent="." instance=ExtResource("8_pggec")]
+visible = false
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_igkw5")]
 
 [node name="VictoryDialogueUI" parent="." instance=ExtResource("9_qkauv")]
 visible = true
+
+[node name="flying_demon" parent="." instance=ExtResource("10_scr3p")]
+position = Vector2(116.57, 197.461)
+collision_mask = 329

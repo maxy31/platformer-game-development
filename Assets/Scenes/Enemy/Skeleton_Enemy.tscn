@@ -236,8 +236,8 @@ radius = 15.0
 height = 34.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8ji7"]
-radius = 40.0
-height = 300.0
+radius = 26.0
+height = 168.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5j0l"]
 radius = 15.0
@@ -273,7 +273,7 @@ offset_bottom = -26.0
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-position = Vector2(0, -22)
+position = Vector2(1, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r8ji7")
 

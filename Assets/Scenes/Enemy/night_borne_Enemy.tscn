@@ -237,8 +237,8 @@ _data = {
 height = 34.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17xjp"]
-radius = 40.0
-height = 400.0
+radius = 28.0
+height = 144.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xh2lk"]
 radius = 35.0
@@ -269,11 +269,11 @@ offset_left = -18.0
 offset_top = -38.0
 offset_right = 22.0
 offset_bottom = -15.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-position = Vector2(0, -16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_17xjp")
 
