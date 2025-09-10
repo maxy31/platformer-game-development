@@ -6,25 +6,29 @@ const CHARACTERS_DATA = {
 		"name": "Flyman",
 		"description": "The origin of all things, the pioneer of stories.",
 		"texture_path": "res://assets/sprites/knight_display.png", # 用于在选择界面展示的大图
-		"scene_path": "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"      # 角色实际的游戏场景
+		"scene_path": "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn",    # 角色实际的游戏场景
+		"locked": false
 	},
 	"Destroyer": {
 		"name": "Destroyer",
 		"description": "The Mighty Assassin.",
 		"texture_path": "res://assets/sprites/wizard_display.png",
-		"scene_path": "res://Assets/Scenes/PlayerController/DestroyerPlayer.tscn"
+		"scene_path": "res://Assets/Scenes/PlayerController/DestroyerPlayer.tscn",
+		"locked": true
 	},
 	"Racer": {
 		"name": "Racer",
 		"description": "Noble Knight, Master of Speed.",
 		"texture_path": "res://assets/sprites/rogue_display.png",
-		"scene_path": "res://Assets/Scenes/PlayerController/RacerPlayer.tscn"
+		"scene_path": "res://Assets/Scenes/PlayerController/RacerPlayer.tscn",
+		"locked": true
 	},
 	"Flowmaster": {
 		"name": "Flowmaster",
 		"description": "The Omniscient and Omnipotent Mage.",
 		"texture_path": "res://assets/sprites/rogue_display.png",
-		"scene_path": "res://Assets/Scenes/PlayerController/FlowmasterPlayer.tscn"
+		"scene_path": "res://Assets/Scenes/PlayerController/FlowmasterPlayer.tscn",
+		"locked": true
 	}
 }
 
@@ -39,6 +43,7 @@ var current_character_index: int = 0
 @onready var next_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextButton
 @onready var previous_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/PreviousButton
 @onready var select_button: Button = $MarginContainer/VBoxContainer/SelectButton
+@onready var locked_label: Label = $MarginContainer/VBoxContainer/LockedLabel # 一个用于显示“Locked”的标签（你需要在场景中添加这个 Label）
 
 
 func _ready() -> void:
@@ -87,6 +92,19 @@ func update_character_display() -> void:
 			
 		character_viewport.add_child(character_instance)
 		character_instance.position = character_viewport.size / 2
+	
+	# 是否锁定？
+	var is_locked = current_data.get("locked", false)
+	if is_locked:
+		select_button.disabled = true
+		select_button.text = "Locked"
+		select_button.modulate = Color(0.5, 0.5, 0.5)  # 灰色
+		locked_label.visible = true
+	else:
+		select_button.disabled = false
+		select_button.text = "Select"
+		select_button.modulate = Color(1, 1, 1)  # 正常颜色
+		locked_label.visible = false
 	# --- End: 实例化新的角色到 SubViewport ---
 
 
@@ -122,7 +140,7 @@ func _on_select_button_pressed() -> void:
 
 	# 3. 打印确认信息并切换到游戏主场景
 	print("选择了角色: ", selected_character_data["name"])
-	get_tree().change_scene_to_file("res://scenes/main_game.tscn") # 替换成你的游戏场景路径
+	get_tree().change_scene_to_file("res://Assets/Scenes/Global/level_select_screen.tscn") # 替换成你的游戏场景路径
 	
 
 func _on_back_button_pressed() -> void:

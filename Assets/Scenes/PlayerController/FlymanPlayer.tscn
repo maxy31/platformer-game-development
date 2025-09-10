@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
 [ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
 [ext_resource type="Texture2D" uid="uid://bfqsaldbqx2ol" path="res://Assets/Sprites/Flyman/Char_3.png" id="2_lgsfl"]
-[ext_resource type="Script" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
+[ext_resource type="Script" uid="uid://bbai7gu4fm30f" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
 
 [sub_resource type="Animation" id="Animation_guasd"]
 length = 0.001

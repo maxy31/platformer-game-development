@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpw1pgudqn5ii"]
+[gd_scene load_steps=5 format=3 uid="uid://cpw1pgudqn5ii"]
 
 [ext_resource type="Script" uid="uid://wjw5omqj1iaw" path="res://Assets/Scenes/Global/level_select_screen.gd" id="1_gmv5r"]
 [ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="1_qnx68"]
 [ext_resource type="FontFile" uid="uid://bi4dnmwfja8if" path="res://Assets/Fonts/antiquity-print.ttf" id="2_gmv5r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmv5r"]
+bg_color = Color(0.902628, 0.126628, 0.151187, 1)
 
 [node name="LevelSelectScreen" type="Control"]
 layout_mode = 3
@@ -53,13 +56,34 @@ text = "Level2"
 
 [node name="Level3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 195.0
-offset_top = 249.0
-offset_right = 408.0
-offset_bottom = 288.0
+offset_left = 69.0
+offset_top = 250.0
+offset_right = 282.0
+offset_bottom = 289.0
 theme_override_fonts/font = ExtResource("2_gmv5r")
 text = "Level3"
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 15.0
+offset_right = 622.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_gmv5r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gmv5r")
+text = "Back"
+
+[node name="Level4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 323.0
+offset_top = 246.0
+offset_right = 534.0
+offset_bottom = 290.0
+theme_override_fonts/font = ExtResource("2_gmv5r")
+text = "Level4"
 
 [connection signal="pressed" from="Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="Level2" to="." method="_on_level_2_pressed"]
 [connection signal="pressed" from="Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Level4" to="." method="_on_level_4_pressed"]

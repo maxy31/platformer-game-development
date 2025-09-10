@@ -30,13 +30,13 @@ func testMenu():
 
 func _on_resume_pressed() -> void:
 	resume()
-	
 
 func _on_restart_pressed() -> void:
 	resume()
 	get_tree().reload_current_scene()
 
 func _on_quit_pressed() -> void:
+	get_tree().paused = false 
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
 	
 func _process(delta):
