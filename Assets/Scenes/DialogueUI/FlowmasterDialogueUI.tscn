@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://5cxvgwm17gyn"]
+
+[ext_resource type="Script" uid="uid://bkbpxb1agb8jh" path="res://Assets/Script/DialogueUI/FlowmasterDialogueUI.gd" id="1_o7yxt"]
+
+[node name="FlowmasterDialogueUI" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_o7yxt")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

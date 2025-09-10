@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://olq2ydlj0s56"]
+
+[ext_resource type="Texture2D" uid="uid://dkx8b8c8npd5t" path="res://Assets/Sprites/Flowmaster/B_witch_idle.png" id="1_vrukf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6ktb"]
+atlas = ExtResource("1_vrukf")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jedii"]
+atlas = ExtResource("1_vrukf")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhnih"]
+atlas = ExtResource("1_vrukf")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt55m"]
+atlas = ExtResource("1_vrukf")
+region = Rect2(0, 144, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pif30"]
+atlas = ExtResource("1_vrukf")
+region = Rect2(0, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn5eg"]
+atlas = ExtResource("1_vrukf")
+region = Rect2(0, 240, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_24kwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6ktb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jedii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhnih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt55m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pif30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn5eg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr0hb"]
+size = Vector2(58, 14.5)
+
+[node name="FlowmasterNPC" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_24kwv")
+animation = &"idle"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hr0hb")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dur3jlnx3ouk"]
+[gd_scene load_steps=16 format=3 uid="uid://dur3jlnx3ouk"]
 
 [ext_resource type="Texture2D" uid="uid://sevmli5c722c" path="res://Assets/Sprites/Background/color5.jpg" id="1_27a00"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_0nv3x"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="7_l2d4g"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="8_dojng"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_6lw6o"]
+[ext_resource type="PackedScene" uid="uid://olq2ydlj0s56" path="res://Assets/Scenes/NPC/FlowmasterNPC.tscn" id="10_pvqyf"]
+[ext_resource type="PackedScene" uid="uid://5cxvgwm17gyn" path="res://Assets/Scenes/DialogueUI/FlowmasterDialogueUI.tscn" id="11_qxl72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhhfi"]
 texture = ExtResource("2_0nv3x")
@@ -173,8 +175,10 @@ position = Vector2(26, 243)
 collision_mask = 318
 heart_bar = NodePath("../HeartUI/HeartBar")
 
-[node name="Flag" parent="." instance=ExtResource("4_qxl72")]
-position = Vector2(1195, 210)
+[node name="Flag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("4_qxl72")]
+position = Vector2(1196, 210)
+dialogue_ui = NodePath("../FlowmasterDialogueUI")
+victory_ui = NodePath("../VictoryUI/VictoryUI")
 
 [node name="leftBoundaries" type="StaticBody2D" parent="."]
 collision_layer = 256
@@ -203,3 +207,7 @@ shape = SubResource("WorldBoundaryShape2D_opfb8")
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_6lw6o")]
+
+[node name="FlowmasterNPC" parent="." instance=ExtResource("10_pvqyf")]
+
+[node name="FlowmasterDialogueUI" parent="." instance=ExtResource("11_qxl72")]

@@ -70,12 +70,14 @@ animations = [{
 size = Vector2(58, 14.5)
 
 [node name="DestroyerNPC" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ijnig")
 animation = &"idle"
-frame_progress = 0.356573
+frame_progress = 0.12514
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

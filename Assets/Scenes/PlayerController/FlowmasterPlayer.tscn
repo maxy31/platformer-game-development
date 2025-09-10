@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btved8nlgmfid" path="res://Assets/Sprites/Flowmaster/B_witch_take_damage.png" id="5_17omi"]
 [ext_resource type="Texture2D" uid="uid://dkx8b8c8npd5t" path="res://Assets/Sprites/Flowmaster/B_witch_idle.png" id="6_s1a7y"]
 [ext_resource type="Texture2D" uid="uid://oxooiswm3cgm" path="res://Assets/Sprites/Flowmaster/B_witch_run.png" id="7_byfcp"]
-[ext_resource type="Script" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
+[ext_resource type="Script" uid="uid://b4pen3sfmifn4" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ti2co"]
 atlas = ExtResource("2_08y4y")
