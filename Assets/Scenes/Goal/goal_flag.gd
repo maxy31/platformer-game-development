@@ -29,6 +29,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func on_dialogue_finished() -> void:
 	print("💬 对话结束，触发胜利逻辑！")
 	emit_signal("level_completed")
-	
 	if victory_ui:
+		# --- 新增代码在这里 ---
+		# 在显示胜利UI之前，暂停整个游戏，实现“静止画面”效果
+		get_tree().paused = true
+		# --------------------
 		victory_ui.show_victory()

@@ -1,4 +1,4 @@
-# DialogueUI.gd (最终修复版 v5.0 - 修正变量类型)
+# DialogueUI.gd (最终修复版 v5.0)
 extends CanvasLayer
 
 signal dialogue_finished
@@ -10,25 +10,16 @@ var dialogue_library = {
 		"太好了，你成功到达了这里！",
 		"感谢你的帮助，我们终于安全了。",
 		"恭喜你获得了胜利！"
-	],
-	"welcome_message": [
-		"你好，冒险者。",
-		"前方的路充满了危险，请小心。"
 	]
 }
 
 # --- 核心修改在这里 ---
-# 我们把这个变量的类型也改成了通用的 Array
+# 我们把这个变量的类型也改成了通用的 Array，以匹配_begin函数的参数
 var dialogue_lines: Array = []
 var current_line_index: int = 0
 
 func _ready() -> void:
 	hide()
-
-func start_dialogue(lines: Array[String]) -> void:
-	if lines.is_empty():
-		return
-	_begin(lines)
 
 func start_dialogue_from_library(key: String) -> void:
 	if dialogue_library.has(key):
@@ -44,7 +35,7 @@ func _begin(lines: Array) -> void:
 	current_line_index = 0
 	text_label.text = dialogue_lines[current_line_index]
 	show()
-	get_tree().paused = true
+	get_tree().paused = true # 对话开始时暂停游戏
 
 func advance_dialogue() -> void:
 	current_line_index += 1
@@ -56,8 +47,9 @@ func advance_dialogue() -> void:
 func end_dialogue() -> void:
 	dialogue_lines.clear()
 	hide()
+	# 注意：我们在这里不再 unpause，因为胜利后需要保持暂停
+	# get_tree().paused = false # 暂时注释掉或删除这行
 	emit_signal("dialogue_finished")
-	get_tree().paused = false
 
 func _input(event: InputEvent) -> void:
 	if not visible:
