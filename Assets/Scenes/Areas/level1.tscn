@@ -1,11 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://bswcofslo0wpl"]
+[gd_scene load_steps=32 format=3 uid="uid://bswcofslo0wpl"]
 
 [ext_resource type="Script" uid="uid://eneyabk0qk8h" path="res://Assets/Scenes/Areas/level_1.gd" id="1_15xp4"]
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_ph71w"]
 [ext_resource type="TileSet" uid="uid://b17ewrr7dejxj" path="res://Assets/Tileset/level1.tres" id="2_eiqap"]
 [ext_resource type="PackedScene" uid="uid://c8qf1fmrhd7h2" path="res://Assets/Scenes/Platform/platform_a.tscn" id="4_mex2m"]
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="5_o3j8m"]
-[ext_resource type="PackedScene" uid="uid://5mhrqxiqqhol" path="res://Assets/Scenes/PlayerController/RacerPlayer.tscn" id="6_8fqg5"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="6_r5d1o"]
 [ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="7_8fqg5"]
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="8_j254v"]
@@ -180,6 +179,8 @@ _data = {
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_15xp4")
 
+[node name="SpawnPoint" type="Node2D" parent="."]
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -252,13 +253,6 @@ shape = SubResource("RectangleShape2D_r5d1o")
 [node name="Cheese" parent="." instance=ExtResource("6_r5d1o")]
 position = Vector2(178, 146)
 collision_layer = 512
-
-[node name="RacerController" parent="." node_paths=PackedStringArray("heart_bar") instance=ExtResource("6_8fqg5")]
-position = Vector2(18, 273)
-collision_mask = 814
-heart_bar = NodePath("../HeartUi/HeartBar")
-
-[node name="Camera2D2" type="Camera2D" parent="RacerController"]
 
 [node name="Destroyer" parent="." instance=ExtResource("7_8fqg5")]
 position = Vector2(588, 62)
