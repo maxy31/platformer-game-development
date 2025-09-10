@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dpyjuodoiureh" path="res://Assets/Scenes/Enemy/bat.tscn" id="13_naafl"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="14_51fmr"]
 [ext_resource type="PackedScene" uid="uid://dqohs7n0k8b85" path="res://Assets/Scenes/NPC/DestroyerNPC.tscn" id="15_qm12a"]
-[ext_resource type="PackedScene" uid="uid://brxpa7o2xll2r" path="res://Assets/Scenes/DialogueUI/DialogueUI.tscn" id="16_mgw7y"]
+[ext_resource type="PackedScene" uid="uid://brxpa7o2xll2r" path="res://Assets/Scenes/DialogueUI/DestroyerDialogueUI.tscn" id="16_mgw7y"]
 
 [sub_resource type="Animation" id="Animation_o3j8m"]
 length = 0.001
@@ -272,9 +272,8 @@ libraries = {
 }
 autoplay = "last"
 
-[node name="GoalFlag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("8_betcy")]
+[node name="GoalFlag" parent="." node_paths=PackedStringArray("victory_ui") instance=ExtResource("8_betcy")]
 position = Vector2(1062, 132)
-dialogue_ui = NodePath("../DialogueUI")
 victory_ui = NodePath("../VictoryUI/VictoryUI")
 
 [node name="HeartUi" type="CanvasLayer" parent="."]
@@ -336,5 +335,5 @@ position = Vector2(1043, 139)
 collision_layer = 16
 collision_mask = 8
 
-[node name="DialogueUI" parent="." instance=ExtResource("16_mgw7y")]
+[node name="DestroyerDialogueUI" parent="." instance=ExtResource("16_mgw7y")]
 process_mode = 2
