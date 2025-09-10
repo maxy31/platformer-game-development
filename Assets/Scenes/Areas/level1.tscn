@@ -333,8 +333,6 @@ collision_mask = 73
 
 [node name="DestroyerNPC" parent="." instance=ExtResource("15_mjamk")]
 position = Vector2(1042, 138)
-collision_layer = 16
-collision_mask = 8
 
 [node name="DestroyerDialogueUI" parent="." instance=ExtResource("16_jrpw8")]
 process_mode = 2

@@ -209,5 +209,6 @@ shape = SubResource("WorldBoundaryShape2D_opfb8")
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_6lw6o")]
 
 [node name="FlowmasterNPC" parent="." instance=ExtResource("10_pvqyf")]
+position = Vector2(1179, 217)
 
 [node name="FlowmasterDialogueUI" parent="." instance=ExtResource("11_qxl72")]
