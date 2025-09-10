@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2eectg6ejnlt" path="res://Assets/Script/destroyer_controller.gd" id="1_lsrbb"]
 [ext_resource type="Texture2D" uid="uid://dp1ghuf3t8nt2" path="res://Assets/Sprites/Destroyer/DarkSamurai (64x64).png" id="2_601w7"]
 [ext_resource type="Script" uid="uid://blwj64fyycpaj" path="res://Assets/Script/destroyer_animator.gd" id="2_bcnlo"]
-[ext_resource type="Script" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
+[ext_resource type="Script" uid="uid://dfbq4anuyi33e" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
 
 [sub_resource type="Animation" id="Animation_hfby3"]
 length = 0.001
@@ -211,7 +211,7 @@ combat_handler = NodePath("DestroyerAnimator/AttackArea/AttackAreaMap")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 
 [node name="DestroyerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "attack_area")]
 script = ExtResource("2_bcnlo")
@@ -250,3 +250,5 @@ position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_pptjt")
 
 [node name="BoostTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

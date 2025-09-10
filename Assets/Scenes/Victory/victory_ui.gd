@@ -29,6 +29,8 @@ func _on_quit_pressed():
 	get_tree().paused = false   # 🔓 Unpause before changing scene
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
 
+# In your victory_ui.gd script
+
 func _on_next_level_pressed():
 	print("⏭️ Next Level pressed")
 	get_tree().paused = false
@@ -55,14 +57,30 @@ func _on_next_level_pressed():
 		if err != OK:
 			print("⚠️ Couldn't load save, starting new one")
 
-		# Save highest unlocked level
+		# --- START: NEW UNLOCK LOGIC ---
+		# Based on the level just completed, unlock the corresponding character.
+		match current_level_number:
+			1:
+				config.set_value("Characters", "Destroyer_unlocked", true)
+				print("🔓 Character Unlocked: Destroyer")
+			2:
+				config.set_value("Characters", "Racer_unlocked", true)
+				print("🔓 Character Unlocked: Racer")
+			3:
+				config.set_value("Characters", "Flowmaster_unlocked", true)
+				print("🔓 Character Unlocked: Flowmaster")
+		# --- END: NEW UNLOCK LOGIC ---
+
+		# Save highest unlocked level (your existing code)
 		var prev_unlocked = config.get_value("Progress", "unlocked_level", 1)
 		if next_level_number > prev_unlocked:
 			config.set_value("Progress", "unlocked_level", next_level_number)
-			config.save(save_path)
-			print("💾 Progress saved: unlocked level", next_level_number)
+			
+		# Now, save all changes to the file
+		config.save(save_path)
+		print("💾 Progress and unlocks saved.")
 
-		# Load the next level if it exists
+		# Load the next level if it exists (your existing code)
 		if ResourceLoader.exists(next_level_path):
 			print("➡️ Loading next level:", next_level_path)
 			get_tree().change_scene_to_file(next_level_path)

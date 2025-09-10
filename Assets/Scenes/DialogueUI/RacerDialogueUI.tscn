@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://diebvul6iumrb" path="res://Assets/Script/DialogueUI/RacerDialogueUI.gd" id="1_21aow"]
 
 [node name="RacerDialogueUI" type="CanvasLayer"]
+process_mode = 2
 script = ExtResource("1_21aow")
 
 [node name="Panel" type="Panel" parent="."]

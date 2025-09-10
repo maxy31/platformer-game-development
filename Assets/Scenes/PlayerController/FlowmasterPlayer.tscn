@@ -593,3 +593,5 @@ shape = SubResource("CapsuleShape2D_tooa8")
 
 [node name="BoostTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

@@ -285,7 +285,7 @@ func _stop_invincible_flicker() -> void:
 #Boost Jump Cheese
 func eat_food():
 	is_boosted = true
-	$BoostTimer.start(0.5)
+	$BoostTimer.start(1.5)
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false

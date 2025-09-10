@@ -1,12 +1,12 @@
 extends Control
 
-# 之前定义好的角色数据
-const CHARACTERS_DATA = {
+# IMPORTANT: Changed from 'const' to 'var' to allow modification at runtime.
+var CHARACTERS_DATA = {
 	"Flyman": {
 		"name": "Flyman",
 		"description": "The origin of all things, the pioneer of stories.",
-		"texture_path": "res://assets/sprites/knight_display.png", # 用于在选择界面展示的大图
-		"scene_path": "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn",    # 角色实际的游戏场景
+		"texture_path": "res://assets/sprites/knight_display.png",
+		"scene_path": "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn",
 		"locked": false
 	},
 	"Destroyer": {
@@ -14,134 +14,152 @@ const CHARACTERS_DATA = {
 		"description": "The Mighty Assassin.",
 		"texture_path": "res://assets/sprites/wizard_display.png",
 		"scene_path": "res://Assets/Scenes/PlayerController/DestroyerPlayer.tscn",
-		"locked": true
+		"locked": true # Default locked status
 	},
 	"Racer": {
 		"name": "Racer",
 		"description": "Noble Knight, Master of Speed.",
 		"texture_path": "res://assets/sprites/rogue_display.png",
 		"scene_path": "res://Assets/Scenes/PlayerController/RacerPlayer.tscn",
-		"locked": true
+		"locked": true # Default locked status
 	},
 	"Flowmaster": {
 		"name": "Flowmaster",
 		"description": "The Omniscient and Omnipotent Mage.",
 		"texture_path": "res://assets/sprites/rogue_display.png",
 		"scene_path": "res://Assets/Scenes/PlayerController/FlowmasterPlayer.tscn",
-		"locked": true
+		"locked": true # Default locked status
 	}
 }
 
-# 将角色ID（字典的键）存储在一个数组中，方便索引
+# Array to hold the keys for easy indexing
 var character_keys: Array = []
 var current_character_index: int = 0
 
-# 引用UI节点，以便在代码中操作它们
+# UI Node references
 @onready var character_viewport: SubViewport = $MarginContainer/VBoxContainer/HBoxContainer/CharacterDisplayPanel/SubViewportContainer/CharacterViewport
 @onready var name_label: Label = $MarginContainer/VBoxContainer/NameLabel
 @onready var description_label: Label = $MarginContainer/VBoxContainer/DescriptionLabel
 @onready var next_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/NextButton
 @onready var previous_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/PreviousButton
 @onready var select_button: Button = $MarginContainer/VBoxContainer/SelectButton
-@onready var locked_label: Label = $MarginContainer/VBoxContainer/LockedLabel # 一个用于显示“Locked”的标签（你需要在场景中添加这个 Label）
+@onready var locked_label: Label = $MarginContainer/VBoxContainer/LockedLabel
 
 
 func _ready() -> void:
-	# 获取所有角色的键
+	# First, load any unlock progress from the save file.
+	# This modifies the CHARACTERS_DATA dictionary before we display anything.
+	_load_character_unlocks()
+
+	# Now, proceed with the original setup
 	character_keys = CHARACTERS_DATA.keys()
 
-	# 连接按钮的 "pressed" 信号到处理函数
+	# Connect buttons' "pressed" signals to their handler functions
 	next_button.pressed.connect(_on_next_button_pressed)
 	previous_button.pressed.connect(_on_previous_button_pressed)
 	select_button.pressed.connect(_on_select_button_pressed)
 
-	# 初始化显示第一个角色
+	# Initialize the display to show the first character
 	update_character_display()
 
 
-# 更新所有UI元素以显示当前选择的角色
+# This new function reads the save file and updates the lock status.
+func _load_character_unlocks():
+	var save_path = "user://save_game.cfg"
+	var config = ConfigFile.new()
+	
+	# Attempt to load the save file. If it doesn't exist, exit the function.
+	var err = config.load(save_path)
+	if err != OK:
+		print("No save file found. Using default character locks.")
+		return
+	
+	# Check the "[Characters]" section of the save file for each character.
+	# get_value() safely returns 'false' if the key doesn't exist.
+	if config.get_value("Characters", "Destroyer_unlocked", false):
+		CHARACTERS_DATA["Destroyer"]["locked"] = false
+		
+	if config.get_value("Characters", "Racer_unlocked", false):
+		CHARACTERS_DATA["Racer"]["locked"] = false
+		
+	if config.get_value("Characters", "Flowmaster_unlocked", false):
+		CHARACTERS_DATA["Flowmaster"]["locked"] = false
+
+
+# Updates all UI elements to reflect the currently selected character.
 func update_character_display() -> void:
-	# --- Start: 清除旧的角色实例 ---
-	# 遍历 SubViewport 的所有子节点并删除它们
+	# Clear any old character model from the viewport
 	for child in character_viewport.get_children():
-		child.queue_free() # 使用 queue_free() 是安全的删除方式
-	# --- End: 清除旧的角色实例 ---
+		child.queue_free()
 
-	# 1. 获取当前角色的ID（例如 "knight"）
+	# Get the data for the current character
 	var current_key = character_keys[current_character_index]
-
-	# 2. 从字典中获取该角色的数据
 	var current_data = CHARACTERS_DATA[current_key]
 
-	# 3. 更新文本标签
+	# Update text labels
 	name_label.text = current_data["name"]
 	description_label.text = current_data["description"]
 
-	# --- Start: 实例化新的角色到 SubViewport ---
-	# 4. 加载角色场景资源
+	# Load and instantiate the character scene into the viewport
 	var character_scene = load(current_data["scene_path"])
 	if character_scene:
 		var character_instance = character_scene.instantiate()
 		
-		# --- 核心改动在这里 ---
-		# 检查角色是否有我们定义的接口函数，有就调用它
+		# Set character to UI mode if the function exists
 		if character_instance.has_method("enter_ui_mode"):
 			character_instance.enter_ui_mode()
 		else:
-			print("警告: 角色 ", character_instance.name, " 没有实现 enter_ui_mode() 函数!")
+			print("Warning: Character ", character_instance.name, " does not have enter_ui_mode() function.")
 			
 		character_viewport.add_child(character_instance)
 		character_instance.position = character_viewport.size / 2
 	
-	# 是否锁定？
+	# Check the lock status and update the Select button and Locked label
 	var is_locked = current_data.get("locked", false)
 	if is_locked:
 		select_button.disabled = true
 		select_button.text = "Locked"
-		select_button.modulate = Color(0.5, 0.5, 0.5)  # 灰色
+		select_button.modulate = Color(0.5, 0.5, 0.5) # Gray out
 		locked_label.visible = true
 	else:
 		select_button.disabled = false
 		select_button.text = "Select"
-		select_button.modulate = Color(1, 1, 1)  # 正常颜色
+		select_button.modulate = Color(1, 1, 1) # Normal color
 		locked_label.visible = false
-	# --- End: 实例化新的角色到 SubViewport ---
 
 
-# “下一个”按钮被按下时调用
+# Called when the "Next" button is pressed.
 func _on_next_button_pressed() -> void:
 	current_character_index += 1
-	# 如果索引超出范围，则循环回到第一个
+	# Loop back to the start if we go past the end
 	if current_character_index >= character_keys.size():
 		current_character_index = 0
-
 	update_character_display()
 
 
-# “上一个”按钮被按下时调用
+# Called when the "Previous" button is pressed.
 func _on_previous_button_pressed() -> void:
 	current_character_index -= 1
-	# 如果索引小于0，则循环回到最后一个
+	# Loop to the end if we go before the start
 	if current_character_index < 0:
 		current_character_index = character_keys.size() - 1
-
 	update_character_display()
 
 
-# “选择”按钮被按下时调用
+# Called when the "Select" button is pressed.
 func _on_select_button_pressed() -> void:
-	# 1. 获取选定角色的数据
+	# Get the selected character's data
 	var selected_key = character_keys[current_character_index]
 	var selected_character_data = CHARACTERS_DATA[selected_key]
 
-	# 2. 将选择的角色场景路径保存到全局状态管理器中
-	# (我们将在下一步创建这个 GlobalState)
+	# Store the chosen scene path in a global state manager (e.g., an Autoload singleton)
 	GlobalState.selected_character_scene_path = selected_character_data["scene_path"]
 
-	# 3. 打印确认信息并切换到游戏主场景
-	print("选择了角色: ", selected_character_data["name"])
-	get_tree().change_scene_to_file("res://Assets/Scenes/Global/level_select_screen.tscn") # 替换成你的游戏场景路径
-	
+	# Go to the next screen (e.g., level select or the first level)
+	print("Selected character: ", selected_character_data["name"])
+	get_tree().change_scene_to_file("res://Assets/Scenes/Global/level_select_screen.tscn")
 
+
+# Called when the "Back" button is pressed.
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")

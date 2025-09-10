@@ -1,17 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwxwsb3nj1tkc"]
+[gd_scene load_steps=18 format=3 uid="uid://bwxwsb3nj1tkc"]
 
 [ext_resource type="Texture2D" uid="uid://btia7fwgn5p68" path="res://Assets/Sprites/Background/color4.jpg" id="1_jnb58"]
+[ext_resource type="Script" uid="uid://denhsfxx1w806" path="res://Assets/Scenes/Areas/level_2.gd" id="1_q3qk7"]
 [ext_resource type="TileSet" uid="uid://wexklw05sc70" path="res://Assets/Tileset/level2.tres" id="2_8a18q"]
 [ext_resource type="PackedScene" uid="uid://c8qf1fmrhd7h2" path="res://Assets/Scenes/Platform/platform_a.tscn" id="4_0ggan"]
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="5_ubrbx"]
-[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="6_diw2v"]
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="7_h0ywj"]
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="8_wfkt0"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_hieum"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="10_lrq8y"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="11_enau4"]
 [ext_resource type="PackedScene" uid="uid://twrnnto8egv6" path="res://Assets/Scenes/NPC/RacerNPC.tscn" id="12_761qc"]
-[ext_resource type="PackedScene" uid="uid://v3iimkhjwycp" path="res://Assets/Scenes/PlayerController/FlymanPlayer.tscn" id="13_q3qk7"]
 [ext_resource type="PackedScene" uid="uid://bdrghr7y8y4sf" path="res://Assets/Scenes/DialogueUI/RacerDialogueUI.tscn" id="13_wggyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8a18q"]
@@ -59,6 +58,10 @@ _data = {
 distance = -25.0
 
 [node name="Level2" type="Node2D"]
+script = ExtResource("1_q3qk7")
+
+[node name="SpawnPoint" type="CharacterBody2D" parent="."]
+collision_mask = 830
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -102,10 +105,6 @@ position = Vector2(66, 382)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("WorldBoundaryShape2D_diw2v")
 
-[node name="HeartUI" type="CanvasLayer" parent="."]
-
-[node name="HeartBar" parent="HeartUI" instance=ExtResource("6_diw2v")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_h0ywj")]
@@ -115,15 +114,10 @@ offset_top = 26.0
 offset_right = 6.0
 offset_bottom = 26.0
 
-[node name="Flag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("8_wfkt0")]
+[node name="GoalFlag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("8_wfkt0")]
 position = Vector2(1234, 211)
 dialogue_ui = NodePath("../RacerDialogueUI")
 victory_ui = NodePath("../VictoryUI/VictoryUI")
-
-[node name="VictoryUI" type="CanvasLayer" parent="."]
-
-[node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_hieum")]
-visible = false
 
 [node name="Cheese" parent="." instance=ExtResource("10_lrq8y")]
 position = Vector2(443, 247)
@@ -134,10 +128,14 @@ visible = false
 [node name="RacerNPC" parent="." instance=ExtResource("12_761qc")]
 position = Vector2(1209, 218)
 
-[node name="RacerDialogueUI" parent="." instance=ExtResource("13_wggyh")]
-process_mode = 2
-
 [node name="Cheese2" parent="." instance=ExtResource("10_lrq8y")]
 position = Vector2(223, 313)
 
-[node name="FlymanController" parent="." instance=ExtResource("13_q3qk7")]
+[node name="Cheese3" parent="." instance=ExtResource("10_lrq8y")]
+position = Vector2(557, 199)
+
+[node name="RacerDialogueUI" parent="." instance=ExtResource("13_wggyh")]
+
+[node name="VictoryUI" type="CanvasLayer" parent="."]
+
+[node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_hieum")]

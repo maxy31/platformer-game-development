@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://v3iimkhjwycp"]
+[gd_scene load_steps=20 format=3 uid="uid://v3iimkhjwycp"]
 
 [ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
 [ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
 [ext_resource type="Texture2D" uid="uid://bfqsaldbqx2ol" path="res://Assets/Sprites/Flyman/Char_3.png" id="2_lgsfl"]
 [ext_resource type="Script" uid="uid://bbai7gu4fm30f" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
+[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_acrhl"]
 
 [sub_resource type="Animation" id="Animation_guasd"]
 length = 0.001
@@ -265,9 +266,10 @@ size = Vector2(9.5, 7)
 radius = 4.0
 height = 12.0
 
-[node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler") groups=["Player"]]
+[node name="FlymanController" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar", "animator", "combat_handler") groups=["Player"]]
 collision_mask = 46
 script = ExtResource("1_i8rbu")
+heart_bar = NodePath("HeartUi/HeartBar")
 animator = NodePath("FlymanAnimator")
 combat_handler = NodePath("FlymanAnimator/AttackArea/AttackAreaMap")
 metadata/_custom_type_script = "uid://c21ad1la0q0e2"
@@ -314,4 +316,9 @@ shape = SubResource("CapsuleShape2D_i8rbu")
 [node name="BoostTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="HeartUi" type="CanvasLayer" parent="."]
+
+[node name="HeartBar" parent="HeartUi" instance=ExtResource("5_acrhl")]
+
 [connection signal="animation_finished" from="FlymanAnimator/AnimationPlayer" to="FlymanAnimator" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

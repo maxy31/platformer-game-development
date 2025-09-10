@@ -20,6 +20,7 @@ var current_line_index: int = 0
 
 func _ready() -> void:
 	hide()
+	self.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 func start_dialogue_from_library(key: String) -> void:
 	if dialogue_library.has(key):

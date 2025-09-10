@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://ddgdvj1epppqb"]
+[gd_scene load_steps=16 format=3 uid="uid://d3d4k0uof3i7f"]
 
+[ext_resource type="Script" uid="uid://83s2yvkj8ms1" path="res://Assets/Scenes/Areas/level_3.gd" id="1_0nv3x"]
 [ext_resource type="Texture2D" uid="uid://cfbirq5cie5vp" path="res://Assets/Sprites/Background/color3.jpg" id="1_1ua0q"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_0nv3x"]
 [ext_resource type="PackedScene" uid="uid://5mhrqxiqqhol" path="res://Assets/Scenes/PlayerController/RacerPlayer.tscn" id="3_pvqyf"]
@@ -154,6 +155,10 @@ size = Vector2(41, 374)
 distance = -9.0
 
 [node name="level3" type="Node2D"]
+script = ExtResource("1_0nv3x")
+
+[node name="SpawnPoint" parent="." instance=ExtResource("4_qxl72")]
+position = Vector2(1201, 193)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -187,20 +192,16 @@ shape = SubResource("RectangleShape2D_08m3y")
 
 [node name="HeartBar" parent="HeartUI" instance=ExtResource("6_5b2dy")]
 
-[node name="RacerController" parent="." instance=ExtResource("3_pvqyf")]
-position = Vector2(27, 209)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_l2d4g")]
-
-[node name="Node2D" parent="CanvasLayer/PauseMenu" instance=ExtResource("4_qxl72")]
-position = Vector2(1201, 193)
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_6lw6o")]
+
+[node name="Node2D" type="Node2D" parent="VictoryUI"]
 
 [node name="GameOverUI" parent="." instance=ExtResource("8_dojng")]
 visible = false
@@ -210,3 +211,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 position = Vector2(63, 398)
 shape = SubResource("WorldBoundaryShape2D_0nv3x")
+
+[node name="RacerController" parent="." instance=ExtResource("3_pvqyf")]
+position = Vector2(31, 203)

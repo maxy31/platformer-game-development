@@ -9,3 +9,9 @@ func _on_body_entered(body: Node2D) -> void:
 		hide()
 		$CollisionShape2D.call_deferred("set_disabled", true)
 		$RespawnTimer.start()
+		
+func _on_respawn_timer_timeout() -> void:
+	# Show the cheese again
+	show()
+	 # Re-enable the collision shape so it can be picked up again
+	$CollisionShape2D.disabled = false

@@ -220,7 +220,7 @@ func _on_body_attack_area_entered(body):
 #Boost Jump Cheese
 func eat_food():
 	is_boosted = true
-	$BoostTimer.start(3.0)
+	$BoostTimer.start(1.5)
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false

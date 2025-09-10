@@ -88,10 +88,14 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# 跳跃：地面受击可立刻跳；空中受击要等动画结束
+# 跳跃：地面受击可立刻跳；空中受击要等动画结束
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		if (not is_hurt) or _allow_jump_while_hurt_this_time:
-			velocity.y = jump_power * jump_multiplier
+		# 检查是否处于跳跃增强状态
+			if is_boosted:
+				velocity.y = boosted_jump_velocity      # 使用增强跳跃力
+			else:
+				velocity.y = jump_power * jump_multiplier  # 使用普通跳跃力
 
 	# 攻击输入
 	if Input.is_action_just_pressed("attack"):
@@ -261,7 +265,7 @@ func _stop_invincible_flicker() -> void:
 # Boost Jump Cheese
 func eat_food():
 	is_boosted = true
-	$BoostTimer.start(3.0)
+	$BoostTimer.start(1.5)
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
