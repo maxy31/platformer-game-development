@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://brxpa7o2xll2r"]
 
-[ext_resource type="Script" uid="uid://dakr4llff8s4h" path="res://Assets/Script/DialogueUI/DialogueUI.gd" id="1_5e14f"]
+[ext_resource type="Script" uid="uid://dakr4llff8s4h" path="res://Assets/Script/DialogueUI/DestroyerDialogueUI.gd" id="1_5e14f"]
 
 [node name="DestroyerDialogueUI" type="CanvasLayer"]
 visible = false
@@ -11,5 +11,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TextLabel" type="Label" parent="Panel"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

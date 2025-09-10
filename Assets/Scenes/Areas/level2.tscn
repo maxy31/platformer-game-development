@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bwxwsb3nj1tkc"]
+[gd_scene load_steps=19 format=3 uid="uid://bwxwsb3nj1tkc"]
 
 [ext_resource type="Texture2D" uid="uid://btia7fwgn5p68" path="res://Assets/Sprites/Background/color4.jpg" id="1_jnb58"]
 [ext_resource type="TileSet" uid="uid://wexklw05sc70" path="res://Assets/Tileset/level2.tres" id="2_8a18q"]
@@ -11,9 +11,26 @@
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_hieum"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="10_lrq8y"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="11_enau4"]
+[ext_resource type="PackedScene" uid="uid://twrnnto8egv6" path="res://Assets/Scenes/NPC/RacerNPC.tscn" id="12_761qc"]
+[ext_resource type="PackedScene" uid="uid://bdrghr7y8y4sf" path="res://Assets/Scenes/DialogueUI/RacerDialogueUI.tscn" id="13_wggyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8a18q"]
 size = Vector2(25, 362)
+
+[sub_resource type="Animation" id="Animation_ubrbx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(329, 240)]
+}
 
 [sub_resource type="Animation" id="Animation_0ggan"]
 resource_name = "updown"
@@ -32,21 +49,6 @@ tracks/0/keys = {
 "values": [Vector2(330, 275), Vector2(327, 187)]
 }
 
-[sub_resource type="Animation" id="Animation_ubrbx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(329, 240)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_diw2v"]
 _data = {
 &"RESET": SubResource("Animation_ubrbx"),
@@ -61,6 +63,7 @@ distance = -25.0
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_repeat = 2
@@ -117,8 +120,10 @@ offset_top = 26.0
 offset_right = 6.0
 offset_bottom = 26.0
 
-[node name="Flag" parent="." instance=ExtResource("8_wfkt0")]
+[node name="Flag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("8_wfkt0")]
 position = Vector2(1234, 211)
+dialogue_ui = NodePath("../RacerDialogueUI")
+victory_ui = NodePath("../VictoryUI/VictoryUI")
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 
@@ -130,3 +135,12 @@ position = Vector2(443, 247)
 
 [node name="GameOverUI" parent="." instance=ExtResource("11_enau4")]
 visible = false
+
+[node name="RacerNPC" parent="." instance=ExtResource("12_761qc")]
+position = Vector2(1209, 218)
+
+[node name="RacerDialogueUI" parent="." instance=ExtResource("13_wggyh")]
+process_mode = 2
+
+[node name="Cheese2" parent="." instance=ExtResource("10_lrq8y")]
+position = Vector2(223, 313)

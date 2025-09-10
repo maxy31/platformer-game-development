@@ -75,7 +75,7 @@ size = Vector2(58, 14.5)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ijnig")
 animation = &"idle"
-frame_progress = 0.578137
+frame_progress = 0.356573
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

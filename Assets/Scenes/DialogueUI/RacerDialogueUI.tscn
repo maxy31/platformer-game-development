@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdrghr7y8y4sf"]
+
+[ext_resource type="Script" uid="uid://diebvul6iumrb" path="res://Assets/Script/DialogueUI/RacerDialogueUI.gd" id="1_21aow"]
+
+[node name="RacerDialogueUI" type="CanvasLayer"]
+script = ExtResource("1_21aow")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

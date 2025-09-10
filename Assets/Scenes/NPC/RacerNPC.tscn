@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://twrnnto8egv6"]
+
+[ext_resource type="Texture2D" uid="uid://b6ngkoj2lkwou" path="res://Assets/Sprites/Racer/Idle/Knight_idle1.png" id="1_3n6vk"]
+[ext_resource type="Texture2D" uid="uid://my7hrxrwp0ir" path="res://Assets/Sprites/Racer/Idle/Knight_idle2.png" id="2_l8poo"]
+[ext_resource type="Texture2D" uid="uid://dinulhq2vr1bf" path="res://Assets/Sprites/Racer/Idle/Knight_idle3.png" id="3_hvqwm"]
+[ext_resource type="Texture2D" uid="uid://ca86mp87dxcg4" path="res://Assets/Sprites/Racer/Idle/Knight_idle4.png" id="4_w7kk0"]
+[ext_resource type="Texture2D" uid="uid://ddety7trp3lm1" path="res://Assets/Sprites/Racer/Idle/Knight_idle5.png" id="5_brd8r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wcm6j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3n6vk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l8poo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hvqwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w7kk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_brd8r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_foewd"]
+size = Vector2(58, 14.5)
+
+[node name="RacerNPC" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_wcm6j")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_foewd")
