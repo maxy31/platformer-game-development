@@ -292,3 +292,9 @@ func enter_ui_mode():
 	velocity = Vector2.ZERO 
 	is_hurt = false
 	is_attacking = false
+	
+# === Called when character is loaded into an actual game level ===
+func exit_ui_mode():
+	is_in_ui_mode = false
+	set_physics_process(true)
+	set_process(true)

@@ -26,6 +26,7 @@ func _on_restart_pressed():
 
 func _on_quit_pressed():
 	print("❌ Quit pressed")
+	get_tree().paused = false   # 🔓 Unpause before changing scene
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
 
 func _on_next_level_pressed():
