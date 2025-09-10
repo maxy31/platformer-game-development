@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dxjuvswdpv43p"]
+[gd_scene load_steps=82 format=3 uid="uid://dxjuvswdpv43p"]
 
 [ext_resource type="Script" uid="uid://0rdsy0dyatlj" path="res://Assets/Script/flowmaster_controller.gd" id="1_1rhmj"]
 [ext_resource type="Texture2D" uid="uid://5drqe6d3jwu7" path="res://Assets/Sprites/Flowmaster/B_witch_attack.png" id="2_08y4y"]
@@ -8,7 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://btved8nlgmfid" path="res://Assets/Sprites/Flowmaster/B_witch_take_damage.png" id="5_17omi"]
 [ext_resource type="Texture2D" uid="uid://dkx8b8c8npd5t" path="res://Assets/Sprites/Flowmaster/B_witch_idle.png" id="6_s1a7y"]
 [ext_resource type="Texture2D" uid="uid://oxooiswm3cgm" path="res://Assets/Sprites/Flowmaster/B_witch_run.png" id="7_byfcp"]
-[ext_resource type="Script" uid="uid://b4pen3sfmifn4" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
+[ext_resource type="Script" path="res://Assets/Script/flowmaster_combatHandler.gd" id="9_jtyff"]
+[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="10_jtyff"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ti2co"]
 atlas = ExtResource("2_08y4y")
@@ -533,15 +534,16 @@ size = Vector2(29.5, 18)
 radius = 3.0
 height = 10.0
 
-[node name="FlowmasterController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler") groups=["Player"]]
+[node name="FlowmasterController" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar", "animator", "combat_handler") groups=["Player"]]
 collision_mask = 60
 script = ExtResource("1_1rhmj")
+heart_bar = NodePath("HeartUi/HeartBar")
 animator = NodePath("FlowmasterAnimator")
 combat_handler = NodePath("FlowmasterAnimator/AttackArea/AttackAreaMap")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 
 [node name="FlowmasterAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animated_sprite", "attackM", "attackE", "attack_area")]
 script = ExtResource("2_ti2co")
@@ -593,5 +595,9 @@ shape = SubResource("CapsuleShape2D_tooa8")
 
 [node name="BoostTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HeartUi" type="CanvasLayer" parent="."]
+
+[node name="HeartBar" parent="HeartUi" instance=ExtResource("10_jtyff")]
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

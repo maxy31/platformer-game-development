@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfoo6vsdoeedu"]
+[gd_scene load_steps=18 format=3 uid="uid://cfoo6vsdoeedu"]
 
 [ext_resource type="Script" uid="uid://2eectg6ejnlt" path="res://Assets/Script/destroyer_controller.gd" id="1_lsrbb"]
 [ext_resource type="Texture2D" uid="uid://dp1ghuf3t8nt2" path="res://Assets/Sprites/Destroyer/DarkSamurai (64x64).png" id="2_601w7"]
 [ext_resource type="Script" uid="uid://blwj64fyycpaj" path="res://Assets/Script/destroyer_animator.gd" id="2_bcnlo"]
-[ext_resource type="Script" uid="uid://dfbq4anuyi33e" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
+[ext_resource type="Script" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
+[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_6hwdv"]
 
 [sub_resource type="Animation" id="Animation_hfby3"]
 length = 0.001
@@ -203,9 +204,10 @@ size = Vector2(26, 20)
 radius = 4.0
 height = 12.0
 
-[node name="DestroyerController" type="CharacterBody2D" node_paths=PackedStringArray("animator", "combat_handler") groups=["Player"]]
+[node name="DestroyerController" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar", "animator", "combat_handler") groups=["Player"]]
 collision_mask = 46
 script = ExtResource("1_lsrbb")
+heart_bar = NodePath("HeartUi/HeartBar")
 animator = NodePath("DestroyerAnimator")
 combat_handler = NodePath("DestroyerAnimator/AttackArea/AttackAreaMap")
 
@@ -250,5 +252,9 @@ position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_pptjt")
 
 [node name="BoostTimer" type="Timer" parent="."]
+
+[node name="HeartUi" type="CanvasLayer" parent="."]
+
+[node name="HeartBar" parent="HeartUi" instance=ExtResource("5_6hwdv")]
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

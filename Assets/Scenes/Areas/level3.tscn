@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://83s2yvkj8ms1" path="res://Assets/Scenes/Areas/level_3.gd" id="1_0nv3x"]
 [ext_resource type="Texture2D" uid="uid://cfbirq5cie5vp" path="res://Assets/Sprites/Background/color3.jpg" id="1_1ua0q"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_0nv3x"]
-[ext_resource type="PackedScene" uid="uid://5mhrqxiqqhol" path="res://Assets/Scenes/PlayerController/RacerPlayer.tscn" id="3_pvqyf"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="4_5jma8"]
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="4_qxl72"]
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="5_wm4iq"]
-[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="6_5b2dy"]
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="7_l2d4g"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="8_dojng"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_6lw6o"]
+[ext_resource type="PackedScene" uid="uid://olq2ydlj0s56" path="res://Assets/Scenes/NPC/FlowmasterNPC.tscn" id="10_pvqyf"]
+[ext_resource type="PackedScene" uid="uid://5cxvgwm17gyn" path="res://Assets/Scenes/DialogueUI/FlowmasterDialogueUI.tscn" id="11_qxl72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08m3y"]
 texture = ExtResource("2_0nv3x")
@@ -157,8 +157,12 @@ distance = -9.0
 [node name="level3" type="Node2D"]
 script = ExtResource("1_0nv3x")
 
-[node name="SpawnPoint" parent="." instance=ExtResource("4_qxl72")]
+[node name="SpawnPoint" type="CharacterBody2D" parent="."]
+
+[node name="GoalFlag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("4_qxl72")]
 position = Vector2(1201, 193)
+dialogue_ui = NodePath("../FlowmasterDialogueUI")
+victory_ui = NodePath("../VictoryUI/VictoryUI")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -188,16 +192,11 @@ collision_layer = 256
 position = Vector2(-22.5, 177)
 shape = SubResource("RectangleShape2D_08m3y")
 
-[node name="HeartUI" type="CanvasLayer" parent="."]
-
-[node name="HeartBar" parent="HeartUI" instance=ExtResource("6_5b2dy")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_l2d4g")]
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_6lw6o")]
 
@@ -212,5 +211,7 @@ visible = false
 position = Vector2(63, 398)
 shape = SubResource("WorldBoundaryShape2D_0nv3x")
 
-[node name="RacerController" parent="." instance=ExtResource("3_pvqyf")]
-position = Vector2(31, 203)
+[node name="FlowmasterNPC" parent="." instance=ExtResource("10_pvqyf")]
+position = Vector2(1182, 203)
+
+[node name="FlowmasterDialogueUI" parent="." instance=ExtResource("11_qxl72")]

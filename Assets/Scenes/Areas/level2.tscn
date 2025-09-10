@@ -61,7 +61,6 @@ distance = -25.0
 script = ExtResource("1_q3qk7")
 
 [node name="SpawnPoint" type="CharacterBody2D" parent="."]
-collision_mask = 830
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -117,7 +116,7 @@ offset_bottom = 26.0
 [node name="GoalFlag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("8_wfkt0")]
 position = Vector2(1234, 211)
 dialogue_ui = NodePath("../RacerDialogueUI")
-victory_ui = NodePath("../VictoryUI/VictoryUI")
+victory_ui = NodePath("../VictoryUI/Level2VictoryUI")
 
 [node name="Cheese" parent="." instance=ExtResource("10_lrq8y")]
 position = Vector2(443, 247)
@@ -134,8 +133,8 @@ position = Vector2(223, 313)
 [node name="Cheese3" parent="." instance=ExtResource("10_lrq8y")]
 position = Vector2(557, 199)
 
-[node name="RacerDialogueUI" parent="." instance=ExtResource("13_wggyh")]
-
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 
-[node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_hieum")]
+[node name="Level2VictoryUI" parent="VictoryUI" instance=ExtResource("9_hieum")]
+
+[node name="RacerDialogueUI" parent="." instance=ExtResource("13_wggyh")]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c16wfx0m6ax3b" path="res://Assets/Script/flyman_controller.gd" id="1_i8rbu"]
 [ext_resource type="Script" uid="uid://vuqp455li7ax" path="res://Assets/Script/flyman_animator.gd" id="2_i8rbu"]
 [ext_resource type="Texture2D" uid="uid://bfqsaldbqx2ol" path="res://Assets/Sprites/Flyman/Char_3.png" id="2_lgsfl"]
-[ext_resource type="Script" uid="uid://bbai7gu4fm30f" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
+[ext_resource type="Script" path="res://Assets/Script/flyman_combatHandler.gd" id="4_xt8c6"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_acrhl"]
 
 [sub_resource type="Animation" id="Animation_guasd"]
@@ -272,11 +272,10 @@ script = ExtResource("1_i8rbu")
 heart_bar = NodePath("HeartUi/HeartBar")
 animator = NodePath("FlymanAnimator")
 combat_handler = NodePath("FlymanAnimator/AttackArea/AttackAreaMap")
-metadata/_custom_type_script = "uid://c21ad1la0q0e2"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 
 [node name="FlymanAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "attack_area")]
 script = ExtResource("2_i8rbu")

@@ -9,7 +9,24 @@ signal level_completed
 var triggered: bool = false
 
 func _ready() -> void:
-	print(dialogue_ui)
+		# 检查在编辑器里是否已经正确设置了 dialogue_ui
+	if not is_instance_valid(dialogue_ui):
+		# push_error 会在编辑器里显示一个可点击的错误信息，非常方便
+		push_error("错误：在场景 '" + get_tree().current_scene.scene_file_path + "' 中, GoalFlag 节点没有分配 DialogueUI 节点！请在检查器中设置它。")
+		# 禁用自己，避免后续出错
+		set_process(false)
+		set_physics_process(false)
+		return # 提前退出函数
+
+	# 同样的，也检查 victory_ui
+	if not is_instance_valid(victory_ui):
+		push_error("错误：在场景 '" + get_tree().current_scene.scene_file_path + "' 中, GoalFlag 节点没有分配 VictoryUI 节点！")
+		set_process(false)
+		set_physics_process(false)
+		return
+		
+	print("This Goal Flag is running inside scene: ", get_tree().current_scene.scene_file_path)
+	dialogue_ui.dialogue_finished.connect(on_dialogue_finished)
 	print("This Goal Flag is running inside scene: ", get_tree().current_scene.scene_file_path)
 
 	if not dialogue_ui:

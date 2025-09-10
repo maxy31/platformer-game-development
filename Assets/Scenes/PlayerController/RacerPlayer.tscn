@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://5mhrqxiqqhol"]
+[gd_scene load_steps=39 format=3 uid="uid://5mhrqxiqqhol"]
 
 [ext_resource type="Script" uid="uid://b8pm3unqjeuee" path="res://Assets/Script/racer_controller.gd" id="1_eau03"]
 [ext_resource type="Script" uid="uid://bqhj4411l64x5" path="res://Assets/Script/racer_animator.gd" id="2_jorce"]
@@ -32,7 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://6nagj8qom8ic" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop1.png" id="30_k2kyw"]
 [ext_resource type="Texture2D" uid="uid://cawkggwqnki0b" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop3.png" id="31_kws6u"]
 [ext_resource type="Texture2D" uid="uid://b7n0h30m1wcqs" path="res://Assets/Sprites/Racer/Gallop/Knight_gallop4.png" id="32_nhehg"]
-[ext_resource type="Script" uid="uid://bumxktdwcaji1" path="res://Assets/Script/racer_combatHandler.gd" id="33_qto2m"]
+[ext_resource type="Script" path="res://Assets/Script/racer_combatHandler.gd" id="33_qto2m"]
+[ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="34_jorce"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_de0mg"]
 animations = [{
@@ -226,10 +227,11 @@ size = Vector2(20, 16.5)
 radius = 6.0
 height = 16.0
 
-[node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("body_attack_area", "animator", "combat_handler") groups=["Player"]]
+[node name="RacerController" type="CharacterBody2D" node_paths=PackedStringArray("body_attack_area", "heart_bar", "animator", "combat_handler") groups=["Player"]]
 collision_mask = 62
 script = ExtResource("1_eau03")
 body_attack_area = NodePath("RacerAnimator/BodyAttackArea")
+heart_bar = NodePath("HeartUi/HeartBar")
 animator = NodePath("RacerAnimator")
 combat_handler = NodePath("RacerAnimator/AttackArea/AttackAreaMap")
 
@@ -273,5 +275,9 @@ shape = SubResource("CapsuleShape2D_auws5")
 
 [node name="BoostTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HeartUi" type="CanvasLayer" parent="."]
+
+[node name="HeartBar" parent="HeartUi" instance=ExtResource("34_jorce")]
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

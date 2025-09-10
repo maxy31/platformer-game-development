@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dakr4llff8s4h" path="res://Assets/Script/DialogueUI/DestroyerDialogueUI.gd" id="1_5e14f"]
 
 [node name="DestroyerDialogueUI" type="CanvasLayer"]
+process_mode = 2
 visible = false
 script = ExtResource("1_5e14f")
 

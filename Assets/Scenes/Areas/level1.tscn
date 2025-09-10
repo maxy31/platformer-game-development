@@ -270,7 +270,7 @@ autoplay = "last"
 [node name="GoalFlag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("8_j254v")]
 position = Vector2(1062, 132)
 dialogue_ui = NodePath("../DestroyerDialogueUI")
-victory_ui = NodePath("../VictoryUI/VictoryUI")
+victory_ui = NodePath("../VictoryUI/Level1VictoryUI")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -320,7 +320,7 @@ collision_mask = 73
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 
-[node name="VictoryUI" parent="VictoryUI" instance=ExtResource("13_q1clr")]
+[node name="Level1VictoryUI" parent="VictoryUI" instance=ExtResource("13_q1clr")]
 
 [node name="DestroyerNPC" parent="." instance=ExtResource("15_mjamk")]
 position = Vector2(1042, 138)
