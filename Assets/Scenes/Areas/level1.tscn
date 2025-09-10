@@ -1,6 +1,5 @@
 [gd_scene load_steps=32 format=3 uid="uid://bswcofslo0wpl"]
 
-[ext_resource type="Script" uid="uid://eneyabk0qk8h" path="res://Assets/Scenes/Areas/level_1.gd" id="1_15xp4"]
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_ph71w"]
 [ext_resource type="TileSet" uid="uid://b17ewrr7dejxj" path="res://Assets/Tileset/level1.tres" id="2_eiqap"]
 [ext_resource type="PackedScene" uid="uid://c8qf1fmrhd7h2" path="res://Assets/Scenes/Platform/platform_a.tscn" id="4_mex2m"]
@@ -177,7 +176,6 @@ _data = {
 }
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_15xp4")
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 
