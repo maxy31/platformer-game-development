@@ -258,5 +258,6 @@ position = Vector2(379, 312)
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("9_6lw6o")]
 
 [node name="FlowmasterNPC" parent="." instance=ExtResource("10_pvqyf")]
+position = Vector2(1179, 217)
 
 [node name="FlowmasterDialogueUI" parent="." instance=ExtResource("11_qxl72")]
