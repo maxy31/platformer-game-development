@@ -9,7 +9,7 @@ func _ready():
 func _spawn_player():
 	# 检查是否有选择的角色
 	if GlobalState.selected_character_scene_path.is_empty():
-		print("没有选择角色，使用默认")
+		print("No character selected, using default’")
 		# 可以在这里加载默认角色
 		GlobalState.selected_character_scene_path = "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"
 	
@@ -22,18 +22,18 @@ func _spawn_player():
 		# 设置生成位置
 		if spawn_point:
 			character_instance.global_position = spawn_point.global_position
-			print("玩家生成在位置: ", spawn_point.global_position)
+			print("Player spawned at position: ", spawn_point.global_position)
 		else:
 			character_instance.global_position = Vector2(100, 300)
-			print("使用默认生成位置")
+			print("Using default spawn position")
 		
 		# 确保退出UI模式
 		if character_instance.has_method("exit_ui_mode"):
 			character_instance.exit_ui_mode()
 		
-		print("玩家生成成功: ", character_instance.name)
+		print("Player spawned successfully: ", character_instance.name)
 	else:
-		print("错误：角色场景不存在 - ", GlobalState.selected_character_scene_path)
+		print("Error: Character scene does not exist - ", GlobalState.selected_character_scene_path)
 		_create_fallback_player()
 
 func _create_fallback_player():
@@ -61,4 +61,4 @@ func _create_fallback_player():
 		player.global_position = Vector2(100, 300)
 	
 	add_child(player)
-	print("已创建备用玩家")
+	print("Fallback player created")

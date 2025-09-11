@@ -3,13 +3,13 @@ extends Node2D
 @onready var spawn_point = $PlayerSpawnPoint  # 直接获取，不需要路径
 
 func _ready():
-	print("=== 关卡初始化 ===")
-	print("生成点存在: ", spawn_point != null)
+	print("=== Level Initialisation ===")
+	print("Spawn point exists: ", spawn_point != null)
 	if spawn_point:
-		print("生成点位置: ", spawn_point.global_position)
+		print("Spawn point exists: ", spawn_point.global_position)
 	else:
-		print("错误：找不到PlayerSpawnPoint节点！")
-		print("场景中的节点: ")
+		print("Error: PlayerSpawnPoint node not found!")
+		print("Nodes in scene: ")
 		for child in get_children():
 			print(" - ", child.name, " (", child.get_class(), ")")
 	
@@ -19,14 +19,14 @@ func _ready():
 func _spawn_player():
 	# 检查生成点
 	if not spawn_point:
-		print("严重错误：没有生成点，无法生成玩家")
+		print("Critical error: No spawn point found, unable to spawn player")
 		# 尝试查找其他可能的生成点
 		_find_alternative_spawn_point()
 		return
 	
 	# 检查角色路径
 	if GlobalState.selected_character_scene_path.is_empty():
-		print("没有选择角色，使用默认")
+		print("No character selected, using default")
 		GlobalState.selected_character_scene_path = "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"
 	
 	# 加载玩家场景
@@ -37,15 +37,15 @@ func _spawn_player():
 		
 		# 设置生成位置
 		character_instance.global_position = spawn_point.global_position
-		print("玩家生成在: ", spawn_point.global_position)
+		print("Player spawned at: ", spawn_point.global_position)
 		
 		# 退出UI模式
 		if character_instance.has_method("exit_ui_mode"):
 			character_instance.exit_ui_mode()
 		
-		print("玩家生成成功: ", character_instance.name)
+		print("Player spawned successfully:: ", character_instance.name)
 	else:
-		print("错误：角色场景不存在")
+		print("Error: Character scene does not exist")
 		_create_fallback_player()
 
 func _find_alternative_spawn_point():
@@ -60,10 +60,10 @@ func _find_alternative_spawn_point():
 	
 	if possible_spawn_points.size() > 0:
 		spawn_point = possible_spawn_points[0]
-		print("找到备用生成点: ", spawn_point.name)
+		print("Found fallback spawn point: ", spawn_point.name)
 		_spawn_player()
 	else:
-		print("找不到任何生成点，使用默认位置")
+		print("No spawn points found, using default position")
 		_create_fallback_player()
 
 func _create_fallback_player():
@@ -86,6 +86,6 @@ func _create_fallback_player():
 	
 	# 设置位置（场景中心或默认位置）
 	player.global_position = Vector2(500, 300)
-	print("使用默认生成位置: ", player.global_position)
+	print("Using default spawn position: ", player.global_position)
 	
 	add_child(player)

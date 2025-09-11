@@ -9,7 +9,7 @@ func _ready():
 func _spawn_player():
 	# 检查是否有选择的角色
 	if GlobalData.selected_character_scene_path.is_empty():
-		print("没有选择角色，使用默认Flyman")
+		print("No character selected, using default Flyman")
 		GlobalData.selected_character_scene_path = "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"
 		GlobalData.selected_character = "Flyman"
 	
@@ -31,7 +31,7 @@ func _spawn_player():
 		if player_instance.has_method("exit_ui_mode"):
 			player_instance.exit_ui_mode()
 	else:
-		print("错误：角色场景不存在")
+		print("Error: Character scene does not exist’")
 		# 创建备用玩家
 		_create_fallback_player()
 
