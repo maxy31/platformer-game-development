@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d3d4k0uof3i7f"]
+[gd_scene load_steps=19 format=3 uid="uid://d3d4k0uof3i7f"]
 
 [ext_resource type="Script" uid="uid://83s2yvkj8ms1" path="res://Assets/Scenes/Areas/level_3.gd" id="1_0nv3x"]
 [ext_resource type="Texture2D" uid="uid://cfbirq5cie5vp" path="res://Assets/Sprites/Background/color3.jpg" id="1_1ua0q"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://5cxvgwm17gyn" path="res://Assets/Scenes/DialogueUI/FlowmasterDialogueUI.tscn" id="11_qxl72"]
 [ext_resource type="PackedScene" uid="uid://b6d3sy0xa8uoh" path="res://Assets/Scenes/Enemy/Skeleton_Enemy.tscn" id="12_qxl72"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="13_wm4iq"]
+[ext_resource type="PackedScene" uid="uid://br7y3p8qa04wt" path="res://Assets/Scenes/Enemy/Mushroom.tscn" id="14_5b2dy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08m3y"]
 texture = ExtResource("2_0nv3x")
@@ -159,7 +160,8 @@ distance = -9.0
 [node name="level3" type="Node2D"]
 script = ExtResource("1_0nv3x")
 
-[node name="SpawnPoint" type="CharacterBody2D" parent="."]
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(30, 173)
 
 [node name="GoalFlag" parent="." node_paths=PackedStringArray("dialogue_ui", "victory_ui") instance=ExtResource("4_qxl72")]
 position = Vector2(1201, 193)
@@ -248,3 +250,8 @@ position = Vector2(-39, 0)
 
 [node name="Point2" type="Marker2D" parent="EnemyCrab2/PatrolPoints"]
 position = Vector2(35, 0)
+
+[node name="Mushroom" parent="." instance=ExtResource("14_5b2dy")]
+position = Vector2(886, 196)
+collision_layer = 2
+collision_mask = 73

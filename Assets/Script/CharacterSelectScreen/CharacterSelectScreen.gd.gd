@@ -152,8 +152,9 @@ func _on_select_button_pressed() -> void:
 	var selected_key = character_keys[current_character_index]
 	var selected_character_data = CHARACTERS_DATA[selected_key]
 
-	# Store the chosen scene path in a global state manager (e.g., an Autoload singleton)
-	GlobalState.selected_character_scene_path = selected_character_data["scene_path"]
+	# 存储到 GlobalData 而不是 GlobalState
+	GlobalData.selected_character = selected_character_data["name"]
+	GlobalData.selected_character_scene_path = selected_character_data["scene_path"]
 
 	# Go to the next screen (e.g., level select or the first level)
 	print("Selected character: ", selected_character_data["name"])

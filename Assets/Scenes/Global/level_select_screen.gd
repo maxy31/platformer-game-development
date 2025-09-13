@@ -6,20 +6,20 @@ extends Control
 @onready var level4_button = $Level4
 
 func _ready():
-	var save_path = "user://save_game.cfg"
-	print(save_path)
-	var config = ConfigFile.new()
-	var unlocked_level = 1  # default to level 1 only
-
-	if config.load(save_path) == OK:
-		if config.has_section_key("Progress", "unlocked_level"):
-			unlocked_level = config.get_value("Progress", "unlocked_level", 1)
-
-	# Enable buttons accordingly
+	# 使用 GlobalData 加载游戏进度
+	GlobalData.load_game()
+	
+	var unlocked_level = GlobalData.unlocked_level
+	
+	# 启用按钮
 	level1_button.disabled = false
 	level2_button.disabled = unlocked_level < 2
 	level3_button.disabled = unlocked_level < 3
 	level4_button.disabled = unlocked_level < 4
+	
+	# 显示选择的角色
+	print("当前选择角色: ", GlobalData.selected_character)
+	print("角色场景路径: ", GlobalData.selected_character_scene_path)
 
 func _on_level_1_pressed() -> void:
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level1.tscn")
@@ -30,8 +30,8 @@ func _on_level_2_pressed() -> void:
 func _on_level_3_pressed() -> void:
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level3.tscn")
 
-func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
-
 func _on_level_4_pressed() -> void:
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level4.tscn")
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
