@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name DestroyerController
+signal player_died
 
 @export var speed := 5.0
 @export var jump_power := 8.0
@@ -207,6 +208,7 @@ func heal(amount: int = 1):
 
 func die():
 	print("☠ Player Died")
+	emit_signal("player_died")
 	if animator and animator.has_method("play_die_animation"):
 		animator.play_die_animation()
 		audio_controller.play_game_over_sound()

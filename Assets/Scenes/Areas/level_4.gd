@@ -19,26 +19,34 @@ func _ready():
 	_print_scene_info()
 
 func _spawn_player():
-	# 检查是否有选择的角色
 	if GlobalData.selected_character_scene_path.is_empty():
-		print("Warning: No character selected, using default Flyman")
+		print("No character selected, using default Flyman")
 		GlobalData.selected_character_scene_path = "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"
 		GlobalData.selected_character = "Flyman"
 	
-	# 加载玩家场景
-	if ResourceLoader.exists(GlobalData.selected_character_scene_path):
-		var character_scene = load(GlobalData.selected_character_scene_path)
+	var character_scene = load(GlobalData.selected_character_scene_path)
+	if character_scene:
 		var player_instance = character_scene.instantiate()
+
+		# Set spawn position
+		if spawn_point:
+			player_instance.position = spawn_point.position
+		else:
+			player_instance.position = Vector2(100, 300)
 		
-		# 设置生成位置
-		player_instance.position = spawn_point.position
 		add_child(player_instance)
-		
-		print("✅ Player spawned successfully: ", GlobalData.selected_character)
-		print("Player position: ", player_instance.position)
+
+		# ✅ Connect player death → GameOverUI
+# ✅ Connect player death → GameOverUI
+		if player_instance.has_signal("player_died"):
+			var ui = $GameOverUI   # path to your UI node
+			print("📡 Connecting player_died to GameOverUI:", ui)
+			player_instance.player_died.connect(ui.show_game_over)
+
+		if player_instance.has_method("exit_ui_mode"):
+			player_instance.exit_ui_mode()
 	else:
-		print("❌ Error: Character scene not found - ", GlobalData.selected_character_scene_path)
-		# 创建简单备用玩家
+		print("Error: Character scene does not exist")
 		_create_fallback_player()
 
 func _create_fallback_player():

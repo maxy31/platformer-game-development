@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name FlowmasterController
+signal player_died
 
 @export var speed := 9.0
 @export var jump_power := 9.0
@@ -190,8 +191,13 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
+	process_mode = Node.PROCESS_MODE_DISABLED
+	hide() 
+	emit_signal("player_died")
 	audio_controller.play_game_over_sound()
-	queue_free()
+
+	# By removing queue_free(), the node stays in the scene,
+	# allowing the sound to play out completely.
 
 #Boost Jump Cheese
 func eat_food():

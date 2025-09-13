@@ -10,33 +10,34 @@ func _ready():
 	_spawn_player()
 
 func _spawn_player():
-	# 检查是否有选择的角色
-	if GlobalState.selected_character_scene_path.is_empty():
-		print("No character selected, using default’")
-		# 可以在这里加载默认角色
-		GlobalState.selected_character_scene_path = "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"
+	if GlobalData.selected_character_scene_path.is_empty():
+		print("No character selected, using default Flyman")
+		GlobalData.selected_character_scene_path = "res://Assets/Scenes/PlayerController/FlymanPlayer.tscn"
+		GlobalData.selected_character = "Flyman"
 	
-	# 加载玩家场景
-	var character_scene = load(GlobalState.selected_character_scene_path)
+	var character_scene = load(GlobalData.selected_character_scene_path)
 	if character_scene:
-		var character_instance = character_scene.instantiate()
-		add_child(character_instance)
-		
-		# 设置生成位置
+		var player_instance = character_scene.instantiate()
+
+		# Set spawn position
 		if spawn_point:
-			character_instance.global_position = spawn_point.global_position
-			print("Player spawned at position: ", spawn_point.global_position)
+			player_instance.position = spawn_point.position
 		else:
-			character_instance.global_position = Vector2(100, 300)
-			print("Using default spawn position")
+			player_instance.position = Vector2(100, 300)
 		
-		# 确保退出UI模式
-		if character_instance.has_method("exit_ui_mode"):
-			character_instance.exit_ui_mode()
-		
-		print("Player spawned successfully: ", character_instance.name)
+		add_child(player_instance)
+
+		# ✅ Connect player death → GameOverUI
+# ✅ Connect player death → GameOverUI
+		if player_instance.has_signal("player_died"):
+			var ui = $GameOverUI   # path to your UI node
+			print("📡 Connecting player_died to GameOverUI:", ui)
+			player_instance.player_died.connect(ui.show_game_over)
+
+		if player_instance.has_method("exit_ui_mode"):
+			player_instance.exit_ui_mode()
 	else:
-		print("Error: Character scene does not exist - ", GlobalState.selected_character_scene_path)
+		print("Error: Character scene does not exist")
 		_create_fallback_player()
 
 func _create_fallback_player():

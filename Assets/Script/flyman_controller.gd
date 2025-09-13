@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name FlymanController
+signal player_died 
 
 @export var speed := 5.0
 @export var jump_power := 8.0
@@ -223,11 +224,17 @@ func heal(amount: int = 1):
 
 func die():
 	print("☠ Player Died")
+	
+	# Disable all processing and physics for this node.
+	# It will stop moving, running code, and colliding.
+	process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Hide the player's sprite.
+	hide() 
+
+	# Now, safely do the death actions.
+	emit_signal("player_died")
 	audio_controller.play_game_over_sound()
-	if animator and animator.has_method("play_die_animation"):
-		animator.play_die_animation()
-	else:
-		queue_free()
 
 # =========================
 #   接触持续伤害
