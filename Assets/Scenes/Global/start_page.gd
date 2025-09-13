@@ -4,6 +4,7 @@ func _ready():
 	# 游戏启动时加载进度
 	GlobalData.load_game()
 	print("游戏已启动，当前解锁关卡: ", GlobalData.unlocked_level)
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Main_Menu.wav")
 
 func _on_start_button_pressed() -> void:
 	# 重置角色选择
@@ -24,7 +25,3 @@ func _on_quit_button_pressed() -> void:
 			print("存档已删除")
 	
 	get_tree().quit()
-
-func _ready():
-	# Make sure the menu music is playing when this scene loads.
-	MusicPlayer.change_music("res://Assets/Audio/BGM/Main_Menu.wav")
