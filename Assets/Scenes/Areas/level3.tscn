@@ -205,7 +205,6 @@ shape = SubResource("RectangleShape2D_08m3y")
 [node name="Node2D" type="Node2D" parent="VictoryUI"]
 
 [node name="GameOverUI" parent="." instance=ExtResource("8_dojng")]
-visible = false
 
 [node name="KillZone" parent="." instance=ExtResource("5_wm4iq")]
 

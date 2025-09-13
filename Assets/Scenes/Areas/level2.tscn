@@ -124,7 +124,6 @@ victory_ui = NodePath("../VictoryUI/Level2VictoryUI")
 position = Vector2(443, 247)
 
 [node name="GameOverUI" parent="." instance=ExtResource("11_enau4")]
-visible = false
 
 [node name="RacerNPC" parent="." instance=ExtResource("12_761qc")]
 position = Vector2(1209, 218)

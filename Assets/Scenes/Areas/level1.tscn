@@ -308,7 +308,6 @@ position = Vector2(-39, 0)
 position = Vector2(35, 0)
 
 [node name="GameOverUI" parent="." instance=ExtResource("12_gs0c5")]
-visible = false
 
 [node name="Enemies" type="Node2D" parent="."]
 

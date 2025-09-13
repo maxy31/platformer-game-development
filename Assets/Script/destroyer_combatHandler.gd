@@ -2,6 +2,7 @@ extends Node
 class_name DestroyerAttackAreaMap
 
 @export var attack_area: Area2D
+@export var player: DestroyerController
 
 func do_attack_hit(damage: int):
 	if not attack_area:
@@ -17,6 +18,7 @@ func do_attack_hit(damage: int):
 	for body in bodies:
 		if body.is_in_group("Enemy"):
 			if body.has_method("take_damage"):
+				player.play_weapon_hit_sound()
 				print("💥 对敌人造成伤害: ", damage)
 				body.take_damage(damage)
 			else:

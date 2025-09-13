@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalState="*res://Assets/Script/Global/global_state.gd"
+MusicPlayer="*res://Assets/Scenes/Audio/music_player.tscn"
 
 [display]
 

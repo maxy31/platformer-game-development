@@ -4,6 +4,9 @@ extends Node2D
 
 func _ready():
 	var character_path = GlobalState.selected_character_scene_path
+	
+	#Code for lvl 3 BGM
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Level_3.ogg")
 
 	if character_path == "":
 		print("No character selected! Using default.")

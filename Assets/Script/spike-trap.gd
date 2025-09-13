@@ -12,6 +12,6 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is RacerController or body.is_in_group("Player"):
+	if body.is_in_group("Player"):
 		print("Contacted with spike trap")
 		body.take_damage(damage_to_player, global_position)

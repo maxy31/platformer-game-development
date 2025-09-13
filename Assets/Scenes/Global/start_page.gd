@@ -15,3 +15,7 @@ func _on_quit_button_pressed() -> void:
 			print("Save data deleted.")
 			
 	get_tree().quit()
+
+func _ready():
+	# Make sure the menu music is playing when this scene loads.
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Main_Menu.wav")
