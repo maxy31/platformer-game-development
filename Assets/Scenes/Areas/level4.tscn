@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_igkw5"]
 [ext_resource type="PackedScene" uid="uid://c12euual2tjn2" path="res://Assets/Scenes/DialogueUI/VictoryDialogueUI.tscn" id="9_qkauv"]
 [ext_resource type="PackedScene" uid="uid://d3mm0obwvwwtg" path="res://Assets/Scenes/Enemy/flying_demon.tscn" id="10_scr3p"]
-[ext_resource type="PackedScene" uid="uid://br7y3p8qa04wt" path="res://Assets/Scenes/Enemy/Mushroom.tscn" id="11_6qsyh"]
+[ext_resource type="PackedScene" path="res://Assets/Scenes/Enemy/Mushroom.tscn" id="11_6qsyh"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="12_ogk4k"]
 [ext_resource type="PackedScene" uid="uid://b6d3sy0xa8uoh" path="res://Assets/Scenes/Enemy/Skeleton_Enemy.tscn" id="13_oxiw7"]
 

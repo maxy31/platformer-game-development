@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://5cxvgwm17gyn" path="res://Assets/Scenes/DialogueUI/FlowmasterDialogueUI.tscn" id="11_qxl72"]
 [ext_resource type="PackedScene" uid="uid://b6d3sy0xa8uoh" path="res://Assets/Scenes/Enemy/Skeleton_Enemy.tscn" id="12_qxl72"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="13_wm4iq"]
-[ext_resource type="PackedScene" uid="uid://br7y3p8qa04wt" path="res://Assets/Scenes/Enemy/Mushroom.tscn" id="14_5b2dy"]
+[ext_resource type="PackedScene" path="res://Assets/Scenes/Enemy/Mushroom.tscn" id="14_5b2dy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08m3y"]
 texture = ExtResource("2_0nv3x")
