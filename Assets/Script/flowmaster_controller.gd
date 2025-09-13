@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name FlowmasterController
+signal player_died
 
 @export var speed := 9.0
 @export var jump_power := 9.0
@@ -182,6 +183,7 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
+	emit_signal("player_died")
 	queue_free()
 
 #Boost Jump Cheese

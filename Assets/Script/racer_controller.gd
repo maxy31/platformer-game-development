@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name RacerController
+signal player_died 
 
 @export var speed := 10.0
 @export var jump_power := 8.0
@@ -197,6 +198,7 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
+	emit_signal("player_died")
 	var ui = get_tree().current_scene.get_node("GameOverUI")
 	if ui:
 		ui.show_game_over()
