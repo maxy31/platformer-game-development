@@ -106,7 +106,7 @@ func _physics_process(delta: float) -> void:
 
 # 跳跃：地面受击可立刻跳；空中受击要等动画结束
 	if Input.is_action_just_pressed("jump"):
-		if (not is_hurt) or _allow_jump_while_hurt_this_time:
+		if is_on_floor() and ((not is_hurt) or _allow_jump_while_hurt_this_time):
 			audio_controller.play_jump_sound()
 		# 检查是否处于跳跃增强状态
 			if is_boosted:

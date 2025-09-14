@@ -9,6 +9,7 @@ extends Area2D
 @export var health: int = 4  # 蝙蝠的血量
 
 @onready var anim_s: AnimatedSprite2D = $AnimatedSprite2D
+#@onready var audio_controller = $EnemyAudio
 
 var players: Array = []  # 存储检测到的所有玩家
 var stay_timer: float = 0.0
@@ -17,6 +18,7 @@ var is_chasing: bool = false # 用于追踪蝙蝠是否正在追逐
 
 func _ready() -> void:
 	add_to_group("Enemy")
+	#audio_controller.start_bat_wings()
 
 func _process(delta: float) -> void:
 	var was_chasing = is_chasing # 保存上一帧的追逐状态

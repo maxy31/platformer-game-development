@@ -1,4 +1,5 @@
 extends Control
+@onready var audio_controller = $MiscAudio
 
 func _ready():
 	# 游戏启动时加载进度
@@ -7,12 +8,18 @@ func _ready():
 	MusicPlayer.change_music("res://Assets/Audio/BGM/Main_Menu.wav")
 
 func _on_start_button_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	# 重置角色选择
 	GlobalData.selected_character = ""
 	GlobalData.selected_character_scene_path = ""
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/CharacterSelectScreen.tscn")
 
 func _on_quit_button_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	# 退出前保存游戏
 	GlobalData.save_game()
 	

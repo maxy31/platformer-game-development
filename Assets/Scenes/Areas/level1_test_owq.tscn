@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://clikeh86gs6si"]
+[gd_scene load_steps=33 format=3 uid="uid://clikeh86gs6si"]
 
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_m00ke"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_5iect"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="9_pci1o"]
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="10_ibvc3"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="11_0uojb"]
-[ext_resource type="PackedScene" uid="uid://bnbxm48yshkrl" path="res://Assets/Scenes/Trap/walkthrough_spike.tscn" id="11_o73iu"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="12_nkrhc"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="13_vx4v7"]
 [ext_resource type="PackedScene" uid="uid://bur1j3skw4rmc" path="res://Assets/Scenes/Trap/Spike-trap.tscn" id="14_5iect"]
@@ -457,16 +456,13 @@ position = Vector2(35, 0)
 visible = false
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("13_vx4v7")]
-
-[node name="Spike" parent="." instance=ExtResource("14_5iect")]
-position = Vector2(112, 264)
+visible = false
 
 [node name="FallingSpikes" parent="." instance=ExtResource("15_x1ife")]
 position = Vector2(312, 134)
 speed = 200.0
 
-[node name="WalkthroughSpike" parent="." instance=ExtResource("11_o73iu")]
-position = Vector2(55, 255)
+[node name="Spike" parent="." instance=ExtResource("14_5iect")]
+position = Vector2(57, 259)

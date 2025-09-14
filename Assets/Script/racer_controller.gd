@@ -208,11 +208,11 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
-	process_mode = Node.PROCESS_MODE_DISABLED
-	hide() 
-	emit_signal("player_died")
+
 	audio_controller.play_game_over_sound()
-	
+
+	emit_signal("player_died")
+
 	var ui = get_tree().current_scene.get_node("GameOverUI")
 	if ui:
 		ui.show_game_over()

@@ -6,3 +6,4 @@
 script = ExtResource("1_xjgp2")
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://drrdef8w16ueu"]
+
+[ext_resource type="Script" uid="uid://dwxv37324q1q0" path="res://Assets/Script/Audio/misc_audio.gd" id="1_8eid3"]
+[ext_resource type="AudioStream" uid="uid://degqs3mtla1s2" path="res://Assets/Audio/Misc/Wood_Creak_1.mp3" id="2_lj3jo"]
+[ext_resource type="AudioStream" uid="uid://n71vvu160mei" path="res://Assets/Audio/Misc/click-buttons-ui-menu-sounds-effects-button-7-203601.mp3" id="3_k2cjs"]
+[ext_resource type="AudioStream" uid="uid://bpcedraopv74v" path="res://Assets/Audio/Misc/Wood_Creak_2.mp3" id="4_k2cjs"]
+
+[node name="MiscAudio" type="Node"]
+script = ExtResource("1_8eid3")
+
+[node name="Falling_Arrow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_lj3jo")
+
+[node name="Button_Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_k2cjs")
+volume_db = 5.0
+
+[node name="Falling_Arrow2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_k2cjs")

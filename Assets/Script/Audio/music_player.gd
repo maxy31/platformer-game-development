@@ -11,10 +11,8 @@ func _ready() -> void:
 	bgm_player.finished.connect(bgm_player.play)
 
 func change_music(new_music_path: String) -> void:
-	# --- THIS IS THE NEW, SMARTER LOGIC ---
-	# If the requested music is already playing, do nothing.
 	if new_music_path == current_track_path:
-		return # Exit the function early
+		return
 
 	# If it's a new track, load and play it.
 	bgm_player.stream = load(new_music_path)

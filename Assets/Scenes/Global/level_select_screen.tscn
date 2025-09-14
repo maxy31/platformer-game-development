@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpw1pgudqn5ii"]
+[gd_scene load_steps=6 format=3 uid="uid://cpw1pgudqn5ii"]
 
 [ext_resource type="Script" uid="uid://wjw5omqj1iaw" path="res://Assets/Scenes/Global/level_select_screen.gd" id="1_gmv5r"]
 [ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="1_qnx68"]
 [ext_resource type="FontFile" uid="uid://bi4dnmwfja8if" path="res://Assets/Fonts/antiquity-print.ttf" id="2_gmv5r"]
+[ext_resource type="PackedScene" uid="uid://drrdef8w16ueu" path="res://Assets/Scenes/Audio/Misc_Audio.tscn" id="4_cmauh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmv5r"]
 bg_color = Color(0.902628, 0.126628, 0.151187, 1)
@@ -81,6 +82,8 @@ offset_right = 534.0
 offset_bottom = 290.0
 theme_override_fonts/font = ExtResource("2_gmv5r")
 text = "Level4"
+
+[node name="MiscAudio" parent="." instance=ExtResource("4_cmauh")]
 
 [connection signal="pressed" from="Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="Level2" to="." method="_on_level_2_pressed"]
