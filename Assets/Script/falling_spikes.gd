@@ -2,9 +2,16 @@ extends Node2D
 
 @export var speed = 160.0
 @export var damage_to_player : int = 1
+
+@onready var wood_creak_1: AudioStreamPlayer2D = $Wood_Creak_1
+@onready var wood_creak_2: AudioStreamPlayer2D = $Wood_Creak_2
 var current_speed = 0.0
 
 # Displaying layer issue
+
+func _ready() -> void:
+	wood_creak_1.play()
+	wood_creak_2.play()
 
 func _physics_process(delta: float) -> void:
 	position.y += current_speed * delta;

@@ -23,6 +23,8 @@ signal player_died
 # Attack buffer Mode
 @export var attack_buffer_on_hurt: bool = true
 
+@onready var audio_controller = $CharacterAudio
+
 var is_in_ui_mode: bool = false
 
 var current_health : int
@@ -81,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		if regen_timer >= regen_interval:
 			regen_timer = 0.0
 			heal(1)
+			audio_controller.play_health_regen_sound()
 
 	# 接触持续伤害
 	_process_contact_damage(delta)
@@ -91,6 +94,7 @@ func _physics_process(delta: float) -> void:
 
 # 跳跃：地面受击可立刻跳；空中受击要等动画结束
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		audio_controller.play_jump_sound()
 		if (not is_hurt) or _allow_jump_while_hurt_this_time:
 		# 检查是否处于跳跃增强状态
 			if is_boosted:
@@ -113,8 +117,10 @@ func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		velocity.x = direction * speed * speed_multiplier
+		audio_controller.start_character_walk()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
+		audio_controller.stop_character_walk()
 
 	move_and_slide()
 
@@ -126,6 +132,7 @@ func start_attack():
 
 	if animator and animator.has_method("play_attack_animation"):
 		animator.play_attack_animation(current_attack_index)
+		audio_controller.play_weapon_swoosh_sound()
 
 	if combat_handler and combat_handler.has_method("do_attack_hit"):
 		combat_handler.do_attack_hit(attack_damage)
@@ -180,6 +187,7 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 	# 播放受击动画
 	if animator and animator.has_method("play_hurt_animation"):
 		animator.play_hurt_animation()
+		audio_controller.play_take_damage_sound()
 
 func on_hurt_animation_finished():
 	is_hurt = false
@@ -203,6 +211,7 @@ func die():
 	emit_signal("player_died")
 	if animator and animator.has_method("play_die_animation"):
 		animator.play_die_animation()
+		audio_controller.play_game_over_sound()
 	else:
 		queue_free()
 
@@ -268,6 +277,7 @@ func _stop_invincible_flicker() -> void:
 func eat_food():
 	is_boosted = true
 	$BoostTimer.start(1.5)
+	audio_controller.play_cheese_pickup_sound()
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
@@ -278,3 +288,9 @@ func enter_ui_mode():
 	velocity = Vector2.ZERO 
 	is_hurt = false
 	is_attacking = false
+
+func play_level_complete_sound():
+	audio_controller.play_level_complete_sound()
+
+func play_weapon_hit_sound():
+	audio_controller.play_weapon_hit_sound()

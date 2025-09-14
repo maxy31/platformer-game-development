@@ -45,6 +45,8 @@ var current_character_index: int = 0
 @onready var select_button: Button = $MarginContainer/VBoxContainer/SelectButton
 @onready var locked_label: Label = $MarginContainer/VBoxContainer/LockedLabel
 
+@onready var audio_controller = $MiscAudio
+
 
 func _ready() -> void:
 	# First, load any unlock progress from the save file.
@@ -130,6 +132,8 @@ func update_character_display() -> void:
 
 # Called when the "Next" button is pressed.
 func _on_next_button_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
 	current_character_index += 1
 	# Loop back to the start if we go past the end
 	if current_character_index >= character_keys.size():
@@ -139,6 +143,8 @@ func _on_next_button_pressed() -> void:
 
 # Called when the "Previous" button is pressed.
 func _on_previous_button_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
 	current_character_index -= 1
 	# Loop to the end if we go before the start
 	if current_character_index < 0:
@@ -148,6 +154,9 @@ func _on_previous_button_pressed() -> void:
 
 # Called when the "Select" button is pressed.
 func _on_select_button_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	# Get the selected character's data
 	var selected_key = character_keys[current_character_index]
 	var selected_character_data = CHARACTERS_DATA[selected_key]
@@ -163,4 +172,7 @@ func _on_select_button_pressed() -> void:
 
 # Called when the "Back" button is pressed.
 func _on_back_button_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")

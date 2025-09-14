@@ -19,6 +19,8 @@ signal player_died
 @export var knockback_up := -30.0
 @export var invincible_duration := 0.1
 
+@onready var audio_controller = $CharacterAudio
+
 var is_in_ui_mode: bool = false
 
 var current_health : int
@@ -77,6 +79,8 @@ func _physics_process(delta: float) -> void:
 		if regen_timer >= regen_interval:
 			regen_timer = 0.0
 			heal(1)
+			
+			audio_controller.play_health_regen_sound()
 
 	# 如果受击中只处理物理，不响应其它输入
 	if is_hurt:
@@ -90,12 +94,14 @@ func _physics_process(delta: float) -> void:
 	# 跳跃
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or _allow_jump_while_hurt_this_time:
+			audio_controller.play_jump_sound()
 			if is_boosted:
 				velocity.y = boosted_jump_velocity
 			else:
 				velocity.y = jump_power * jump_multiplier
 		# ⚡ 一次机会用完后重置
 		_allow_jump_while_hurt_this_time = false
+		
 
 	# 攻击输入（缓冲）
 	if Input.is_action_just_pressed("attack"):
@@ -109,7 +115,8 @@ func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		velocity.x = direction * speed * speed_multiplier
-
+		audio_controller.start_racer_walk()
+			
 		move_timer += delta
 		if move_timer >= charge_attack_time:
 			if not charge_attack_ready:
@@ -117,6 +124,7 @@ func _physics_process(delta: float) -> void:
 				charge_attack_ready = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
+		audio_controller.stop_racer_walk()	
 		move_timer = 0.0
 		charge_attack_ready = false
 
@@ -133,6 +141,7 @@ func start_attack():
 
 	var t = get_tree().create_timer(0.5)
 	t.timeout.connect(Callable(self, "_force_end_attack"))
+	audio_controller.play_weapon_swoosh_sound()
 
 
 func _force_end_attack():
@@ -182,6 +191,7 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 
 	if animator and animator.has_method("play_hurt_animation"):
 		animator.play_hurt_animation()
+		audio_controller.play_take_damage_sound()
 
 
 func heal(amount: int = 1):
@@ -198,7 +208,11 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
+
+	audio_controller.play_game_over_sound()
+
 	emit_signal("player_died")
+
 	var ui = get_tree().current_scene.get_node("GameOverUI")
 	if ui:
 		ui.show_game_over()
@@ -212,6 +226,7 @@ func _on_body_attack_area_entered(body):
 		if body.has_method("take_damage"):
 			print("💥 冲锋攻击触发，对敌人造成 ", charge_attack_damage, " 点伤害")
 			body.take_damage(charge_attack_damage)
+			audio_controller.play_weapon_hit_sound()
 		else:
 			print("⚠ 敌人没有 take_damage 方法")
 
@@ -223,6 +238,7 @@ func _on_body_attack_area_entered(body):
 func eat_food():
 	is_boosted = true
 	$BoostTimer.start(1.5)
+	audio_controller.play_cheese_pickup_sound()
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
@@ -232,3 +248,17 @@ func enter_ui_mode():
 	velocity = Vector2.ZERO
 	is_hurt = false
 	is_attacking = false
+
+func play_level_complete_sound():
+	# --- ADD THIS DEBUGGING BLOCK ---
+	if is_instance_valid(audio_controller):
+		print("DEBUG (Player): 'play_level_complete_sound' called. The audio player IS valid. Playing sound.") #This line is shown
+		audio_controller.play_level_complete_sound()
+	else:
+		# If you see this message, your @onready var path is WRONG.
+		print("DEBUG (Player): FAILED! 'play_level_complete_sound' was called, but 'audio_level_completed' is NULL. Check the node path in the @onready var.")
+	# --------------------------------
+
+func play_weapon_hit_sound():
+	#audio_weapon_hit.play()
+	audio_controller.play_weapon_hit_sound()

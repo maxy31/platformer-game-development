@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfoo6vsdoeedu"]
+[gd_scene load_steps=19 format=3 uid="uid://cfoo6vsdoeedu"]
 
 [ext_resource type="Script" uid="uid://2eectg6ejnlt" path="res://Assets/Script/destroyer_controller.gd" id="1_lsrbb"]
 [ext_resource type="Texture2D" uid="uid://dp1ghuf3t8nt2" path="res://Assets/Sprites/Destroyer/DarkSamurai (64x64).png" id="2_601w7"]
 [ext_resource type="Script" uid="uid://blwj64fyycpaj" path="res://Assets/Script/destroyer_animator.gd" id="2_bcnlo"]
-[ext_resource type="Script" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
+[ext_resource type="Script" uid="uid://dfbq4anuyi33e" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_6hwdv"]
+[ext_resource type="PackedScene" uid="uid://i6rq20w4slip" path="res://Assets/Scenes/Audio/Character_Audio.tscn" id="6_g8vsq"]
 
 [sub_resource type="Animation" id="Animation_hfby3"]
 length = 0.001
@@ -241,11 +242,12 @@ scale = Vector2(0.5, 0.5)
 collision_layer = 64
 collision_mask = 2
 
-[node name="AttackAreaMap" type="CollisionShape2D" parent="DestroyerAnimator/AttackArea" node_paths=PackedStringArray("attack_area")]
+[node name="AttackAreaMap" type="CollisionShape2D" parent="DestroyerAnimator/AttackArea" node_paths=PackedStringArray("attack_area", "player")]
 position = Vector2(20, -12)
 shape = SubResource("RectangleShape2D_a8ve8")
 script = ExtResource("4_bcnlo")
 attack_area = NodePath("..")
+player = NodePath("../../..")
 
 [node name="DestroyerMoveArea" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -256,5 +258,7 @@ shape = SubResource("CapsuleShape2D_pptjt")
 [node name="HeartUi" type="CanvasLayer" parent="."]
 
 [node name="HeartBar" parent="HeartUi" instance=ExtResource("5_6hwdv")]
+
+[node name="CharacterAudio" parent="." instance=ExtResource("6_g8vsq")]
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3d4k0uof3i7f"]
+[gd_scene load_steps=28 format=3 uid="uid://d3d4k0uof3i7f"]
 
 [ext_resource type="Script" uid="uid://83s2yvkj8ms1" path="res://Assets/Scenes/Areas/level_3.gd" id="1_0nv3x"]
 [ext_resource type="Texture2D" uid="uid://cfbirq5cie5vp" path="res://Assets/Sprites/Background/color3.jpg" id="1_1ua0q"]
@@ -12,8 +12,17 @@
 [ext_resource type="PackedScene" uid="uid://olq2ydlj0s56" path="res://Assets/Scenes/NPC/FlowmasterNPC.tscn" id="10_pvqyf"]
 [ext_resource type="PackedScene" uid="uid://5cxvgwm17gyn" path="res://Assets/Scenes/DialogueUI/FlowmasterDialogueUI.tscn" id="11_qxl72"]
 [ext_resource type="PackedScene" uid="uid://b6d3sy0xa8uoh" path="res://Assets/Scenes/Enemy/Skeleton_Enemy.tscn" id="12_qxl72"]
+[ext_resource type="AudioStream" uid="uid://bmjlokkkid4ax" path="res://Assets/Audio/Enemy/Monster_Spotted.mp3" id="13_cm6xx"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="13_wm4iq"]
 [ext_resource type="PackedScene" uid="uid://br7y3p8qa04wt" path="res://Assets/Scenes/Enemy/Mushroom.tscn" id="14_5b2dy"]
+[ext_resource type="AudioStream" uid="uid://c5p1sbes7r6ef" path="res://Assets/Audio/Enemy/Monster_Walk_Growl.mp3" id="14_103ml"]
+[ext_resource type="AudioStream" uid="uid://cditidcp4t6o1" path="res://Assets/Audio/Enemy/Crab_Enemy_Walking.mp3" id="14_oh54e"]
+[ext_resource type="AudioStream" uid="uid://c1a5kbiohlnsc" path="res://Assets/Audio/Enemy/Crab_Enemy_Noise.mp3" id="15_8vj0t"]
+[ext_resource type="PackedScene" uid="uid://d12ws5yjabkmb" path="res://Assets/Scenes/Trap/FallingSpikes.tscn" id="15_dojng"]
+[ext_resource type="AudioStream" uid="uid://bguita05wxnia" path="res://Assets/Audio/Enemy/Skeleton_Axe_Swing.mp3" id="15_umttl"]
+[ext_resource type="PackedScene" uid="uid://bur1j3skw4rmc" path="res://Assets/Scenes/Trap/Spike-trap.tscn" id="16_6lw6o"]
+[ext_resource type="AudioStream" uid="uid://degqs3mtla1s2" path="res://Assets/Audio/Misc/Wood_Creak_1.mp3" id="16_xykxu"]
+[ext_resource type="AudioStream" uid="uid://bpcedraopv74v" path="res://Assets/Audio/Misc/Wood_Creak_2.mp3" id="17_ghlic"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08m3y"]
 texture = ExtResource("2_0nv3x")
@@ -207,7 +216,6 @@ shape = SubResource("RectangleShape2D_08m3y")
 [node name="Node2D" type="Node2D" parent="VictoryUI"]
 
 [node name="GameOverUI" parent="." instance=ExtResource("8_dojng")]
-visible = false
 
 [node name="KillZone" parent="." instance=ExtResource("5_wm4iq")]
 
@@ -223,6 +231,18 @@ position = Vector2(1182, 203)
 [node name="Skeleton" parent="." instance=ExtResource("12_qxl72")]
 position = Vector2(351, 319)
 
+[node name="Monster_Spotted" type="AudioStreamPlayer2D" parent="Skeleton"]
+stream = ExtResource("13_cm6xx")
+max_distance = 250.0
+
+[node name="Monster_Walk_Growl" type="AudioStreamPlayer2D" parent="Skeleton"]
+stream = ExtResource("14_103ml")
+max_distance = 250.0
+
+[node name="Skeleton_Axe_Swing" type="AudioStreamPlayer2D" parent="Skeleton"]
+stream = ExtResource("15_umttl")
+max_distance = 250.0
+
 [node name="EnemyCrab" parent="." node_paths=PackedStringArray("patrol_points") groups=["Enemy"] instance=ExtResource("13_wm4iq")]
 position = Vector2(497, 208)
 collision_layer = 2
@@ -236,6 +256,16 @@ position = Vector2(-39, 0)
 
 [node name="Point2" type="Marker2D" parent="EnemyCrab/PatrolPoints"]
 position = Vector2(35, 0)
+
+[node name="Crab_Enemy_Walking" type="AudioStreamPlayer2D" parent="EnemyCrab"]
+stream = ExtResource("14_oh54e")
+autoplay = true
+max_distance = 250.0
+
+[node name="Crab_Enemy_Noise" type="AudioStreamPlayer2D" parent="EnemyCrab"]
+stream = ExtResource("15_8vj0t")
+autoplay = true
+max_distance = 250.0
 
 [node name="EnemyCrab2" parent="." node_paths=PackedStringArray("patrol_points") groups=["Enemy"] instance=ExtResource("13_wm4iq")]
 position = Vector2(587, 208)
@@ -252,7 +282,80 @@ position = Vector2(-39, 0)
 [node name="Point2" type="Marker2D" parent="EnemyCrab2/PatrolPoints"]
 position = Vector2(35, 0)
 
+[node name="Crab_Enemy_Walking" type="AudioStreamPlayer2D" parent="EnemyCrab2"]
+stream = ExtResource("14_oh54e")
+autoplay = true
+max_distance = 250.0
+
+[node name="Crab_Enemy_Noise" type="AudioStreamPlayer2D" parent="EnemyCrab2"]
+stream = ExtResource("15_8vj0t")
+autoplay = true
+max_distance = 250.0
+
 [node name="Mushroom" parent="." instance=ExtResource("14_5b2dy")]
 position = Vector2(886, 196)
 collision_layer = 2
 collision_mask = 73
+
+[node name="Crab_Enemy_Noise" type="AudioStreamPlayer2D" parent="Mushroom"]
+position = Vector2(-299, 12)
+stream = ExtResource("15_8vj0t")
+autoplay = true
+max_distance = 250.0
+
+[node name="FallingSpikes" parent="." instance=ExtResource("15_dojng")]
+position = Vector2(860, 55)
+
+[node name="Wood_Creak_1" type="AudioStreamPlayer2D" parent="FallingSpikes"]
+stream = ExtResource("16_xykxu")
+autoplay = true
+max_distance = 300.0
+
+[node name="Wood_Creak_2" type="AudioStreamPlayer2D" parent="FallingSpikes"]
+stream = ExtResource("17_ghlic")
+max_distance = 300.0
+
+[node name="FallingSpikes2" parent="." instance=ExtResource("15_dojng")]
+position = Vector2(388, 221)
+
+[node name="Wood_Creak_1" type="AudioStreamPlayer2D" parent="FallingSpikes2"]
+stream = ExtResource("16_xykxu")
+autoplay = true
+max_distance = 300.0
+
+[node name="Wood_Creak_2" type="AudioStreamPlayer2D" parent="FallingSpikes2"]
+stream = ExtResource("17_ghlic")
+max_distance = 300.0
+
+[node name="FallingSpikes3" parent="." instance=ExtResource("15_dojng")]
+position = Vector2(112, 56)
+
+[node name="Wood_Creak_1" type="AudioStreamPlayer2D" parent="FallingSpikes3"]
+stream = ExtResource("16_xykxu")
+autoplay = true
+max_distance = 300.0
+
+[node name="Wood_Creak_2" type="AudioStreamPlayer2D" parent="FallingSpikes3"]
+stream = ExtResource("17_ghlic")
+max_distance = 300.0
+
+[node name="Spike" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(206, 196)
+
+[node name="Spike2" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(388, 194)
+
+[node name="Spike4" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(1038, 195)
+
+[node name="Spike6" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(963, 322)
+
+[node name="Spike7" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(900, 322)
+
+[node name="Spike5" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(1102, 196)
+
+[node name="Spike3" parent="." instance=ExtResource("16_6lw6o")]
+position = Vector2(308, 194)

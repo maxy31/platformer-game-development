@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://g1beklg07jvw"]
+[gd_scene load_steps=15 format=3 uid="uid://g1beklg07jvw"]
 
 [ext_resource type="Script" uid="uid://d2j0d1bh3jpuq" path="res://Assets/Scenes/Global/start_page.gd" id="1_uq3g0"]
 [ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="2_jm0dv"]
 [ext_resource type="FontFile" uid="uid://bi4dnmwfja8if" path="res://Assets/Fonts/antiquity-print.ttf" id="3_kh51p"]
+[ext_resource type="PackedScene" uid="uid://drrdef8w16ueu" path="res://Assets/Scenes/Audio/Misc_Audio.tscn" id="4_jm0dv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jshle"]
 
@@ -80,6 +81,8 @@ offset_bottom = 336.0
 theme_override_fonts/font = ExtResource("3_kh51p")
 text = "Quit
 "
+
+[node name="MiscAudio" parent="." instance=ExtResource("4_jm0dv")]
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -7,6 +7,9 @@ extends CharacterBody2D
 @onready var ray_cast_right = $RayCast/RayCastRight
 @onready var ray_cast_left = $RayCast/RayCastLeft
 @onready var attack_area = $AttackArea2D
+@onready var monster_spotted: AudioStreamPlayer2D = $Monster_Spotted
+@onready var monster_walk_growl: AudioStreamPlayer2D = $Monster_Walk_Growl
+@onready var nightborne_greatsword_swing: AudioStreamPlayer2D = $NighBorne_Greatsword_Swing
 @export var attack_cooldown : float = 1.5 # 攻击冷却时间（秒）
 
 var player = null  # Don't initialize here, will be set in _ready()
@@ -32,6 +35,8 @@ func _ready():
 	await get_tree().process_frame
 	player = get_tree().get_first_node_in_group("Player")
 	
+	monster_walk_growl.play()
+	
 	if player:
 		print("Player found for skeleton")
 	else:
@@ -40,6 +45,7 @@ func _ready():
 	# Initialize the state machine to start in Idle state
 	if finite_state_machine:
 		finite_state_machine.change_state("Idle State")
+		monster_walk_growl.play()
 	else:
 		push_error("FiniteStateMachine node not found!")
 	
@@ -83,6 +89,7 @@ func _physics_process(delta):
 	if is_player_in_range and finite_state_machine.check_if_can_move():
 		if abs(direction_to_player_x) > stop_distance:
 			velocity.x = direction.x * chase_speed
+			monster_spotted.play()
 		else:
 			velocity.x = 0
 	else:
@@ -112,6 +119,7 @@ func check_wall_collision():
 		sprite_2d.flip_h = false
 	
 func start_attack_animation():
+	nightborne_greatsword_swing.play()
 	if not can_attack:
 		return  # 冷却中，不能攻击
 	

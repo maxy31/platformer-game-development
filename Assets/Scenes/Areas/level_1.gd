@@ -3,6 +3,10 @@ extends Node2D
 @onready var spawn_point = $PlayerSpawnPoint  # 确保场景中有这个节点
 
 func _ready():
+	
+	#Code for lvl 1 BGM
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Level_1.mp3")
+	
 	# 生成玩家角色
 	_spawn_player()
 

@@ -3,6 +3,10 @@ extends Node2D
 @onready var spawn_point = $PlayerSpawnPoint  # 直接获取，不需要路径
 
 func _ready():
+
+	#Code for lvl 3 BGM
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Level_3.ogg")
+
 	print("=== Level Initialisation ===")
 	print("Spawn point exists: ", spawn_point != null)
 	if spawn_point:

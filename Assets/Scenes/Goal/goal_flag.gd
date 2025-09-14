@@ -7,6 +7,7 @@ signal level_completed
 @export var victory_ui: Control
 
 var triggered: bool = false
+var player_ref: Node2D = null
 
 func _ready() -> void:
 		# 检查在编辑器里是否已经正确设置了 dialogue_ui
@@ -48,6 +49,7 @@ func _process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and not triggered:
 		print("DEBUG 1: Player has entered the GoalFlag area.")
+		player_ref = body
 		triggered = true
 		print("DEBUG 2: The assigned dialogue_ui node is: ", dialogue_ui.name)
 		# 【核心改动】
@@ -72,6 +74,20 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func on_dialogue_finished() -> void:
 	print("💬 对话结束，触发胜利逻辑！")
+	# --- THIS IS THE PERFECT PLACE FOR THE SOUND ---
+	# First, check if we have a valid reference to the player
+	if is_instance_valid(player_ref):
+		# Now, call the function you created on the player's script
+		print("DEBUG (Goal): The 'player_ref' IS valid.")
+		if player_ref.has_method("play_level_complete_sound"):
+			print("DEBUG (Goal): SUCCESS! Calling the player's sound function now.") #Until this line is displayed
+			player_ref.play_level_complete_sound()
+		else:
+			print("DEBUG (Goal): FAILED! The player node is missing the function.")
+	else:
+		# If you see this, it means player_ref was never set in the first place.
+		print("DEBUG (Goal): FAILED! The 'player_ref' is EMPTY/NULL.")
+	# ---------------------------------------------
 	emit_signal("level_completed")
 	if victory_ui:
 		# --- 新增代码在这里 ---

@@ -417,8 +417,10 @@ position = Vector2(1062, 132)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" groups=["Player"] instance=ExtResource("10_ibvc3")]
-offset_right = 88.0
-offset_bottom = 5.0
+offset_left = 37.0
+offset_top = 16.0
+offset_right = 125.0
+offset_bottom = 21.0
 
 [node name="EnemyCrab" parent="." node_paths=PackedStringArray("patrol_points") groups=["Enemy"] instance=ExtResource("11_0uojb")]
 position = Vector2(582, 273)
@@ -454,13 +456,13 @@ position = Vector2(35, 0)
 visible = false
 
 [node name="VictoryUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="VictoryUI" parent="VictoryUI" instance=ExtResource("13_vx4v7")]
-
-[node name="Spike" parent="." instance=ExtResource("14_5iect")]
-position = Vector2(60, 264)
+visible = false
 
 [node name="FallingSpikes" parent="." instance=ExtResource("15_x1ife")]
 position = Vector2(312, 134)
 speed = 200.0
+
+[node name="Spike" parent="." instance=ExtResource("14_5iect")]
+position = Vector2(57, 259)

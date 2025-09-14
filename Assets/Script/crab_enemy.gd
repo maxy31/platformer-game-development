@@ -9,6 +9,9 @@ extends CharacterBody2D
 @onready var timer = $Timer
 @onready var damage_area = $DamageArea  # 假设Area2D节点名为DamageArea
 
+@onready var crab_enemy_noise: AudioStreamPlayer2D = $Crab_Enemy_Noise
+@onready var crab_enemy_walking: AudioStreamPlayer2D = $Crab_Enemy_Walking
+
 const GRAVITY = 1000
 
 enum State {Idle, Walk}
@@ -43,8 +46,11 @@ func _ready():
 	
 func _physics_process(delta : float):
 	enemy_gravity(delta)
-	enemy_idle(delta)
-	enemy_walk(delta)
+	match current_state:
+		State.Idle:
+			enemy_idle(delta)
+		State.Walk:
+			enemy_walk(delta)
 	
 	move_and_slide()
 	
@@ -70,11 +76,28 @@ func enemy_gravity(delta : float):
 
 func enemy_idle(delta : float):
 	if !can_walk:
+		#audio_controller.stop_crab_walking() 
+		#audio_controller.start_crab_idle_noise()
+		
+		if crab_enemy_walking.is_playing():
+			crab_enemy_walking.stop()
+		
+		if not crab_enemy_noise.is_playing():
+			crab_enemy_noise.play()
+			
 		velocity.x = move_toward(velocity.x, 0, speed * delta)
 		current_state = State.Idle
 
 
 func enemy_walk(delta : float):
+	#audio_controller.stop_crab_idle_noise()
+	#audio_controller.start_crab_walking()
+	if crab_enemy_noise.is_playing():
+		crab_enemy_noise.stop()
+		
+		if not crab_enemy_walking.is_playing():
+			crab_enemy_walking.play()
+	
 	if !can_walk:
 		return
 	
@@ -96,7 +119,8 @@ func enemy_walk(delta : float):
 			
 		can_walk = false
 		timer.start()
-	
+		# Tell the enemy it's now idle
+		current_state = State.Idle
 	animated_sprite_2d.flip_h = direction.x > 0
 	
 
@@ -121,9 +145,10 @@ func check_player_collision():
 			
 # 新增：Area2D检测到玩家进入		
 func _on_damage_area_body_entered(body):
-	if body is RacerController or body.is_in_group("Player"):
+	if body.is_in_group("Player"):
 		print("Player entered crab damage area!")
 		body.take_damage(damage_to_player, global_position)
 
 func _on_timer_timeout() -> void:
 	can_walk = true
+	current_state = State.Walk

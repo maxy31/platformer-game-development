@@ -4,6 +4,10 @@ extends Node2D
 @onready var spawn_point = $PlayerSpawnPoint
 
 func _ready():
+	
+	#Code for lvl 4 BGM
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Level_4.ogg")
+
 	print("=== Level 4 Loaded ===")
 	print("Selected Character: ", GlobalData.selected_character)
 	print("Player will spawn at: ", spawn_point.position)

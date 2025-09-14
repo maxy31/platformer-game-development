@@ -11,6 +11,7 @@ var current_state: State = State.IDLE
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animation_player = $AnimationPlayer  # 用于攻击动画
 @onready var animated_sprite = $AnimatedSprite2D  # 用于其他状态动画
+@onready var crab_enemy_noise: AudioStreamPlayer2D = $Crab_Enemy_Noise
 
 var max_health: int = 3
 var current_health: int = max_health
@@ -36,6 +37,7 @@ func change_state(new_state: State) -> void:
 	match current_state:
 		State.IDLE:
 			idle_state()
+			crab_enemy_noise.play()
 		State.ATTACK:
 			attack_state()
 		State.TAKE_HIT:

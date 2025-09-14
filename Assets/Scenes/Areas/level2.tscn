@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bwxwsb3nj1tkc"]
+[gd_scene load_steps=29 format=3 uid="uid://bwxwsb3nj1tkc"]
 
 [ext_resource type="Texture2D" uid="uid://btia7fwgn5p68" path="res://Assets/Sprites/Background/color4.jpg" id="1_jnb58"]
 [ext_resource type="Script" uid="uid://denhsfxx1w806" path="res://Assets/Scenes/Areas/level_2.gd" id="1_q3qk7"]
@@ -9,11 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="8_wfkt0"]
 [ext_resource type="PackedScene" uid="uid://bgygn05ht1qvo" path="res://Assets/Scenes/Victory/victory_ui.tscn" id="9_hieum"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="10_lrq8y"]
+[ext_resource type="PackedScene" uid="uid://bur1j3skw4rmc" path="res://Assets/Scenes/Trap/Spike-trap.tscn" id="11_ccyvr"]
 [ext_resource type="PackedScene" uid="uid://cmihho5qlp3qf" path="res://Assets/Scenes/GameOver/GameOver.tscn" id="11_enau4"]
 [ext_resource type="PackedScene" uid="uid://twrnnto8egv6" path="res://Assets/Scenes/NPC/RacerNPC.tscn" id="12_761qc"]
+[ext_resource type="PackedScene" uid="uid://d12ws5yjabkmb" path="res://Assets/Scenes/Trap/FallingSpikes.tscn" id="12_qphm6"]
+[ext_resource type="AudioStream" uid="uid://degqs3mtla1s2" path="res://Assets/Audio/Misc/Wood_Creak_1.mp3" id="13_lt3xt"]
 [ext_resource type="PackedScene" uid="uid://bqowr5tox3fvy" path="res://Assets/Scenes/Enemy/night_borne_Enemy.tscn" id="13_q3qk7"]
 [ext_resource type="PackedScene" uid="uid://bdrghr7y8y4sf" path="res://Assets/Scenes/DialogueUI/RacerDialogueUI.tscn" id="13_wggyh"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="14_q3qk7"]
+[ext_resource type="AudioStream" uid="uid://bpcedraopv74v" path="res://Assets/Audio/Misc/Wood_Creak_2.mp3" id="14_yxjy5"]
+[ext_resource type="AudioStream" uid="uid://cditidcp4t6o1" path="res://Assets/Audio/Enemy/Crab_Enemy_Walking.mp3" id="17_kmn6m"]
+[ext_resource type="AudioStream" uid="uid://c1a5kbiohlnsc" path="res://Assets/Audio/Enemy/Crab_Enemy_Noise.mp3" id="18_6ppnl"]
+[ext_resource type="AudioStream" uid="uid://bmjlokkkid4ax" path="res://Assets/Audio/Enemy/Monster_Spotted.mp3" id="18_govh5"]
+[ext_resource type="AudioStream" uid="uid://c5p1sbes7r6ef" path="res://Assets/Audio/Enemy/Monster_Walk_Growl.mp3" id="19_0y136"]
+[ext_resource type="AudioStream" uid="uid://co4pu2glm644u" path="res://Assets/Audio/Enemy/NighBorne_Greatsword_Swing.mp3" id="20_27px5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8a18q"]
 size = Vector2(25, 362)
@@ -107,7 +116,6 @@ shape = SubResource("WorldBoundaryShape2D_diw2v")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_h0ywj")]
-visible = false
 offset_left = 6.0
 offset_top = 26.0
 offset_right = 6.0
@@ -125,7 +133,6 @@ victory_ui = NodePath("../VictoryUI/Level2VictoryUI")
 position = Vector2(443, 247)
 
 [node name="GameOverUI" parent="." instance=ExtResource("11_enau4")]
-visible = false
 
 [node name="RacerNPC" parent="." instance=ExtResource("12_761qc")]
 position = Vector2(1209, 218)
@@ -136,6 +143,39 @@ position = Vector2(223, 313)
 [node name="Cheese3" parent="." instance=ExtResource("10_lrq8y")]
 position = Vector2(557, 199)
 
+[node name="Spike" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(143, 243)
+
+[node name="Spike2" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(416, 243)
+
+[node name="Spike3" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(527, 195)
+
+[node name="Spike4" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(638, 163)
+
+[node name="Spike5" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(907, 146)
+
+[node name="Spike6" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(955, 210)
+
+[node name="Spike7" parent="." instance=ExtResource("11_ccyvr")]
+position = Vector2(1134, 211)
+
+[node name="FallingSpikes" parent="." instance=ExtResource("12_qphm6")]
+position = Vector2(109, 273)
+
+[node name="Wood_Creak_1" type="AudioStreamPlayer2D" parent="FallingSpikes"]
+stream = ExtResource("13_lt3xt")
+autoplay = true
+max_distance = 300.0
+
+[node name="Wood_Creak_2" type="AudioStreamPlayer2D" parent="FallingSpikes"]
+stream = ExtResource("14_yxjy5")
+max_distance = 300.0
+
 [node name="VictoryUI" type="CanvasLayer" parent="."]
 
 [node name="Level2VictoryUI" parent="VictoryUI" instance=ExtResource("9_hieum")]
@@ -144,6 +184,21 @@ position = Vector2(557, 199)
 
 [node name="NightBorne" parent="." groups=["Enemy"] instance=ExtResource("13_q3qk7")]
 position = Vector2(152, 312)
+
+[node name="Monster_Spotted" type="AudioStreamPlayer2D" parent="NightBorne"]
+stream = ExtResource("18_govh5")
+autoplay = true
+max_distance = 250.0
+
+[node name="Monster_Walk_Growl" type="AudioStreamPlayer2D" parent="NightBorne"]
+stream = ExtResource("19_0y136")
+autoplay = true
+max_distance = 250.0
+
+[node name="NighBorne_Greatsword_Swing" type="AudioStreamPlayer2D" parent="NightBorne"]
+stream = ExtResource("20_27px5")
+autoplay = true
+max_distance = 250.0
 
 [node name="EnemyCrab" parent="." node_paths=PackedStringArray("patrol_points") groups=["Enemy"] instance=ExtResource("14_q3qk7")]
 position = Vector2(769, 177)
@@ -159,3 +214,15 @@ position = Vector2(-39, 0)
 
 [node name="Point2" type="Marker2D" parent="EnemyCrab/PatrolPoints"]
 position = Vector2(35, 0)
+
+[node name="Crab_Enemy_Walking" type="AudioStreamPlayer2D" parent="EnemyCrab"]
+position = Vector2(-83, 0)
+stream = ExtResource("17_kmn6m")
+autoplay = true
+max_distance = 250.0
+
+[node name="Crab_Enemy_Noise" type="AudioStreamPlayer2D" parent="EnemyCrab"]
+position = Vector2(-83, 0)
+stream = ExtResource("18_6ppnl")
+autoplay = true
+max_distance = 250.0

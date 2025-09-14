@@ -18,6 +18,8 @@ signal player_died
 @export var knockback_up := -10.0
 @export var invincible_duration := 0.5
 
+@onready var audio_controller = $CharacterAudio
+
 var is_in_ui_mode: bool = false
 
 var current_health : int
@@ -65,6 +67,7 @@ func _physics_process(delta: float) -> void:
 		regen_timer += delta
 		if regen_timer >= regen_interval:
 			regen_timer = 0.0
+			audio_controller.play_health_regen_sound()
 			heal(1)
 
 	# 如果受击中只处理物理，不响应其它输入
@@ -81,6 +84,7 @@ func _physics_process(delta: float) -> void:
 
 	if input_dir != 0:
 		velocity.x = input_dir * speed * speed_multiplier
+		audio_controller.start_character_walk()
 		# ✅ 根据方向翻转角色
 		if input_dir > 0:
 			animator.scale.x = 1
@@ -88,10 +92,12 @@ func _physics_process(delta: float) -> void:
 			animator.scale.x = -1
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
+		audio_controller.stop_character_walk()
 
 	# 跳跃
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or _allow_jump_while_hurt_this_time:
+			audio_controller.play_jump_sound()
 			if is_boosted:
 				velocity.y = boosted_jump_velocity
 			else:
@@ -112,6 +118,7 @@ func start_attack():
 	is_attacking = true
 	if animator and animator.has_method("play_attack_animation"):
 		animator.play_attack_animation()
+		audio_controller.play_magic_cast_sound()
 
 	if combat_handler and combat_handler.has_method("do_attack_hit"):
 		combat_handler.do_attack_hit(attack_damage)
@@ -167,6 +174,7 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 
 	if animator and animator.has_method("play_hurt_animation"):
 		animator.play_hurt_animation()
+		audio_controller.play_take_damage_sound()
 
 
 func heal(amount: int = 1):
@@ -183,13 +191,19 @@ func on_hurt_animation_finished():
 
 func die():
 	print("☠ Player Died")
+	process_mode = Node.PROCESS_MODE_DISABLED
+	hide() 
 	emit_signal("player_died")
-	queue_free()
+	audio_controller.play_game_over_sound()
+
+	# By removing queue_free(), the node stays in the scene,
+	# allowing the sound to play out completely.
 
 #Boost Jump Cheese
 func eat_food():
 	is_boosted = true
 	$BoostTimer.start(1.5)
+	audio_controller.play_cheese_pickup_sound()
 	
 func _on_boost_timer_timeout() -> void:
 	is_boosted = false
@@ -199,3 +213,12 @@ func enter_ui_mode():
 	velocity = Vector2.ZERO
 	is_hurt = false
 	is_attacking = false
+
+func play_level_complete_sound():
+	if is_instance_valid(audio_controller):
+		audio_controller.play_level_complete_sound()
+
+func play_magic_cast_sound():
+	# This function's only job is to tell its audio component what to do.
+	if is_instance_valid(audio_controller):
+		audio_controller.play_magic_cast_sound()

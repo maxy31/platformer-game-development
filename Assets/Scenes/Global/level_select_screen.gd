@@ -4,6 +4,7 @@ extends Control
 @onready var level2_button = $Level2
 @onready var level3_button = $Level3
 @onready var level4_button = $Level4
+@onready var audio_controller = $MiscAudio
 
 func _ready():
 	# 使用 GlobalData 加载游戏进度
@@ -22,16 +23,31 @@ func _ready():
 	print("角色场景路径: ", GlobalData.selected_character_scene_path)
 
 func _on_level_1_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level1.tscn")
 
 func _on_level_2_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level2.tscn")
 
 func _on_level_3_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level3.tscn")
 
 func _on_level_4_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level4.tscn")
 
 func _on_back_pressed() -> void:
+	print("Button sound invoked")
+	audio_controller.play_button_click()
+	await audio_controller.audio_button_click.finished
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")

@@ -3,6 +3,9 @@ extends Node2D
 @onready var spawn_point = $PlayerSpawnPoint  # 应该是 Marker2D 节点
 
 func _ready():
+	#Code for lvl 2 BGM
+	MusicPlayer.change_music("res://Assets/Audio/BGM/Level_2.ogg")
+
 	# 生成玩家角色
 	_spawn_player()
 
