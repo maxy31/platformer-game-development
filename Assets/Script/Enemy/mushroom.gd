@@ -14,7 +14,7 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var crab_enemy_noise: AudioStreamPlayer2D = $Crab_Enemy_Noise
 
 var max_health: int = 3
-var current_health: int = max_health
+var current_health: int = 6
 var player_in_range: bool = false
 var player_ref: Node2D = null
 

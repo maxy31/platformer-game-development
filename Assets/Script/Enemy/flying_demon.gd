@@ -16,7 +16,7 @@ var is_dead = false
 @export var attack_range : float = 150.0
 @export var min_attack_range : float = 50.0
 @export var chase_speed = 400
-@export var acceleration = 8.0
+@export var acceleration = 8.0 #速度
 @export var health = 3
 @export var attack_cooldown_time : float = 2.0
 

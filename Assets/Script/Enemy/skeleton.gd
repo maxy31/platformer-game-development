@@ -27,7 +27,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var damage_dealt : int = 1
 @export var move_speed = 28
 @export var chase_speed = 60
-@export var health = 3
+@export var health = 5
 @export var knockback_force = Vector2(250, -15)
 
 func _ready():
