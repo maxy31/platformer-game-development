@@ -1,4 +1,3 @@
-# flying_demon_Attack_State.gd
 extends State_1_0
 
 @export var ranged_attack_scene: PackedScene

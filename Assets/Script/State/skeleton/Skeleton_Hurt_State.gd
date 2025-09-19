@@ -12,4 +12,3 @@ func enter():
 func transition():
 	if can_transition:
 		get_parent().change_state("Idle State")
-	

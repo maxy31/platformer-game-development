@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cmcsskek6x438" path="res://Assets/Sprites/Tutorial/Background.png" id="1_r1sv1"]
 [ext_resource type="Texture2D" uid="uid://dtdc0fxr4nrj5" path="res://Assets/Sprites/Tutorial/tiles_1.png" id="2_7k1b7"]
-[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="3_jt6vs"]
+[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy.tscn" id="3_jt6vs"]
 [ext_resource type="PackedScene" uid="uid://dxjuvswdpv43p" path="res://Assets/Scenes/PlayerController/FlowmasterPlayer.tscn" id="4_opsn0"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_bl6vc"]
 [ext_resource type="PackedScene" uid="uid://d3mm0obwvwwtg" path="res://Assets/Scenes/Enemy/flying_demon.tscn" id="6_i631l"]

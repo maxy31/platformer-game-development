@@ -14,32 +14,26 @@ func _process(delta):
 	if not player_controller:
 		return
 
-	# ===========================
-	#      新增：UI 模式的最高优先级
-	# ===========================
+	# UI mode has the highest priority
 	if player_controller.is_in_ui_mode:
 		animation_player.play("idle")
-		return # 如果在UI模式，直接播放idle并跳过后续所有逻辑
+		return # If in UI mode, play idle and skip all subsequent logic
 
 	var vel = player_controller.velocity
 
-	# ===========================
-	#   优先播放受击动画
-	# ===========================
+	# Prioritize playing the hurt animation
 	if player_controller.is_hurt:
 		if animation_player and animation_player.has_animation("hurt"):
 			if not animation_player.is_playing() or animation_player.current_animation != "hurt":
-				print("🤕 播放受击动画（只触发一次）")
+				print("🤕 Play hurt animation (triggers only once)")
 				animation_player.play("hurt")
-		return  # 正在受击 → 不切换其他动画
+		return  # Currently being hurt → Don't switch to other animations
 
-	# 如果正在攻击，就不要覆盖动画
+	# If currently attacking, don't override the animation
 	if player_controller.is_attacking:
 		return
 
-	# ===========================
-	#   正常的移动/跳跃动画
-	# ===========================
+	# Normal move/jump animations
 	if player_controller.direction == 1:
 		sprite.flip_h = false
 		attack_area.scale.x = 1
@@ -57,24 +51,22 @@ func _process(delta):
 	else:
 		animation_player.play("idle")
 
-# ===========================
-#   战斗 & 动画事件
-# ===========================
+# Combat & Animation Events
 func play_attack_animation(index: int):
 	var anim_name = "attack%d" % index
 	if animation_player and animation_player.has_animation(anim_name):
-		print("🎬 播放攻击动画:", anim_name)
+		print("🎬 Playing attack animation:", anim_name)
 		animation_player.play(anim_name)
 	else:
-		print("❌ 找不到动画", anim_name)
+		print("❌ Animation not found", anim_name)
 
 func play_hurt_animation():
 	if animation_player and animation_player.has_animation("hurt"):
-		print("🤕 播放受击动画（由 Player 调用）")
+		print("🤕 Playing hurt animation (called by Player)")
 		animation_player.play("hurt")
 
 func _on_animation_finished(anim_name: String):
-	print("✅ 动画播放结束:", anim_name)
+	print("✅ Animation finished playing:", anim_name)
 	if anim_name == "hurt":
 		if player_controller:
 			player_controller.on_hurt_animation_finished()
@@ -82,7 +74,7 @@ func _on_animation_finished(anim_name: String):
 		if player_controller:
 			player_controller.on_attack_animation_finished()
 
-# 这个方法会在动画事件中调用（cancel point）
+# This method is called by an animation event (cancel point)
 func animation_cancel_point():
 	if player_controller:
 		player_controller.on_attack_cancel_point()

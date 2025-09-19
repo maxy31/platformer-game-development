@@ -10,10 +10,10 @@ extends CharacterBody2D
 @onready var monster_spotted: AudioStreamPlayer2D = $Monster_Spotted
 @onready var monster_walk_growl: AudioStreamPlayer2D = $Monster_Walk_Growl
 @onready var nightborne_greatsword_swing: AudioStreamPlayer2D = $NighBorne_Greatsword_Swing
-@export var attack_cooldown : float = 1.5 # 攻击冷却时间（秒）
+@export var attack_cooldown : float = 1.5 # Attack cooldown time (in seconds)
 
 var player = null  # Don't initialize here, will be set in _ready()
-var can_attack: bool = true  # 是否能攻击
+var can_attack: bool = true  # Whether can attack or not
 var mandatory_idle_active = false
 var is_player_in_range = false #for chase
 var is_close_to_player = false #for attack
@@ -121,13 +121,13 @@ func check_wall_collision():
 func start_attack_animation():
 	nightborne_greatsword_swing.play()
 	if not can_attack:
-		return  # 冷却中，不能攻击
+		return  # In cooldown, cannot attack
 	
 	is_close_to_player = true
-	can_attack = false  # 进入冷却
-	# 播放攻击动画（假设在 FSM 或 AnimationPlayer 里处理）
+	can_attack = false  # Entering cooldown
+	# Play attack animation
 	
-	# 启动计时器冷却
+	# Activate cooldown timer
 	var cooldown_timer = get_tree().create_timer(attack_cooldown)
 	cooldown_timer.timeout.connect(_reset_attack_cooldown)
 	

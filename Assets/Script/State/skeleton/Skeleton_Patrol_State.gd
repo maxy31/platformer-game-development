@@ -10,7 +10,7 @@ func enter():
 	can_transition_chase = false
 	animation_player.play("Patrol-Chase")
 	
-	# 进入巡逻时默认向右走
+	# Move right by default when patrolling.
 	owner.direction = Vector2.RIGHT
 	owner.sprite_2d.flip_h = false
 	

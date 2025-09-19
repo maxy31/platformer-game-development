@@ -7,8 +7,6 @@ extends Node2D
 @onready var wood_creak_2: AudioStreamPlayer2D = $Wood_Creak_2
 var current_speed = 0.0
 
-# Displaying layer issue
-
 func _ready() -> void:
 	wood_creak_1.play()
 	wood_creak_2.play()
@@ -17,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	position.y += current_speed * delta;
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is RacerController or body.is_in_group("Player"):
+	if body.is_in_group("Player"):
 		print("Player is hit");
 		body.take_damage(damage_to_player, global_position)
 		queue_free()

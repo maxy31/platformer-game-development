@@ -1,4 +1,4 @@
-# goal_flag.gd (版本 3 - 调用对话库)
+# goal_flag.gd (Version 3 - Calling the dialogue library)
 extends Node2D
 
 signal level_completed
@@ -10,18 +10,18 @@ var triggered: bool = false
 var player_ref: Node2D = null
 
 func _ready() -> void:
-		# 检查在编辑器里是否已经正确设置了 dialogue_ui
+		# Check if dialogue_ui has been set correctly in the editor
 	if not is_instance_valid(dialogue_ui):
-		# push_error 会在编辑器里显示一个可点击的错误信息，非常方便
-		push_error("错误：在场景 '" + get_tree().current_scene.scene_file_path + "' 中, GoalFlag 节点没有分配 DialogueUI 节点！请在检查器中设置它。")
-		# 禁用自己，避免后续出错
+		# push_error will display a clickable error message in the editor, which is very convenient
+		push_error("Error: In scene '" + get_tree().current_scene.scene_file_path + "', the GoalFlag node has not been assigned a DialogueUI node! Please set it in the inspector.")
+		# Disable itself to avoid further errors
 		set_process(false)
 		set_physics_process(false)
-		return # 提前退出函数
+		return # Exit the function early
 
-	# 同样的，也检查 victory_ui
+	#  Also check victory_ui
 	if not is_instance_valid(victory_ui):
-		push_error("错误：在场景 '" + get_tree().current_scene.scene_file_path + "' 中, GoalFlag 节点没有分配 VictoryUI 节点！")
+		push_error("Error: In scene '" + get_tree().current_scene.scene_file_path + "', the GoalFlag node has not been assigned a VictoryUI node!")
 		set_process(false)
 		set_physics_process(false)
 		return
@@ -52,9 +52,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		player_ref = body
 		triggered = true
 		print("DEBUG 2: The assigned dialogue_ui node is: ", dialogue_ui.name)
-		# 【核心改动】
-		# 不再需要自己定义对话内容了
-		# 直接告诉 DialogueUI 播放 "victory_dialogue" 这段对话
+		# [CORE CHANGE]
+		# No longer need to define dialogue content here
+		# Directly tell DialogueUI to play the "victory_dialogue" conversation
 		
 		dialogue_ui.start_dialogue_from_library("victory_dialogue")
 		# STEP 3: The MOST IMPORTANT CHECK.
@@ -73,11 +73,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 
 func on_dialogue_finished() -> void:
-	print("💬 对话结束，触发胜利逻辑！")
-	# --- THIS IS THE PERFECT PLACE FOR THE SOUND ---
-	# First, check if we have a valid reference to the player
+	print("💬 Dialogue finished, triggering victory logic!")
+
 	if is_instance_valid(player_ref):
-		# Now, call the function you created on the player's script
 		print("DEBUG (Goal): The 'player_ref' IS valid.")
 		if player_ref.has_method("play_level_complete_sound"):
 			print("DEBUG (Goal): SUCCESS! Calling the player's sound function now.") #Until this line is displayed
@@ -85,15 +83,11 @@ func on_dialogue_finished() -> void:
 		else:
 			print("DEBUG (Goal): FAILED! The player node is missing the function.")
 	else:
-		# If you see this, it means player_ref was never set in the first place.
+		# If this was reached, means player_ref was never set in the first place.
 		print("DEBUG (Goal): FAILED! The 'player_ref' is EMPTY/NULL.")
 	# ---------------------------------------------
 	emit_signal("level_completed")
 	if victory_ui:
-		# --- 新增代码在这里 ---
-		# 在显示胜利UI之前，暂停整个游戏，实现“静止画面”效果
+		# Pause the entire game before showing the victory UI to achieve a "freeze frame" effect
 		get_tree().paused = true
-		# --------------------
 		victory_ui.show_victory()
-		
-# Add this entire function to goal_flag.gd

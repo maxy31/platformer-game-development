@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="4_mgw7y"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="5_o42jk"]
 [ext_resource type="PackedScene" uid="uid://5mhrqxiqqhol" path="res://Assets/Scenes/PlayerController/RacerPlayer.tscn" id="6_f1hkb"]
-[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="7_lmf0a"]
+[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy.tscn" id="7_lmf0a"]
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="8_betcy"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="9_e2a2o"]
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="10_pcwu4"]

@@ -7,14 +7,14 @@ signal player_died
 @export var max_health := 5
 @export var attack_damage := 1
 
-@export var charge_attack_time: float = 1.0     # 蓄力时长（秒）
-@export var charge_attack_damage: int = 2       # 冲锋攻击伤害
-@export var body_attack_area: Area2D            # 绑定 BodyAttackArea
+@export var charge_attack_time: float = 1.0     # Charge duration (seconds)
+@export var charge_attack_damage: int = 2       # Charge attack damage
+@export var body_attack_area: Area2D            # Binds to BodyAttackArea
 @export var heart_bar: HeartBar
 @export var animator: Node
 @export var combat_handler: Node
 
-# ⚡ 新增：受伤相关
+# ⚡ Damage related variables
 @export var knockback_force := 50.0
 @export var knockback_up := -30.0
 @export var invincible_duration := 0.1
@@ -31,10 +31,10 @@ var direction := 0.0
 var is_attacking := false
 var queued_attack := false
 var is_hurt := false
-var invincible_timer := 0.0        # ⚡ 无敌计时器
-var _allow_jump_while_hurt_this_time := false  # ⚡ 地面受击立刻跳
+var invincible_timer := 0.0        # ⚡ Invincibility timer
+var _allow_jump_while_hurt_this_time := false  # ⚡ Allow immediate jump if hit on the ground
 
-# 冲锋模式变量
+# Charge status changes
 var move_timer: float = 0.0
 var charge_attack_ready: bool = false
 
@@ -44,7 +44,7 @@ var boosted_jump_velocity = -600  # stronger jump after cheese
 var boost_time = 3.0              # seconds boost lasts
 var is_boosted = false
 
-# 自动回血相关
+# Automatic Health Regeneration
 var regen_interval: float = 10.0   # 每10秒回血
 var regen_timer: float = 0.0
 signal health_changed(current: int, max: int)
@@ -61,19 +61,18 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	# ======================
-	#   无敌计时 & 闪烁
-	# ======================
+	# Invincibility Timer & Flashing
 	if invincible_timer > 0.0:
 		invincible_timer -= delta
 		if animator and animator.has_method("set_modulate_alpha"):
 			# 交给 animator 控制闪烁，或直接修改 modulate
+			# Animator handles flashing, or modify modulate value directly
 			animator.set_modulate_alpha(0.5 + 0.5 * sin(Time.get_ticks_msec() / 50.0))
 	else:
 		if animator and animator.has_method("set_modulate_alpha"):
 			animator.set_modulate_alpha(1.0)
 
-	# 自动回血逻辑
+	# Auto health regeneration
 	if current_health < max_health:
 		regen_timer += delta
 		if regen_timer >= regen_interval:
@@ -82,16 +81,16 @@ func _physics_process(delta: float) -> void:
 			
 			audio_controller.play_health_regen_sound()
 
-	# 如果受击中只处理物理，不响应其它输入
+	# If hurt, only process physics and don't respond to other input
 	if is_hurt:
 		move_and_slide()
 		return
 
-	# 重力
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# 跳跃
+	# Jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or _allow_jump_while_hurt_this_time:
 			audio_controller.play_jump_sound()
@@ -99,19 +98,19 @@ func _physics_process(delta: float) -> void:
 				velocity.y = boosted_jump_velocity
 			else:
 				velocity.y = jump_power * jump_multiplier
-		# ⚡ 一次机会用完后重置
+		# ⚡ Reset after 1 usage
 		_allow_jump_while_hurt_this_time = false
 		
 
-	# 攻击输入（缓冲）
+	# Attack input (buffering)
 	if Input.is_action_just_pressed("attack"):
 		if not is_attacking:
 			start_attack()
 		else:
 			queued_attack = true
-			print("⏩ 记录下一次攻击输入")
+			print("⏩ Queueing the next attack input")
 
-	# 移动 + 蓄力计时
+	# Moving + Charging state Timer
 	direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		velocity.x = direction * speed * speed_multiplier
@@ -120,7 +119,7 @@ func _physics_process(delta: float) -> void:
 		move_timer += delta
 		if move_timer >= charge_attack_time:
 			if not charge_attack_ready:
-				print("⚡ 玩家进入冲锋攻击模式")
+				print("⚡ Player entering charging state")
 				charge_attack_ready = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
@@ -146,7 +145,7 @@ func start_attack():
 
 func _force_end_attack():
 	if is_attacking:
-		print("⚠ 动画信号未触发，强制结束攻击状态")
+		print("⚠ Animation signal not triggered, forcing end of attack state")
 		on_attack_animation_finished()
 
 
@@ -158,7 +157,7 @@ func on_attack_animation_finished():
 		is_attacking = false
 
 
-# ⚡ 修改：take_damage 增加 from_pos & 无敌 & 击退
+# ⚡ take_damage adds from_pos & invincibility & knockback
 func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 	if invincible_timer > 0.0:
 		return
@@ -173,20 +172,20 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 		die()
 		return
 
-	# 地面受击可以立即跳
+	# Can jump immediately if hit on the ground; jump is locked until animation finishes if hit in the air
 	_allow_jump_while_hurt_this_time = is_on_floor()
 
 	is_hurt = true
 	is_attacking = false
 	queued_attack = false
 
-	# ⚡ 击退
+	# ⚡ Knockback
 	if from_pos != Vector2.ZERO:
 		var dir = sign(global_position.x - from_pos.x)
 		velocity.x = dir * knockback_force
 		velocity.y = knockback_up
 
-	# ⚡ 开启无敌
+	# ⚡ Knockback
 	invincible_timer = invincible_duration
 
 	if animator and animator.has_method("play_hurt_animation"):
@@ -218,17 +217,15 @@ func die():
 		ui.show_game_over()
 
 
-# ======================
-#   冲锋攻击检测
-# ======================
+# Charging attack detection
 func _on_body_attack_area_entered(body):
 	if charge_attack_ready and body.is_in_group("Enemy"):
 		if body.has_method("take_damage"):
-			print("💥 冲锋攻击触发，对敌人造成 ", charge_attack_damage, " 点伤害")
+			print("💥 Triggering charging attack, dealing to enemy ", charge_attack_damage, " damage")
 			body.take_damage(charge_attack_damage)
 			audio_controller.play_weapon_hit_sound()
 		else:
-			print("⚠ 敌人没有 take_damage 方法")
+			print("⚠ Detected an enemy but it doesn't have a take_damage method")
 
 		move_timer = 0.0
 		charge_attack_ready = false
@@ -250,15 +247,8 @@ func enter_ui_mode():
 	is_attacking = false
 
 func play_level_complete_sound():
-	# --- ADD THIS DEBUGGING BLOCK ---
 	if is_instance_valid(audio_controller):
-		print("DEBUG (Player): 'play_level_complete_sound' called. The audio player IS valid. Playing sound.") #This line is shown
 		audio_controller.play_level_complete_sound()
-	else:
-		# If you see this message, your @onready var path is WRONG.
-		print("DEBUG (Player): FAILED! 'play_level_complete_sound' was called, but 'audio_level_completed' is NULL. Check the node path in the @onready var.")
-	# --------------------------------
 
 func play_weapon_hit_sound():
-	#audio_weapon_hit.play()
 	audio_controller.play_weapon_hit_sound()

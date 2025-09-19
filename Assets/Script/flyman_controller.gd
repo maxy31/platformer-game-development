@@ -11,21 +11,21 @@ signal player_died
 @export var animator: Node
 @export var combat_handler: Node
 
-# —— 接触持续伤害相关 —— 
+# Contact with ongoing harm related
 @export var contact_area: Area2D
 @export var contact_damage: int = 1
 @export var contact_damage_interval: float = 0.4
 
-# —— 闪烁无敌 —— 
+# Invulnerable flashing state variables
 @export var flicker_target: CanvasItem
 @export var invincible_time: float = 0.5
 @export var flicker_interval: float = 0.1
 
-# —— 击退 —— 
+# Knockback
 @export var knockback_force: float = 250.0
 @export var knockback_up: float = -150.0
 
-# —— 攻击缓冲模式 —— 
+# Attack buffer Mode
 @export var attack_buffer_on_hurt: bool = true
 
 @onready var audio_controller = $CharacterAudio
@@ -37,27 +37,27 @@ var speed_multiplier := 30.0
 var jump_multiplier := -30.0
 var direction := 0.0
 
-# 攻击
+# Attack
 var is_attacking := false
 var current_attack_index := 1
 var queued_attack := false
 var can_queue_attack := false
 
-# 受击/无敌/闪烁
+# Hit/Invincible/Flash
 var is_hurt: bool = false
 var invincible_timer: float = 0.0
 var _flicker_time_left: float = 0.0
 var _flicker_accum: float = 0.0
 var _flicker_state: bool = false
 
-# “地面受击可立刻跳 / 空中受击锁跳”
+# When hit on the ground, you can jump immediately / When hit in the air, you can lock jump
 var _allow_jump_while_hurt_this_time: bool = false
 
-# 自动回血
+# Automatic Health Regeneration
 var regen_interval: float = 10.0
 var regen_timer: float = 0.0
 
-# 接触持续伤害
+# Continuous Damage
 var _contact_list: Array[Node] = []
 var _contact_cd: float = 0.0
 
@@ -82,14 +82,14 @@ func _ready():
 			contact_area.body_exited.connect(_on_contact_area_body_exited)
 
 func _physics_process(delta: float) -> void:
-	# 无敌计时 + 闪烁
+	# Invincibility timer + flicker
 	if invincible_timer > 0.0:
 		invincible_timer -= delta
 		_handle_invincible_flicker(delta)
 	else:
 		_stop_invincible_flicker()
 
-	# 自动回血
+	# Auto health regeneration
 	if current_health < max_health:
 		regen_timer += delta
 		if regen_timer >= regen_interval:
@@ -97,35 +97,35 @@ func _physics_process(delta: float) -> void:
 			heal(1)
 			audio_controller.play_health_regen_sound()
 
-	# 接触持续伤害
+	# Continuous contact damage
 	_process_contact_damage(delta)
 
-	# 重力
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-# 跳跃：地面受击可立刻跳；空中受击要等动画结束
+	# Jump: Can jump immediately if hit on the ground; must wait for animation to finish if hit in the air
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() and ((not is_hurt) or _allow_jump_while_hurt_this_time):
 			audio_controller.play_jump_sound()
-		# 检查是否处于跳跃增强状态
+		# Check if in a boosted jump state
 			if is_boosted:
-				velocity.y = boosted_jump_velocity      # 使用增强跳跃力
+				velocity.y = boosted_jump_velocity      # Use boosted jump velocity
 			else:
-				velocity.y = jump_power * jump_multiplier  # 使用普通跳跃力
+				velocity.y = jump_power * jump_multiplier  # Use normal jump velocity
 
-	# 攻击输入
+	# Attack input
 	if Input.is_action_just_pressed("attack"):
 		if not is_attacking and not is_hurt:
 			start_attack()
 		elif is_hurt and attack_buffer_on_hurt:
 			queued_attack = true
-			print("⚡ 攻击输入在受击中被缓冲")
+			print("⚡ Attack input buffered while hurt")
 		elif is_attacking:
 			queued_attack = true
-			print("⏩ 攻击缓冲记录")
+			print("⏩ Attack buffer recorded")
 
-	# 移动
+	# Moving
 	direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		velocity.x = direction * speed * speed_multiplier
@@ -136,13 +136,11 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# =========================
-#       战斗逻辑
-# =========================
+# Attack Logic
 func start_attack():
 	is_attacking = true
 	can_queue_attack = false
-	print("🗡 攻击阶段: attack", current_attack_index)
+	print("🗡 Attack phase: attack", current_attack_index)
 
 	if animator and animator.has_method("play_attack_animation"):
 		animator.play_attack_animation(current_attack_index)
@@ -165,9 +163,7 @@ func on_attack_animation_finished():
 		is_attacking = false
 		current_attack_index = 1
 
-# =========================
-#       受击与恢复
-# =========================
+# Take damage and heal
 func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 	if invincible_timer > 0.0:
 		return
@@ -182,25 +178,25 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 		die()
 		return
 
-	# 地面受击可立刻跳；空中受击锁跳直到动画结束
+# Can jump immediately if hit on the ground; jump is locked until animation finishes if hit in the air
 	_allow_jump_while_hurt_this_time = is_on_floor()
 
-	# 打断攻击
+	# Interrupt attack
 	is_attacking = false
 	current_attack_index = 1
 	can_queue_attack = false
 
-	# 进入受击 & 无敌
+	# Enter hurt & invincible state
 	is_hurt = true
 	_start_invincibility_fx()
 
-	# 击退
+	# Knockback
 	if from_pos != Vector2.ZERO:
 		var dir = sign(global_position.x - from_pos.x)
 		velocity.x = dir * knockback_force
 		velocity.y = knockback_up
 
-	# 播放受击动画
+	# Play hurt animation
 	if animator and animator.has_method("play_hurt_animation"):
 		animator.play_hurt_animation()
 		audio_controller.play_take_damage_sound()
@@ -208,9 +204,9 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 func on_hurt_animation_finished():
 	is_hurt = false
 	_allow_jump_while_hurt_this_time = false
-	print("✅ 受击动画结束，解锁操作")
+	print("✅ Hurt animation finished, unlocking controls")
 
-	# 如果受击中有攻击输入，播完立即触发
+	# If there was an attack input during the hurt state, trigger it immediately after finishing
 	if queued_attack:
 		queued_attack = false
 		start_attack()
@@ -224,21 +220,12 @@ func heal(amount: int = 1):
 
 func die():
 	print("☠ Player Died")
-	
-	# Disable all processing and physics for this node.
-	# It will stop moving, running code, and colliding.
 	process_mode = Node.PROCESS_MODE_DISABLED
-	
-	# Hide the player's sprite.
 	hide() 
-
-	# Now, safely do the death actions.
 	emit_signal("player_died")
 	audio_controller.play_game_over_sound()
 
-# =========================
-#   接触持续伤害
-# =========================
+# Continuous damage
 func _on_contact_area_body_entered(body: Node) -> void:
 	if body and body.is_in_group("Enemy"):
 		if not _contact_list.has(body):
@@ -265,9 +252,7 @@ func _process_contact_damage(delta: float) -> void:
 	take_damage(contact_damage, src_pos)
 	_contact_cd = contact_damage_interval
 
-# =========================
-#     无敌闪烁
-# =========================
+# # Invicibility
 func _start_invincibility_fx():
 	invincible_timer = invincible_time
 	_flicker_time_left = invincible_time
@@ -309,7 +294,7 @@ func _on_boost_timer_timeout() -> void:
 
 func enter_ui_mode():
 	is_in_ui_mode = true
-	# 这里的速度和状态重置是可选的，但有助于确保角色完全静止
+	# Resetting velocity and state here is optional, but helps ensure the character is completely still
 	velocity = Vector2.ZERO 
 	is_hurt = false
 	is_attacking = false
@@ -327,6 +312,5 @@ func play_level_complete_sound():
 		print("DEBUG (Player): FAILED! 'play_level_complete_sound' was called, but 'audio_level_completed' is NULL. Check the node path in the @onready var.")
 		
 func play_punch_hit_sound():
-	# This function's only job is to tell its audio component what to do.
 	if is_instance_valid(audio_controller):
 		audio_controller.play_punch_hit_sound()

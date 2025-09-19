@@ -7,20 +7,20 @@ extends Control
 @onready var audio_controller = $MiscAudio
 
 func _ready():
-	# 使用 GlobalData 加载游戏进度
+	# Using GlobalData to load game progress
 	GlobalData.load_game()
 	
 	var unlocked_level = GlobalData.unlocked_level
 	
-	# 启用按钮
+	# Activate / access buttons
 	level1_button.disabled = false
 	level2_button.disabled = unlocked_level < 2
 	level3_button.disabled = unlocked_level < 3
 	level4_button.disabled = unlocked_level < 4
 	
-	# 显示选择的角色
-	print("当前选择角色: ", GlobalData.selected_character)
-	print("角色场景路径: ", GlobalData.selected_character_scene_path)
+	# Show current selected character
+	print("Current selected character: ", GlobalData.selected_character)
+	print("Character scene path: ", GlobalData.selected_character_scene_path)
 
 func _on_level_1_pressed() -> void:
 	print("Button sound invoked")

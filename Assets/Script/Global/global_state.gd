@@ -1,10 +1,10 @@
 extends Node
 
-# 存储玩家选择的角色场景路径
+# Stores the player's selected character scene path
 var selected_character_scene_path: String = ""
 
-# 你也可以在这里定义全局函数
+# You can also define global functions here
 func get_player_score() -> int:
-	# 假设你有score变量
+	# HAve to define a score variable here first
 	# return score
 	return 0

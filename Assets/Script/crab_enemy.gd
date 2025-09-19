@@ -3,11 +3,11 @@ extends CharacterBody2D
 @export var patrol_points : Node
 @export var speed : int = 1500
 @export var wait_time : int = 3
-@export var damage_to_player : int = 1  # 新增：对玩家造成的伤害
+@export var damage_to_player : int = 1
 @export var max_health := 1
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var timer = $Timer
-@onready var damage_area = $DamageArea  # 假设Area2D节点名为DamageArea
+@onready var damage_area = $DamageArea
 
 @onready var crab_enemy_noise: AudioStreamPlayer2D = $Crab_Enemy_Noise
 @onready var crab_enemy_walking: AudioStreamPlayer2D = $Crab_Enemy_Walking
@@ -25,7 +25,7 @@ var current_point_position : int
 var can_walk : bool
 
 func _ready():
-	# 添加到敌人组，方便识别
+	# Add to the "Enemy" group for easy identification
 	add_to_group("Enemy")
 	
 	if patrol_points != null:
@@ -56,7 +56,7 @@ func _physics_process(delta : float):
 	
 	enemy_animations()
 	
-	# 新增：检测与玩家的碰撞
+	# Check for collision with the player
 	check_player_collision()
 
 func take_damage(amount: int):
@@ -76,8 +76,6 @@ func enemy_gravity(delta : float):
 
 func enemy_idle(delta : float):
 	if !can_walk:
-		#audio_controller.stop_crab_walking() 
-		#audio_controller.start_crab_idle_noise()
 		
 		if crab_enemy_walking.is_playing():
 			crab_enemy_walking.stop()
@@ -90,8 +88,6 @@ func enemy_idle(delta : float):
 
 
 func enemy_walk(delta : float):
-	#audio_controller.stop_crab_idle_noise()
-	#audio_controller.start_crab_walking()
 	if crab_enemy_noise.is_playing():
 		crab_enemy_noise.stop()
 		
@@ -119,7 +115,6 @@ func enemy_walk(delta : float):
 			
 		can_walk = false
 		timer.start()
-		# Tell the enemy it's now idle
 		current_state = State.Idle
 	animated_sprite_2d.flip_h = direction.x > 0
 	
@@ -130,20 +125,20 @@ func enemy_animations():
 	elif current_state == State.Walk && can_walk:
 		animated_sprite_2d.play("walk")
 		
-# 新增：检测与玩家的碰撞
+# Check for collision with the player
 func check_player_collision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		# 检查碰撞对象是否是玩家
-		if collider is RacerController or collider.is_in_group("Player"):
+		# Check if the colliding object is a player
+		if collider.is_in_group("Player"):
 			print("Crab touched player! Dealing damage.")
-			# 对玩家造成伤害
+			# Deal damage to the player
 			collider.take_damage(damage_to_player, global_position)
 			break
 			
-# 新增：Area2D检测到玩家进入		
+# Area2D detects a player entering	
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Player"):
 		print("Player entered crab damage area!")

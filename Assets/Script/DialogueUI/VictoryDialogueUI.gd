@@ -7,14 +7,13 @@ signal dialogue_finished
 
 var dialogue_library = {
 	"victory_dialogue": [
-		"Finally...We escape....",
-		"感谢你的帮助，我们终于安全了。",
-		"恭喜你获得了胜利！"
+		"Finally...We've escaped....",
+		"Thanks to your help, we are now safe.",
+		"Congratulations, victory!"
 	]
 }
 
-# --- 核心修改在这里 ---
-# 我们把这个变量的类型也改成了通用的 Array，以匹配_begin函数的参数
+# This variable's type is also changed to a generic Array to match the parameter of the _begin function.
 var dialogue_lines: Array = []
 var current_line_index: int = 0
 
@@ -26,16 +25,16 @@ func start_dialogue_from_library(key: String) -> void:
 		var lines_to_show = dialogue_library[key]
 		_begin(lines_to_show)
 	else:
-		push_error("对话库中找不到key: " + key)
+		push_error("Key not found in dialogue library: " + key)
 
-# 参数类型是通用的 Array
+# The parameter type is a generic Array
 func _begin(lines: Array) -> void:
-	# 现在，把一个通用Array赋值给另一个通用Array，完全没有问题
+	# Now, assigning a generic Array to another generic Array is completely fine
 	dialogue_lines = lines
 	current_line_index = 0
 	text_label.text = dialogue_lines[current_line_index]
 	show()
-	get_tree().paused = true # 对话开始时暂停游戏
+	get_tree().paused = true # Pause the game when the dialogue starts
 
 func advance_dialogue() -> void:
 	current_line_index += 1
@@ -47,8 +46,7 @@ func advance_dialogue() -> void:
 func end_dialogue() -> void:
 	dialogue_lines.clear()
 	hide()
-	# 注意：我们在这里不再 unpause，因为胜利后需要保持暂停
-	# get_tree().paused = false # 暂时注释掉或删除这行
+	# We are no longer unpausing here, because we need to keep it paused after victory
 	emit_signal("dialogue_finished")
 
 func _input(event: InputEvent) -> void:

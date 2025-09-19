@@ -3,25 +3,23 @@ extends Area2D
 @export_group("Pathfinding")
 @export var detect_area: float = 300
 @export var chase_speed: float = 3
-@export var stop_distance: float = 10 # 蝙蝠停止追逐的最小距离
+@export var stop_distance: float = 10 # Minimum distance at which the bat stops chasing
 
 @export_group("Base Attribute")
-@export var health: int = 4  # 蝙蝠的血量
+@export var health: int = 4  # Bat's health
 
 @onready var anim_s: AnimatedSprite2D = $AnimatedSprite2D
-#@onready var audio_controller = $EnemyAudio
 
-var players: Array = []  # 存储检测到的所有玩家
+var players: Array = []  # Stores all detected players
 var stay_timer: float = 0.0
 var is_on_player_head: bool = false
-var is_chasing: bool = false # 用于追踪蝙蝠是否正在追逐
+var is_chasing: bool = false # Used to track if the bat is currently chasing
 
 func _ready() -> void:
 	add_to_group("Enemy")
-	#audio_controller.start_bat_wings()
 
 func _process(delta: float) -> void:
-	var was_chasing = is_chasing # 保存上一帧的追逐状态
+	var was_chasing = is_chasing # Store the chasing state from the previous frame
 	is_chasing = false
 
 	if players.size() > 0:
@@ -34,14 +32,14 @@ func _process(delta: float) -> void:
 				var direction = (target_player.position - position).normalized()
 				position += direction * chase_speed
 			
-	# 根据追逐状态控制动画
+	# Control animation based on chasing state
 	if is_chasing:
 		if not was_chasing:
 			anim_s.play("fly")
 	else:
 		anim_s.play("fly")
 
-	# 处理停留时间
+	# Handle stay time
 	if is_on_player_head:
 		stay_timer += delta
 		if stay_timer >= 3.0:
@@ -54,11 +52,11 @@ func _process(delta: float) -> void:
 	else:
 		stay_timer = 0.0
 
-# 曼哈顿距离计算
+# Manhattan distance calculation
 func get_manhattan(pos1: Vector2, pos2: Vector2) -> float:
 	return abs(pos1.x - pos2.x) + abs(pos1.y - pos2.y)
 
-# 找到最近的玩家
+# Find the closest player
 func get_closest_player() -> Node2D:
 	var closest_player: Node2D = null
 	var min_distance = INF
@@ -69,30 +67,30 @@ func get_closest_player() -> Node2D:
 			closest_player = p
 	return closest_player
 
-# 当玩家进入主蝙蝠的碰撞范围
+# When player enters the main bat's collision area
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if position.y < body.position.y:
 			is_on_player_head = true
 
-# 当玩家离开主蝙蝠的碰撞范围
+# When a player leaves the main bat's collision area
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		is_on_player_head = false
 
-# 当玩家进入【DetectionArea】的侦测范围
+# When a player enters the [DetectionArea]'s detection range
 func _on_DetectionArea_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if not players.has(body):
 			players.append(body)
 
-# 当玩家离开【DetectionArea】的侦测范围
+# When a player leaves the [DetectionArea]'s detection range
 func _on_DetectionArea_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if players.has(body):
 			players.erase(body)
 
-# 玩家攻击时调用
+# Called when the player attacks
 func take_damage(damage: int) -> void:
 	health -= damage
 	print("Bat HP:", health)

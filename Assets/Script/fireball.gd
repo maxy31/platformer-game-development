@@ -10,16 +10,16 @@ extends Area2D
 
 var direction: Vector2 = Vector2.ZERO
 var start_position: Vector2 = Vector2.ZERO
-var player: Node2D  # 添加玩家引用
+var player: Node2D  # Add player reference
 
 func _ready():
-	# 获取玩家引用
+	# Get player reference
 	player = get_tree().get_first_node_in_group("Player")
 	
 	if player:
 		direction = (player.global_position - global_position).normalized()
 	else:
-		# 如果没有找到玩家，使用默认方向
+		# If no player is found, use the default direction
 		direction = Vector2.RIGHT
 	
 	start_position = global_position
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and body.has_method("take_damage"):
-		# 使用固定伤害值而不是百分比
+		# Use a fixed damage value instead of a percentage
 		var fixed_damage = 1.0
 		body.take_damage(fixed_damage)
 		animation_player.play("explode")

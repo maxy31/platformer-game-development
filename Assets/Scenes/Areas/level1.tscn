@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8qf1fmrhd7h2" path="res://Assets/Scenes/Platform/platform_a.tscn" id="4_mex2m"]
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="5_o3j8m"]
 [ext_resource type="PackedScene" uid="uid://cbevqyrp2h7ii" path="res://Assets/Scenes/Food/cheese.tscn" id="6_r5d1o"]
-[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy(test).tscn" id="7_8fqg5"]
+[ext_resource type="PackedScene" uid="uid://r0y7xckbxscw" path="res://Assets/Scenes/Enemy/Destroyer_Enemy.tscn" id="7_8fqg5"]
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="8_j254v"]
 [ext_resource type="PackedScene" uid="uid://bgoha1y03pdak" path="res://Assets/Scenes/Pausing/pause_menu.tscn" id="10_3rbst"]
 [ext_resource type="PackedScene" uid="uid://cwbdasuw7u3j8" path="res://Assets/Scenes/Enemy/Crab_Enemy.tscn" id="11_rqom5"]

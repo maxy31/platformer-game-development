@@ -7,13 +7,13 @@ signal player_died
 @export var max_health := 3
 @export var attack_damage := 2
 
-@export var charge_attack_time: float = 1.0     # 蓄力时长（秒）
-@export var charge_attack_damage: int = 2       # 冲锋攻击伤害
+@export var charge_attack_time: float = 1.0     # Charge duration (seconds)
+@export var charge_attack_damage: int = 2       # Charge attack damage
 @export var heart_bar: HeartBar
 @export var animator: Node
 @export var combat_handler: Node
 
-# ⚡ 新增：受伤相关
+# ⚡ Damage related variables
 @export var knockback_force := 30.0
 @export var knockback_up := -10.0
 @export var invincible_duration := 0.5
@@ -30,8 +30,8 @@ var direction := 0.0
 var is_attacking := false
 var queued_attack := false
 var is_hurt := false
-var invincible_timer := 0.0        # ⚡ 无敌计时器
-var _allow_jump_while_hurt_this_time := false  # ⚡ 地面受击立刻跳
+var invincible_timer := 0.0        # ⚡ Invincibility timer
+var _allow_jump_while_hurt_this_time := false  # ⚡ Allow immediate jump if hit on the ground
 
 #boost jump
 var jump_velocity = -400
@@ -39,8 +39,8 @@ var boosted_jump_velocity = -600  # stronger jump after cheese
 var boost_time = 3.0              # seconds boost lasts
 var is_boosted = false
 
-# 自动回血相关
-var regen_interval: float = 10.0   # 每10秒回血
+# Automatic Health Regeneration
+var regen_interval: float = 10.0   # Recovers health every 10 seconds
 var regen_timer: float = 0.0
 signal health_changed(current: int, max: int)
 
@@ -51,9 +51,7 @@ func _ready():
 		heart_bar.set_value(current_health)
 
 func _physics_process(delta: float) -> void:
-	# ======================
-	#   无敌计时 & 闪烁
-	# ======================
+	# Invincibility Timer & Flashing
 	if invincible_timer > 0.0:
 		invincible_timer -= delta
 		if animator and animator.has_method("set_modulate_alpha"):
@@ -62,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		if animator and animator.has_method("set_modulate_alpha"):
 			animator.set_modulate_alpha(1.0)
 
-	# 自动回血逻辑
+	# Auto health regeneration
 	if current_health < max_health:
 		regen_timer += delta
 		if regen_timer >= regen_interval:
@@ -70,22 +68,22 @@ func _physics_process(delta: float) -> void:
 			audio_controller.play_health_regen_sound()
 			heal(1)
 
-	# 如果受击中只处理物理，不响应其它输入
+	# If hurt, only process physics and don't respond to other input
 	if is_hurt:
 		move_and_slide()
 		return
 
-	# 重力
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# ✅ 左右移动
+	# ✅ Left/Right movement
 	var input_dir = Input.get_axis("move_left", "move_right")
 
 	if input_dir != 0:
 		velocity.x = input_dir * speed * speed_multiplier
 		audio_controller.start_character_walk()
-		# ✅ 根据方向翻转角色
+		# ✅ Flip character based on direction
 		if input_dir > 0:
 			animator.scale.x = 1
 		elif input_dir < 0:
@@ -94,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
 		audio_controller.stop_character_walk()
 
-	# 跳跃
+	# Jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or _allow_jump_while_hurt_this_time:
 			audio_controller.play_jump_sound()
@@ -104,13 +102,13 @@ func _physics_process(delta: float) -> void:
 				velocity.y = jump_power * jump_multiplier
 		_allow_jump_while_hurt_this_time = false
 
-	# 攻击输入（缓冲）
+	# Attack input (buffering)
 	if Input.is_action_just_pressed("attack"):
 		if not is_attacking:
 			start_attack()
 		else:
 			queued_attack = true
-			print("⏩ 记录下一次攻击输入")
+			print("⏩ Queueing the next attack input")
 
 	move_and_slide()
 
@@ -129,7 +127,7 @@ func start_attack():
 
 func _force_end_attack():
 	if is_attacking:
-		print("⚠ 动画信号未触发，强制结束攻击状态")
+		print("⚠ Animation signal not triggered, forcing end of attack state")
 		on_attack_animation_finished()
 
 
@@ -141,7 +139,7 @@ func on_attack_animation_finished():
 		is_attacking = false
 
 
-# ⚡ 修改：take_damage 增加 from_pos & 无敌 & 击退
+# ⚡ take_damage adds from_pos & invincibility & knockback
 func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 	if invincible_timer > 0.0:
 		return
@@ -156,20 +154,20 @@ func take_damage(amount: int = 1, from_pos: Vector2 = Vector2.ZERO):
 		die()
 		return
 
-	# 地面受击可以立即跳
+	# Can jump immediately if hit on the ground; jump is locked until animation finishes if hit in the air
 	_allow_jump_while_hurt_this_time = is_on_floor()
 
 	is_hurt = true
 	is_attacking = false
 	queued_attack = false
 
-	# ⚡ 击退
+	# Knockback
 	if from_pos != Vector2.ZERO:
 		var dir = sign(global_position.x - from_pos.x)
 		velocity.x = dir * knockback_force
 		velocity.y = knockback_up
 
-	# ⚡ 开启无敌
+	# Start invisibility time
 	invincible_timer = invincible_duration
 
 	if animator and animator.has_method("play_hurt_animation"):
@@ -196,9 +194,6 @@ func die():
 	emit_signal("player_died")
 	audio_controller.play_game_over_sound()
 
-	# By removing queue_free(), the node stays in the scene,
-	# allowing the sound to play out completely.
-
 #Boost Jump Cheese
 func eat_food():
 	is_boosted = true
@@ -219,6 +214,5 @@ func play_level_complete_sound():
 		audio_controller.play_level_complete_sound()
 
 func play_magic_cast_sound():
-	# This function's only job is to tell its audio component what to do.
 	if is_instance_valid(audio_controller):
 		audio_controller.play_magic_cast_sound()

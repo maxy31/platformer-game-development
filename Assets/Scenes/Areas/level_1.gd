@@ -1,13 +1,13 @@
 extends Node2D
 
-@onready var spawn_point = $PlayerSpawnPoint  # 确保场景中有这个节点
+@onready var spawn_point = $PlayerSpawnPoint  # Make sure this node exists in the scene
 
 func _ready():
 	
 	#Code for lvl 1 BGM
 	MusicPlayer.change_music("res://Assets/Audio/BGM/Level_1.mp3")
 	
-	# 生成玩家角色
+	# Spawn player's chosen character
 	_spawn_player()
 
 func _spawn_player():
@@ -42,24 +42,24 @@ func _spawn_player():
 		_create_fallback_player()
 
 func _create_fallback_player():
-	# 创建一个简单的玩家节点作为备用
+	# Create a simple player node as a fallback
 	var player = CharacterBody2D.new()
 	player.name = "FallbackPlayer"
 	
-	# 添加碰撞体
+	# Add a collision shape
 	var collision = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
 	shape.size = Vector2(30, 50)
 	collision.shape = shape
 	
-	# 添加精灵
+	# Add a sprite
 	var sprite = Sprite2D.new()
-	sprite.modulate = Color.RED  # 红色以便识别
+	sprite.modulate = Color.RED  # Red for easy identification
 	
 	player.add_child(collision)
 	player.add_child(sprite)
 	
-	# 设置位置
+	# Set the position
 	if spawn_point:
 		player.position = spawn_point.position
 	else:

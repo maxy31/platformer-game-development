@@ -1,4 +1,3 @@
-# level4.gd
 extends Node2D
 
 @onready var spawn_point = $PlayerSpawnPoint
@@ -12,10 +11,10 @@ func _ready():
 	print("Selected Character: ", GlobalData.selected_character)
 	print("Player will spawn at: ", spawn_point.position)
 	
-	# 生成玩家
+	# Spawn player character
 	_spawn_player()
 	
-	# 调试信息
+	#  Debugging information
 	_print_scene_info()
 
 func _spawn_player():
@@ -50,10 +49,10 @@ func _spawn_player():
 		_create_fallback_player()
 
 func _create_fallback_player():
-	# 简单备用玩家
+	# Create a fallback player
 	var player = CharacterBody2D.new()
 	player.name = "FallbackPlayer"
-	player.add_to_group("Player")  # 重要：添加到Player组
+	player.add_to_group("Player")  # Important: Add to the Player group
 	
 	var collision = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
@@ -61,7 +60,7 @@ func _create_fallback_player():
 	collision.shape = shape
 	
 	var sprite = Sprite2D.new()
-	sprite.modulate = Color.RED  # 红色以便识别
+	sprite.modulate = Color.RED  # Red for easy identification
 	
 	player.add_child(collision)
 	player.add_child(sprite)
@@ -74,14 +73,14 @@ func _print_scene_info():
 	print("=== Scene Node Info ===")
 	print("Player spawn point position: ", spawn_point.position)
 	
-	# 检查飞魔敌人
+	# Check for the flying demon enemy
 	if has_node("flying_demon"):
 		var demon = $flying_demon
 		print("Flying demon position: ", demon.position)
 	else:
 		print("❌ Flying demon enemy not found")
 	
-	# 检查是否有玩家节点
+	# Check if there are player nodes
 	var players = get_tree().get_nodes_in_group("Player")
 	print("Number of players in scene: ", players.size())
 	for player in players:

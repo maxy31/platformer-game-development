@@ -161,7 +161,7 @@ func _on_select_button_pressed() -> void:
 	var selected_key = character_keys[current_character_index]
 	var selected_character_data = CHARACTERS_DATA[selected_key]
 
-	# 存储到 GlobalData 而不是 GlobalState
+	# Saved to GlobalData instead of GlobalState
 	GlobalData.selected_character = selected_character_data["name"]
 	GlobalData.selected_character_scene_path = selected_character_data["scene_path"]
 

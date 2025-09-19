@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var spawn_point = $PlayerSpawnPoint  # 直接获取，不需要路径
+@onready var spawn_point = $PlayerSpawnPoint  # Fetch spawn point directly, no path needed
 
 func _ready():
 
@@ -17,7 +17,7 @@ func _ready():
 		for child in get_children():
 			print(" - ", child.name, " (", child.get_class(), ")")
 	
-	# 生成玩家
+	# Spawn player character
 	_spawn_player()
 
 func _spawn_player():
@@ -41,7 +41,7 @@ func _spawn_player():
 		# ✅ Connect player death → GameOverUI
 # ✅ Connect player death → GameOverUI
 		if player_instance.has_signal("player_died"):
-			var ui = $GameOverUI   # path to your UI node
+			var ui = $GameOverUI 
 			print("📡 Connecting player_died to GameOverUI:", ui)
 			player_instance.player_died.connect(ui.show_game_over)
 
@@ -52,7 +52,7 @@ func _spawn_player():
 		_create_fallback_player()
 
 func _find_alternative_spawn_point():
-	# 尝试查找其他可能的生成点
+	# Try to find other possible spawn points
 	var possible_spawn_points = []
 	
 	for child in get_children():
@@ -70,24 +70,24 @@ func _find_alternative_spawn_point():
 		_create_fallback_player()
 
 func _create_fallback_player():
-	# 创建备用玩家
+	# Create a fallback player
 	var player = CharacterBody2D.new()
 	player.name = "FallbackPlayer"
 	
-	# 添加碰撞体
+	# Add a collision shape
 	var collision = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
 	shape.size = Vector2(30, 50)
 	collision.shape = shape
 	
-	# 添加精灵
+	# Add a sprite
 	var sprite = Sprite2D.new()
 	sprite.modulate = Color.RED
 	
 	player.add_child(collision)
 	player.add_child(sprite)
 	
-	# 设置位置（场景中心或默认位置）
+	# Set position (scene center or default position)
 	player.global_position = Vector2(500, 300)
 	print("Using default spawn position: ", player.global_position)
 	

@@ -9,8 +9,8 @@ enum State {
 
 var current_state: State = State.IDLE
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var animation_player = $AnimationPlayer  # 用于攻击动画
-@onready var animated_sprite = $AnimatedSprite2D  # 用于其他状态动画
+@onready var animation_player = $AnimationPlayer  # For the attack animation
+@onready var animated_sprite = $AnimatedSprite2D  # For other state animations
 @onready var crab_enemy_noise: AudioStreamPlayer2D = $Crab_Enemy_Noise
 
 var max_health: int = 3
@@ -46,36 +46,36 @@ func change_state(new_state: State) -> void:
 			death_state()
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
-	print("检测到: ", body.name, " 组: ", body.get_groups())
+	print("Detected: ", body.name, " Group: ", body.get_groups())
 	
 	if body.is_in_group("Player"):
 		player_in_range = true
 		player_ref = body
-		print("玩家进入攻击范围")
+		print("Player entered attack range")
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player_in_range = false
 		player_ref = null
-		print("玩家离开攻击范围")
+		print("Player left attack range")
 
 func idle_state() -> void:
-	animated_sprite.play("Idle")  # 使用 AnimatedSprite2D
+	animated_sprite.play("Idle") # Use AnimatedSprite2D
 
 func attack_state() -> void:
-	animation_player.play("Attack")  # 使用 AnimationPlayer
+	animation_player.play("Attack") # Use AnimationPlayer
 	
-	# 攻击逻辑
+	# Attack logic
 	if player_ref and player_ref.has_method("take_damage"):
 		player_ref.take_damage(1)
 		print("Mushroom attacked player!")
 	
-	# 等待AnimationPlayer动画结束
+	# Wait for the AnimationPlayer animation to finish
 	await animation_player.animation_finished
 	change_state(State.IDLE)
 
 func take_hit_state() -> void:
-	animated_sprite.play("TakeHit")  # 使用 AnimatedSprite2D
+	animated_sprite.play("TakeHit") # Use AnimatedSprite2D
 	await animated_sprite.animation_finished
 	
 	if current_health <= 0:
@@ -84,7 +84,7 @@ func take_hit_state() -> void:
 		change_state(State.IDLE)
 
 func death_state() -> void:
-	animated_sprite.play("Death")  # 使用 AnimatedSprite2D
+	animated_sprite.play("Death")  # Use AnimatedSprite2D
 	await animated_sprite.animation_finished
 	queue_free()
 

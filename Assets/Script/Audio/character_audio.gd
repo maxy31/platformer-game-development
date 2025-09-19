@@ -19,8 +19,6 @@ func play_cheese_pickup_sound():
 		audio_cheese_pickup.play()
 
 func play_game_over_sound():
-	# Note: Make sure this node's Process Mode is set to "Always" in the Inspector
-	# so it can play even when the game is paused.
 	if audio_game_over.stream:
 		audio_game_over.play()
 
@@ -33,8 +31,6 @@ func play_jump_sound():
 		audio_jump.play()
 
 func play_level_complete_sound():
-	# Note: Make sure this node's Process Mode is set to "Always" in the Inspector
-	# so it can play even when the game is paused.
 	if audio_level_completed.stream:
 		audio_level_completed.play()
 
@@ -66,15 +62,8 @@ func play_weapon_hit_sound():
 		audio_weapon_hit.pitch_scale = randf_range(0.9, 1.1)
 		audio_weapon_hit.play()
 
-
-# --- LOOPING SOUNDS (Require Start/Stop logic) ---
-
-# Note: You have two "walk" sounds. Here are functions for both.
-# If you only need one, you can delete the extra pair.
-
-# For 'Character_walk'
+# For characters other than racer
 func start_character_walk():
-	# Note: Ensure the audio file is set to "Loop" in the Import tab.
 	if audio_character_walk.stream and not audio_character_walk.is_playing():
 		audio_character_walk.play()
 
@@ -82,9 +71,8 @@ func stop_character_walk():
 	if audio_character_walk.is_playing():
 		audio_character_walk.stop()
 
-# For 'Racer_walk'
+# For racer only
 func start_racer_walk():
-	# Note: Ensure the audio file is set to "Loop" in the Import tab.
 	if audio_walk.stream and not audio_walk.is_playing():
 		audio_walk.play()
 

@@ -6,20 +6,20 @@ class_name FlowmasterAttackAreaMap
 
 func do_attack_hit(damage: int):
 	if not attack_area:
-		print("❌ AttackArea 没绑定")
+		print("❌ AttackArea not bound")
 		return
 
 	var bodies = attack_area.get_overlapping_bodies()
-	print("🔍 攻击判定检测到物体: ", bodies)
+	print("🔍 Attack detection found objects: ", bodies)
 
 	if bodies.size() == 0:
-		print("⚠ 没有检测到任何物体，可能是 Layer/Mask 设置不对")
+		print("⚠ No objects detected, Layer/Mask settings might be incorrect")
 	
 	for body in bodies:
 		if body.is_in_group("Enemy"):
 			if body.has_method("take_damage"):
 				player.play_magic_cast_sound()
-				print("💥 对敌人造成伤害: ", damage)
+				print("💥 Dealing damage to enemy: ", damage)
 				body.take_damage(damage)
 			else:
-				print("⚠ 检测到敌人但它没有 take_damage 方法")
+				print("⚠ Detected an enemy but it doesn't have a take_damage method")

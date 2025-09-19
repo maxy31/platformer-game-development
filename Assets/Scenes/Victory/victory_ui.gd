@@ -2,19 +2,19 @@ extends Control
 
 @onready var restart_button = $Panel/Restart
 @onready var quit_button = $Panel/Quit
-@onready var next_level_button = $Panel/NextLevel  # New button
+@onready var next_level_button = $Panel/NextLevel
 @export var total_levels: int = 4
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	visible = false  # Start hidden
+	visible = false
 	
 	restart_button.pressed.connect(_on_restart_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	next_level_button.pressed.connect(_on_next_level_pressed)
 
 func show_victory():
-	# --- NEW LOGIC TO CHECK IF THIS IS THE LAST LEVEL ---
+	# Logic to check whether this is last level
 	var current_scene_path = get_tree().current_scene.scene_file_path
 	var is_last_level = false
 
@@ -27,13 +27,12 @@ func show_victory():
 			if current_level_number >= total_levels:
 				is_last_level = true
 
-	# Now, show or hide the button based on the result.
+	#Show or hide the button based on the result.
 	if is_last_level:
 		print("🏆 This is the final level! Hiding 'Next Level' button.")
 		next_level_button.hide() # Or next_level_button.visible = false
 	else:
 		next_level_button.show() # Or next_level_button.visible = true
-	# ----------------------------------------------------
 	print("🎉 Victory screen shown")
 	visible = true
 	print("👁️ VictoryUI visible now?", visible)
@@ -49,8 +48,6 @@ func _on_quit_pressed():
 	print("❌ Quit pressed")
 	get_tree().paused = false   # 🔓 Unpause before changing scene
 	get_tree().change_scene_to_file("res://Assets/Scenes/Global/start_page.tscn")
-
-# In your victory_ui.gd script
 
 func _on_next_level_pressed():
 	print("⏭️ Next Level pressed")
@@ -77,9 +74,7 @@ func _on_next_level_pressed():
 		var err = config.load(save_path)
 		if err != OK:
 			print("⚠️ Couldn't load save, starting new one")
-
-		# --- START: NEW UNLOCK LOGIC ---
-		# Based on the level just completed, unlock the corresponding character.
+			
 		match current_level_number:
 			1:
 				config.set_value("Characters", "Destroyer_unlocked", true)
@@ -90,14 +85,12 @@ func _on_next_level_pressed():
 			3:
 				config.set_value("Characters", "Flowmaster_unlocked", true)
 				print("🔓 Character Unlocked: Flowmaster")
-		# --- END: NEW UNLOCK LOGIC ---
 
-		# Save highest unlocked level (your existing code)
 		var prev_unlocked = config.get_value("Progress", "unlocked_level", 1)
 		if next_level_number > prev_unlocked:
 			config.set_value("Progress", "unlocked_level", next_level_number)
 			
-		# Now, save all changes to the file
+		# Save all changes to the file
 		config.save(save_path)
 		print("💾 Progress and unlocks saved.")
 
