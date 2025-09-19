@@ -26,25 +26,25 @@ func _on_level_1_pressed() -> void:
 	print("Button sound invoked")
 	audio_controller.play_button_click()
 	await audio_controller.audio_button_click.finished
-	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level1.tscn")
+	get_tree().change_scene_to_file("res://Assets/Scenes/Level/level1.tscn")
 
 func _on_level_2_pressed() -> void:
 	print("Button sound invoked")
 	audio_controller.play_button_click()
 	await audio_controller.audio_button_click.finished
-	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level2.tscn")
+	get_tree().change_scene_to_file("res://Assets/Scenes/Level/level2.tscn")
 
 func _on_level_3_pressed() -> void:
 	print("Button sound invoked")
 	audio_controller.play_button_click()
 	await audio_controller.audio_button_click.finished
-	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level3.tscn")
+	get_tree().change_scene_to_file("res://Assets/Scenes/Level/level3.tscn")
 
 func _on_level_4_pressed() -> void:
 	print("Button sound invoked")
 	audio_controller.play_button_click()
 	await audio_controller.audio_button_click.finished
-	get_tree().change_scene_to_file("res://Assets/Scenes/Areas/level4.tscn")
+	get_tree().change_scene_to_file("res://Assets/Scenes/Level/level4.tscn")
 
 func _on_back_pressed() -> void:
 	print("Button sound invoked")

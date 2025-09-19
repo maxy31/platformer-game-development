@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://dur3jlnx3ouk"]
 
 [ext_resource type="Texture2D" uid="uid://sevmli5c722c" path="res://Assets/Sprites/Background/color5.jpg" id="1_qkauv"]
-[ext_resource type="Script" uid="uid://bg5f0kdn5gxq4" path="res://Assets/Scenes/Areas/level_4.gd" id="1_scr3p"]
+[ext_resource type="Script" uid="uid://bg5f0kdn5gxq4" path="res://Assets/Scenes/Level/level_4.gd" id="1_scr3p"]
 [ext_resource type="Texture2D" uid="uid://bwfh8oks0qvw2" path="res://Assets/Sprites/Green Board/Green Board (guide).png" id="2_scr3p"]
 [ext_resource type="PackedScene" uid="uid://xlkwk7lore7w" path="res://Assets/Scenes/Goal/GoalFlag.tscn" id="4_ogk4k"]
 [ext_resource type="PackedScene" uid="uid://c38gygvtvt52b" path="res://Assets/Scenes/Trap/kill_zone.tscn" id="5_oxiw7"]

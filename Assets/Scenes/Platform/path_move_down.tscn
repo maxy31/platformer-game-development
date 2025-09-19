@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4cpbpyxjrvq"]
 
 [ext_resource type="Texture2D" uid="uid://c03givqn1fa5h" path="res://Assets/Sprites/Green Board/11.png" id="1_emptx"]
-[ext_resource type="Script" uid="uid://duejugdwxir3b" path="res://Assets/Script/path_move_down.gd" id="1_oy0n5"]
+[ext_resource type="Script" uid="uid://duejugdwxir3b" path="res://Assets/Script/EnvirionmentalAndTraps/path_move_down.gd" id="1_oy0n5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oy0n5"]
 size = Vector2(57, 34)

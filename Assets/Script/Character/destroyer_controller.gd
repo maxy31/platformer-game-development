@@ -208,12 +208,10 @@ func heal(amount: int = 1):
 
 func die():
 	print("☠ Player Died")
+	process_mode = Node.PROCESS_MODE_DISABLED
+	hide() 
 	emit_signal("player_died")
-	if animator and animator.has_method("play_die_animation"):
-		animator.play_die_animation()
-		audio_controller.play_game_over_sound()
-	else:
-		queue_free()
+	audio_controller.play_game_over_sound()
 
 # Continuous damage
 func _on_contact_area_body_entered(body: Node) -> void:

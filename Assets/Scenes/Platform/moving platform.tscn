@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://darcfylxpubff"]
 
-[ext_resource type="Script" uid="uid://bq26ydsqnbcf7" path="res://Assets/Script/moving_platform.gd" id="1_v8ogt"]
+[ext_resource type="Script" uid="uid://bq26ydsqnbcf7" path="res://Assets/Script/EnvirionmentalAndTraps/moving_platform.gd" id="1_v8ogt"]
 [ext_resource type="Texture2D" uid="uid://djm3mt0khscnp" path="res://Assets/Sprites/Green Board/2.png" id="2_e47jg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0bqi"]

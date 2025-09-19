@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bxs1rnl06kte7"]
 
 [ext_resource type="Texture2D" uid="uid://cpuawhmbmtbmn" path="res://Assets/Sprites/Tutorial/player.png" id="1_6cd4h"]
-[ext_resource type="Script" uid="uid://c21ad1la0q0e2" path="res://Assets/Script/player_controller.gd" id="1_7dd06"]
-[ext_resource type="Script" uid="uid://bqdd7mtiwku0x" path="res://Assets/Script/player_animator.gd" id="2_38rej"]
+[ext_resource type="Script" uid="uid://c21ad1la0q0e2" path="res://Assets/Script/Character/player_controller.gd" id="1_7dd06"]
+[ext_resource type="Script" uid="uid://bqdd7mtiwku0x" path="res://Assets/Script/Character/player_animator.gd" id="2_38rej"]
 
 [sub_resource type="Animation" id="Animation_38rej"]
 length = 0.001

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://xlkwk7lore7w"]
 
 [ext_resource type="Texture2D" uid="uid://d0pv3shjqdqve" path="res://Assets/Sprites/Flag/Flag.png" id="1_plrvv"]
-[ext_resource type="Script" uid="uid://d1otaeu6s2irv" path="res://Assets/Scenes/Goal/goal_flag.gd" id="1_r4042"]
+[ext_resource type="Script" uid="uid://d1otaeu6s2irv" path="res://Assets/Script/EnvirionmentalAndTraps/goal_flag.gd" id="1_r4042"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_plrvv"]
 radius = 28.2843

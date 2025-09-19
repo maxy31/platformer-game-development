@@ -31,10 +31,10 @@ func _ready() -> void:
 	print("This Goal Flag is running inside scene: ", get_tree().current_scene.scene_file_path)
 
 	if not dialogue_ui:
-		push_error("错误：GoalFlag 脚本中没有分配 DialogueUI 节点！")
+		push_error("Error: The DialogueUI node has not been assigned in the GoalFlag script!")
 		return
 	if not victory_ui:
-		push_error("错误：GoalFlag 脚本中没有分配 VictoryUI 节点！")
+		push_error("Error: The VictoryUI node has not been assigned in the GoalFlag script!")
 		return
 	dialogue_ui.dialogue_finished.connect(on_dialogue_finished)
 	

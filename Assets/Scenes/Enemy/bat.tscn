@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dpyjuodoiureh"]
 
 [ext_resource type="Texture2D" uid="uid://5tanfrymggmm" path="res://Assets/Sprites/Bat/Bat.png" id="1_d7u50"]
-[ext_resource type="Script" uid="uid://bjigmpd0fjao1" path="res://Assets/Script/bat.gd" id="1_ng07e"]
+[ext_resource type="Script" uid="uid://bjigmpd0fjao1" path="res://Assets/Script/Enemy/bat.gd" id="1_ng07e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ng07e"]
 radius = 20.0

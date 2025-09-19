@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://cfoo6vsdoeedu"]
 
-[ext_resource type="Script" uid="uid://2eectg6ejnlt" path="res://Assets/Script/destroyer_controller.gd" id="1_lsrbb"]
+[ext_resource type="Script" uid="uid://2eectg6ejnlt" path="res://Assets/Script/Character/destroyer_controller.gd" id="1_lsrbb"]
 [ext_resource type="Texture2D" uid="uid://dp1ghuf3t8nt2" path="res://Assets/Sprites/Destroyer/DarkSamurai (64x64).png" id="2_601w7"]
-[ext_resource type="Script" uid="uid://blwj64fyycpaj" path="res://Assets/Script/destroyer_animator.gd" id="2_bcnlo"]
-[ext_resource type="Script" uid="uid://dfbq4anuyi33e" path="res://Assets/Script/destroyer_combatHandler.gd" id="4_bcnlo"]
+[ext_resource type="Script" uid="uid://blwj64fyycpaj" path="res://Assets/Script/Character/destroyer_animator.gd" id="2_bcnlo"]
+[ext_resource type="Script" uid="uid://dfbq4anuyi33e" path="res://Assets/Script/Character/destroyer_combatHandler.gd" id="4_bcnlo"]
 [ext_resource type="PackedScene" uid="uid://2wfpic2yhhv0" path="res://Assets/Scenes/HeartBar/HeartBar.tscn" id="5_6hwdv"]
 [ext_resource type="PackedScene" uid="uid://i6rq20w4slip" path="res://Assets/Scenes/Audio/Character_Audio.tscn" id="6_g8vsq"]
 

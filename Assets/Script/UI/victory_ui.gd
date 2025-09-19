@@ -64,7 +64,7 @@ func _on_next_level_pressed():
 	if match_result:
 		var current_level_number = match_result.get_string(1).to_int()
 		var next_level_number = current_level_number + 1
-		var next_level_path = "res://Assets/Scenes/Areas/level%d.tscn" % next_level_number
+		var next_level_path = "res://Assets/Scenes/Level/level%d.tscn" % next_level_number
 
 		# 🔐 Save unlocked level to file
 		var save_path = "user://save_game.cfg"

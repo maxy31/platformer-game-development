@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://cwbdasuw7u3j8"]
 
 [ext_resource type="Texture2D" uid="uid://dvcuvls8xorbo" path="res://Assets/Sprites/Crab/ExplodingCrab Idle 80x80.png" id="1_m4ckb"]
-[ext_resource type="Script" uid="uid://bfbdg6w47015j" path="res://Assets/Script/crab_enemy.gd" id="1_nhp1y"]
+[ext_resource type="Script" uid="uid://bfbdg6w47015j" path="res://Assets/Script/Enemy/crab_enemy.gd" id="1_nhp1y"]
 [ext_resource type="Texture2D" uid="uid://c3iwmb5yngnn5" path="res://Assets/Sprites/Crab/ExplodingCrab Walk 80x80.png" id="2_nhp1y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fa2jn"]

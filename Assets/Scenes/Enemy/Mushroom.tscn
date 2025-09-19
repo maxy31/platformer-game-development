@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://br7y3p8qa04wt"]
 
 [ext_resource type="Texture2D" uid="uid://sovsy4wxvdvt" path="res://Assets/Sprites/Mushroom/Mushroom.png" id="1_b7st0"]
-[ext_resource type="Script" uid="uid://bpt21a7vbd8mb" path="res://Assets/Script/mushroom.gd" id="1_rgwvm"]
+[ext_resource type="Script" uid="uid://bpt21a7vbd8mb" path="res://Assets/Script/Enemy/mushroom.gd" id="1_rgwvm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7btc8"]
 atlas = ExtResource("1_b7st0")

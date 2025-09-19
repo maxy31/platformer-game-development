@@ -1,15 +1,15 @@
 [gd_scene load_steps=20 format=3 uid="uid://d3mm0obwvwwtg"]
 
-[ext_resource type="Script" uid="uid://co1fyqw7oa54n" path="res://Assets/Script/flying_demon.gd" id="1_obwwn"]
+[ext_resource type="Script" uid="uid://co1fyqw7oa54n" path="res://Assets/Script/Enemy/flying_demon.gd" id="1_obwwn"]
 [ext_resource type="Texture2D" uid="uid://cjbfthxgiw104" path="res://Assets/Sprites/Flying Demon/IDLEATTACKDEATHFLYINGHURT.png" id="2_0k70j"]
-[ext_resource type="Script" uid="uid://cx4n4xaj3125k" path="res://Assets/Script/State/FiniteStateMachine.gd" id="2_g3doo"]
-[ext_resource type="Script" uid="uid://cqrismiqrx2sy" path="res://Assets/Script/State/flying_demon/flying_demon_Idle_State.gd" id="4_onjrk"]
-[ext_resource type="Script" uid="uid://k5qrvurc2cqa" path="res://Assets/Script/State/flying_demon/flying_demon_Patrol_State.gd" id="5_abx1p"]
-[ext_resource type="Script" uid="uid://daphqexnc0bi3" path="res://Assets/Script/State/flying_demon/flying_demon_Chase_State.gd" id="6_f2pxu"]
-[ext_resource type="Script" uid="uid://bb4mn57uovlq5" path="res://Assets/Script/State/flying_demon/flying_demon_Attack_State.gd" id="7_dqedu"]
+[ext_resource type="Script" uid="uid://cx4n4xaj3125k" path="res://Assets/Script/StateOfEnemies/FiniteStateMachine.gd" id="2_g3doo"]
+[ext_resource type="Script" uid="uid://cqrismiqrx2sy" path="res://Assets/Script/StateOfEnemies/flying_demon/flying_demon_Idle_State.gd" id="4_onjrk"]
+[ext_resource type="Script" uid="uid://k5qrvurc2cqa" path="res://Assets/Script/StateOfEnemies/flying_demon/flying_demon_Patrol_State.gd" id="5_abx1p"]
+[ext_resource type="Script" uid="uid://daphqexnc0bi3" path="res://Assets/Script/StateOfEnemies/flying_demon/flying_demon_Chase_State.gd" id="6_f2pxu"]
+[ext_resource type="Script" uid="uid://bb4mn57uovlq5" path="res://Assets/Script/StateOfEnemies/flying_demon/flying_demon_Attack_State.gd" id="7_dqedu"]
 [ext_resource type="PackedScene" uid="uid://dpysr4w1tyt1r" path="res://Assets/Scenes/Enemy/fireball.tscn" id="8_0k70j"]
-[ext_resource type="Script" uid="uid://dbm3dhd3oerk3" path="res://Assets/Script/State/flying_demon/flying_demon_Hurt_State.gd" id="9_0k70j"]
-[ext_resource type="Script" uid="uid://b2xoa3dq6nybg" path="res://Assets/Script/State/flying_demon/flying_demon_Dead_State.gd" id="10_0k70j"]
+[ext_resource type="Script" uid="uid://dbm3dhd3oerk3" path="res://Assets/Script/StateOfEnemies/flying_demon/flying_demon_Hurt_State.gd" id="9_0k70j"]
+[ext_resource type="Script" uid="uid://b2xoa3dq6nybg" path="res://Assets/Script/StateOfEnemies/flying_demon/flying_demon_Dead_State.gd" id="10_0k70j"]
 
 [sub_resource type="Animation" id="Animation_g3doo"]
 resource_name = "Attack"

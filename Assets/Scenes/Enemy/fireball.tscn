@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dpysr4w1tyt1r"]
 
 [ext_resource type="Texture2D" uid="uid://bme5dto68yqxa" path="res://Assets/Sprites/Fireball/1.png" id="1_g0k2o"]
-[ext_resource type="Script" uid="uid://8sprtut0ty1s" path="res://Assets/Script/fireball.gd" id="1_ysrvr"]
+[ext_resource type="Script" uid="uid://8sprtut0ty1s" path="res://Assets/Script/Enemy/fireball.gd" id="1_ysrvr"]
 
 [sub_resource type="Animation" id="Animation_mmc00"]
 length = 0.001

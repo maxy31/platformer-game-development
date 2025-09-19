@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbevqyrp2h7ii"]
 
-[ext_resource type="Script" uid="uid://cpiomxgdhkbql" path="res://Assets/Script/cheese.gd" id="1_cp6wg"]
-[ext_resource type="Texture2D" uid="uid://b33ohbunyqd4g" path="res://Assets/Scenes/Food/tile_0011.png" id="1_vhs5l"]
+[ext_resource type="Script" uid="uid://cpiomxgdhkbql" path="res://Assets/Script/EnvirionmentalAndTraps/cheese.gd" id="1_cp6wg"]
+[ext_resource type="Texture2D" uid="uid://b33ohbunyqd4g" path="res://Assets/Sprites/Food/tile_0011.png" id="1_vhs5l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vhs5l"]
 atlas = ExtResource("1_vhs5l")

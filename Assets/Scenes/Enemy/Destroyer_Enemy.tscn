@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://r0y7xckbxscw"]
 
 [ext_resource type="Texture2D" uid="uid://dp1ghuf3t8nt2" path="res://Assets/Sprites/Destroyer/DarkSamurai (64x64).png" id="1_lxyfm"]
-[ext_resource type="Script" uid="uid://52ye45ph8nlu" path="res://Assets/Script/enemy.gd" id="1_mir1v"]
+[ext_resource type="Script" uid="uid://52ye45ph8nlu" path="res://Assets/Script/Enemy/enemy.gd" id="1_mir1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qafb8"]
 size = Vector2(12.5, 29)
