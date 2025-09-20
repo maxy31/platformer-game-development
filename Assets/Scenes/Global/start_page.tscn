@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://g1beklg07jvw"]
+[gd_scene load_steps=17 format=3 uid="uid://g1beklg07jvw"]
 
 [ext_resource type="Script" uid="uid://d2j0d1bh3jpuq" path="res://Assets/Script/Global/start_page.gd" id="1_uq3g0"]
 [ext_resource type="Texture2D" uid="uid://5s6b3d460vy5" path="res://Assets/Sprites/Background/background1.png" id="2_jm0dv"]
 [ext_resource type="FontFile" uid="uid://bi4dnmwfja8if" path="res://Assets/Fonts/antiquity-print.ttf" id="3_kh51p"]
 [ext_resource type="PackedScene" uid="uid://drrdef8w16ueu" path="res://Assets/Scenes/Audio/Misc_Audio.tscn" id="4_jm0dv"]
+[ext_resource type="Script" uid="uid://cogmqtav6prnj" path="res://Assets/Script/Audio/volume_slider.gd" id="5_jilqh"]
+[ext_resource type="Texture2D" uid="uid://y57wobj2u3b2" path="res://Assets/Sprites/AudioIcon/pngfind.com-sound-png-748701.png" id="5_kh51p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jshle"]
 
@@ -84,5 +86,22 @@ text = "Quit
 
 [node name="MiscAudio" parent="." instance=ExtResource("4_jm0dv")]
 
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 307.0
+offset_right = 609.0
+offset_bottom = 323.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("5_jilqh")
+
+[node name="Sprite2D" type="Sprite2D" parent="VolumeSlider"]
+position = Vector2(21, -18)
+scale = Vector2(0.0318429, 0.0318429)
+texture = ExtResource("5_kh51p")
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="VolumeSlider" method="_on_value_changed"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgoha1y03pdak"]
+[gd_scene load_steps=9 format=3 uid="uid://bgoha1y03pdak"]
 
 [ext_resource type="Shader" uid="uid://dfmwrow6kxu3j" path="res://pause_menu.gdshader" id="1_0f3vo"]
 [ext_resource type="Script" uid="uid://dkl7a07tftk3g" path="res://Assets/Script/UI/pause_menu.gd" id="1_3bm3b"]
+[ext_resource type="Texture2D" uid="uid://y57wobj2u3b2" path="res://Assets/Sprites/AudioIcon/pngfind.com-sound-png-748701.png" id="3_4cwxj"]
+[ext_resource type="Script" uid="uid://cogmqtav6prnj" path="res://Assets/Script/Audio/volume_slider.gd" id="3_6osml"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bm3b"]
 shader = ExtResource("1_0f3vo")
@@ -130,6 +132,23 @@ libraries = {
 &"": SubResource("AnimationLibrary_kix6r")
 }
 
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 307.0
+offset_right = 609.0
+offset_bottom = 323.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("3_6osml")
+
+[node name="Sprite2D" type="Sprite2D" parent="VolumeSlider"]
+position = Vector2(21, -18)
+scale = Vector2(0.0318429, 0.0318429)
+texture = ExtResource("3_4cwxj")
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="VolumeSlider" method="_on_value_changed"]

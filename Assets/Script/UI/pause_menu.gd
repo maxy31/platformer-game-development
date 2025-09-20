@@ -1,10 +1,12 @@
 extends Control
-
+@onready var h_slider: HSlider = $VolumeSlider # <--- Add this to get the slider node
 func _ready():
+	h_slider.visible = false
 	$AnimationPlayer.play("RESET")
 
 func resume():
 	get_tree().paused = false
+	h_slider.visible = false
 	hide()  # hide the pause menu UI
 
 	# wait one frame before playing animation
@@ -16,6 +18,7 @@ func resume():
 	
 func pause():
 	get_tree().paused = true
+	h_slider.visible = true
 	show()  # show the pause menu UI
 
 	# play blur animation

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 GlobalState="*res://Assets/Script/Global/global_state.gd"
 MusicPlayer="*res://Assets/Scenes/Audio/music_player.tscn"
 GlobalData="*res://Assets/Script/Global/GlobalData.gd"
+AudioSettings="*res://Assets/Script/Global/AudioSettings.gd"
 
 [display]
 
